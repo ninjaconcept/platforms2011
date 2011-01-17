@@ -1,0 +1,46 @@
+@mixin field-with-errors {
+  .field_with_errors {
+    input, select, textarea {
+      border-color: $error_field_border_color;
+      background-color: $error_field_bg_color;
+      &[disabled] {
+        background: $error_field_bg_color; } } } }
+
+@mixin error_messages {
+  #error_explanation {
+    @include border-radius(5px);
+    background: $error_field_bg_color;
+    border: 1px solid $error_field_border_color;
+    margin: 0 25px 25px;
+    font-weight: bold;
+    h2 {
+      // Safari
+      padding: 5px 10px;
+      margin: 0;
+      color: $error_color;
+      font-size: 1em;
+      text-transform: uppercase;
+      font-weight: bold; }
+    
+    p {
+      color: $error_color;
+      padding: 0px 10px 5px 10px; 
+      margin: 0;
+    }
+    
+    ul {
+      padding: 0 10px 5px 10px;
+      margin: 0 10px 0 0;
+      @include no-bullets;
+      li {
+        background: transparent url(/images/admin/li_error.gif) 0 85% no-repeat;
+        padding: 0 0 0 1.5em;
+        color: $error_color;
+        margin: 0 0 2px 0; } } } }
+
+@mixin ajax-errors {
+  &.errors {
+    input[type=text],
+    input[type=password] {
+      border: 1px solid #cc3333;
+      padding: 4px; } } }

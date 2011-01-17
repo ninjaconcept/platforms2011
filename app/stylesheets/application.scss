@@ -1,0 +1,136 @@
+
+@import "compass";
+@import "compass/reset";
+
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+@import "blueprint";
+@import "blueprint/buttons";
+@import "blueprint/fancy_type";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+@import "partials/blueprint-defaults";
+
+@import "partials/colors";
+@import "partials/border-radius";
+@import "partials/error_messages";
+@import "partials/flash_messages";
+@import "partials/tables";
+@import "partials/mixins";
+@import "partials/buttons";
+@import "partials/pagination";
+@import "partials/alternating-rows";
+@import "partials/authentication";
+@import "partials/facebox";
+
+
+body.bp .error {
+  background:none;
+  border: 0;
+  color:#8A1F11;
+  margin-bottom: 0;
+  margin-left: 10px;
+  padding: 0;
+}
+  
+body {
+  background: #efefef;
+  
+  .admin-navigation {
+    @include self-clearing;
+    color: #333;
+    border-bottom: 1px solid #666;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+
+    a, a:visited {
+      color: #333;
+    }
+    
+    .admin-menu {
+      float: right;
+      clear: right;
+    }
+
+    .session-menu {
+      float: right; 
+    }
+    
+    img {
+      margin: 7px 0 0 0;
+    }
+    
+  }
+
+  .frontend-navigation {
+    margin-bottom: 20px;
+    
+    .reset, .reset:visited {
+      color: #ccc;
+      font-size: 12px;
+    }
+  }
+  
+  .body-inner {
+    width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    
+    h3, h4 {
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+    
+  }
+  
+  ul.menu {
+    list-style: none;	
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+  }
+
+  ul.menu li {
+    display: inline;
+    margin-right: 5px;
+  }
+  
+  .menu.level_0 {
+    margin-top: 10px;
+  }
+  
+  form {
+    @include error_messages;
+    @include field-with-errors;
+    
+    #error_explanation {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    input.string {
+      font-size: 14px;
+      padding: 5px;
+    }
+    
+    .input {
+      margin-bottom: 15px;
+      
+      label{
+        display: block;
+        width: 100px;
+        font-size: 14px;
+      }
+    }
+    
+  }
+}
+
+#auth-notice{
+  display: none;
+}

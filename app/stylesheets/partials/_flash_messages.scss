@@ -1,0 +1,34 @@
+.flash_messages {
+  .flash-message {
+    @include border-radius(5px);
+    font-weight: bolder;
+    padding: 12px;
+    color: $text_color;
+    background-color: white;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 2px solid $notice_border_color;
+    color: $notice_color;
+    background-color: $notice_bg_color;
+    a {
+      text-decoration: underline; }
+    .small {
+      font-size: 12px; } }
+  #flash-success {
+    color: $success_color;
+    border-color: $success_border_color;
+    background-color: $success_bg_color;
+    a {
+      color: $success_color; } }
+  #flash-notice {
+    color: $notice_color;
+    border-color: $notice_border_color;
+    background-color: $notice_bg_color;
+    a {
+      color: $notice_color; } }
+  #flash-error {
+    color: $error_color;
+    border-color: $error_border_color;
+    background-color: $error_bg_color;
+    a {
+      color: $error_color; } } }

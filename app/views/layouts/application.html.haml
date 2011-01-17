@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Plat_forms 2011
+    
+    = stylesheet_link_tag 'compiled/application', 'facebox'
+    = javascript_include_tag :defaults, 'facebox'
+    = csrf_meta_tag
+    
+  %body.bp
+    .body-inner
+      .flash_messages
+        = flash_messages
+    
+      .admin-navigation
+        = render 'devise/menu/menu'
+        = render 'admin/layouts/menu' if user_signed_in?
+
+        = link_to image_tag('logo.png'), root_path
+      
+      
+      = render 'layouts/main_menu'
+    
+      = yield
+    
+      = render 'layouts/timestamp'

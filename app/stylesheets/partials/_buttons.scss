@@ -1,0 +1,31 @@
+@mixin section-box {
+  //:background-color #f0f0f0
+  padding: 8px;
+  margin-bottom: 5px;
+  @include border-radius(3px); }
+
+@mixin submit-button {
+  @include button-colors($light_color, $dark_color);
+  font-weight: bold;
+  font-size: 10pt;
+  border: none;
+  padding: 8px 16px 8px 16px;
+  cursor: pointer;
+  outline: none;
+  @include border-radius(3px);
+  &:hover {
+    @include button-colors($light_color, $link_color); } }
+
+@mixin action-button {
+  @include button-colors($link_color, $light_grey);
+  @include border-radius(3px);
+  font-weight: normal;
+  font-size: 9pt;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  &:hover {
+    @include button-colors($light_color, $link_color);
+    text-decoration: none; } }

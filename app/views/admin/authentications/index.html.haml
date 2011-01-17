@@ -1,0 +1,20 @@
+%h1= "Listing authentications (#{@authentications.length})"
+
+.main-actions
+  = link_to 'New Authentication', new_resource_path
+
+%table
+  %tr
+    %th User
+    %th Provider
+    %th Uid
+    %th
+      Actions
+
+  - @authentications.each do |authentication|
+    %tr
+      %td= authentication.user.email
+      %td= authentication.provider
+      %td= authentication.uid
+      %td
+        = link_to 'Revoke', resource_path(authentication), :confirm => 'Are you sure?', :method => :delete

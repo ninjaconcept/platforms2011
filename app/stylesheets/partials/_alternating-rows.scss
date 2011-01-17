@@ -1,0 +1,23 @@
+@mixin alternating-rows($even-row-color, $odd-row-color, $header-color: white, $footer-color: white) {
+  th {
+    background-color: $header-color;
+  }
+  
+  tr.odd {
+    td {
+      background-color: $odd-row-color;
+    }
+  }
+  
+  tr.even {
+    td {
+      background-color: $even-row-color;
+    } 
+  }
+  
+  tfoot {
+    th, td {
+      background-color: $footer-color;
+    } 
+  }
+}

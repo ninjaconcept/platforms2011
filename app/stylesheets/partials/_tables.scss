@@ -1,0 +1,54 @@
+@mixin table-listing {
+  @include section-box;
+  padding: 2px;
+  background-color: $dark_color;
+  border: none;
+  table {
+    @include alternating-rows($even_row_color, $odd_row_color, $table_header_color, $table_footer_color);
+    font-size: 8pt;
+    border: 1px solid $dark_color;
+    a.infopanel-icon {
+      @include submit-button;
+      font-weight: normal;
+      padding: 4px 10px; }
+    tr.even, tr.odd {
+      &:hover {
+        background-color: $light_color;
+        td {
+          background-color: $light_color; } } }
+    tr {
+      th {
+        font-size: 8pt;
+        background-color: $dark_color;
+        color: $light_color;
+        &.actions {
+          white-space: nowrap;
+          text-align: right;
+          a {
+            @include action-button;
+            font-size: 8pt;
+            color: $light_color;
+            background-color: $dark_color + #222222;
+            font-weight: bold; } }
+        a {
+          color: $light_color; } }
+      td {
+        vertical-align: center;
+        border-bottom: 1px solid $mid_color;
+        padding: 7px 5px;
+        a {
+          @include action-button;
+          font-size: 8pt;
+          font-weight: bold; }
+        &.color_preview {
+          width: 50px; }
+        &.show-move {
+          background: transparent url(/images/admin/arrow_move.png) no-repeat center center;
+          cursor: move; }
+        &.actions {
+          white-space: nowrap;
+          text-align: right;
+          padding-right: 10px; } }
+      &.dragged {
+        td {
+          background-color: $light_grey !important; } } } } }

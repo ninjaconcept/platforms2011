@@ -1,0 +1,25 @@
+h1. Welcome to PlatForms
+
+h2. You are able to ...
+
+* register as a user
+* add/edit/delete categories and see changes in the frontend immediately!
+* create a navigation structure dynamically
+* recover your password
+* unlock your account if you misstyped your password to many times
+* edit your registration data
+* sign in via facebook and twitter auth (others are easily added ...)
+* create an account via facebook and twitter auth
+  
+h2. What else ...
+
+* automatic session expiration
+* lock accounts after X login failures
+* integration tests: see cucumber features (.feature files)
+* unit tests: see specs (_spec.rb files)
+
+h3. Notice!
+
+* *changes are immediately visible in the frontend!*
+* *categories are considered to be navigation items*
+* *NOT TESTED WITH INTERNET EXPLORER!!*

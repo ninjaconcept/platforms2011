@@ -1,0 +1,23 @@
+@mixin disabled {
+  &.disabled {
+    color: $dark_color;
+    &:hover {
+      background-color: $light_grey;
+      cursor: default; } } }
+
+.pagination {
+  @include self-clearing;
+  margin: 10px 0px 5px 0;
+  text-align: right;
+  a {
+    @include action-button;
+    &:hover {
+      color: $light_color !important;
+      text-decoration: none !important; } }
+  .prev_page, .next_page {
+    @include action-button;
+    @include disabled; }
+  .current {
+    @include action-button;
+    color: $light_color;
+    background-color: $link_color; } }

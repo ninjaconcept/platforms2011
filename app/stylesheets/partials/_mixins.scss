@@ -1,0 +1,60 @@
+@mixin self-clearing {
+  &:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; } }
+
+@mixin drop-shadow($size: unquote("5px"), $distance: unquote("7px"), $color: $mid_dark_color) {
+  box-shadow: $size $size $distance $color;
+  -moz-box-shadow: $size $size $distance $color;
+  -webkit-box-shadow: $size $size $distance $color; }
+
+
+@mixin general-form-style {
+  border: 3px solid $lighter_grey;
+  background: $lighter_grey;
+  padding: 5px 8px;
+  margin: 0.5em 0;
+  font-size: 10pt;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+  color: $dark_color;
+  &:focus {
+    border: 3px solid $link_color;
+    background-color: $light_color; }
+  &[disabled] {
+    background: $light_color; } }
+
+
+@mixin select-style {
+  margin: 0.5em 0;
+  width: 505px;
+  padding: 5px 2px 5px 8px;
+  border: 2px solid $lighter_grey;
+  background: $lighter_grey;
+  font-size: 10pt;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+  color: $dark_color;
+  &:focus {
+    border: 2px solid $link_color;
+    background-color: $light_color; } }
+
+
+@mixin label-style {
+  font-weight: normal;
+  display: block;
+  width: 200px;
+  text-align: right;
+  float: left;
+  margin: 10px 15px 0 0;
+  padding: 5px 0 0 0; }
+
+
+@mixin small-select {
+  @include general-form-style;
+  font-size: 0.9em;
+  padding: 2px; }
+

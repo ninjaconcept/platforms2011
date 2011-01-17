@@ -1,0 +1,8 @@
+%ul.admin-menu.menu
+  - if request.fullpath =~ /^\/admin/
+    %li
+      = link_to "Switch to frontend", root_path
+  
+  %li
+    =# link_to "Manage pages", admin_pages_path
+    

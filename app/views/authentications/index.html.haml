@@ -1,0 +1,72 @@
+%h2 Authentications
+
+- if @authentications
+  - unless @authentications.empty?
+    %p
+      %strong
+        You can sign in to this account using:
+        
+    .authentications
+      - for authentication in @authentications
+        .authentication
+          = image_tag "providers/#{authentication.provider}_32.png", :size => "32x32"
+          .provider= authentication.provider.titleize
+          .uid= authentication.uid
+          = link_to "X", authentication, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove" 
+      
+      .clear
+  
+  %p
+    %strong
+      Add another service to sign in with:
+      
+- else 
+  %p
+    %strong Sign in through one of these services:
+
+= link_to '/auth/facebook', :class => 'auth_provider' do
+  = image_tag( "providers/facebook_64.png", :size => "64x64", :alt => "Facebook" )
+  Facebook
+
+.clear
+
+
+- unless user_signed_in?
+  %h3 
+    Don't use any of the services above?
+
+  = "#{link_to 'Sign up', new_user_registration_path } or #{link_to 'sign in', new_user_session_path } using plain old username and password.".html_safe
+
+
+%h4
+  The providers below are not working yet but it's as easy as snapping your fingers to make them work too!!
+
+= link_to '#/auth/twitter', :class => 'auth_provider disabled' do
+  = image_tag( "providers/twitter_64.png", :size => "64x64", :alt => "Twitter" )
+  Twitter
+
+= link_to '#/auth/basecamp', :class => 'auth_provider disabled' do
+  = image_tag( "providers/basecamp_64.png", :size => "64x64", :alt => "Basecamp" )
+  Basecamp
+  
+= link_to '#/auth/github', :class => 'auth_provider disabled' do
+  = image_tag( "providers/github_64.png", :size => "64x64", :alt => "Github" )
+  Github
+
+= link_to '#/auth/google_apps', :class => 'auth_provider disabled' do
+  = image_tag( "providers/google_64.png", :size => "64x64", :alt => "Google" )
+  Google
+
+= link_to '#/auth/open_id', :class => 'auth_provider disabled' do
+  = image_tag( "providers/openid_64.png", :size => "64x64", :alt => "OpenID" )
+  OpenID
+
+.clear
+
+#auth-notice
+  %h2 Notice for Auth Providers
+  %p
+    This auth provider is currently disabled!
+    %br
+    %strong
+      Please choose facebook.
