@@ -30,9 +30,11 @@ class RcdStatus < ActiveRecord::Base
   
   def accept!
     self.status = "in_contact"
+    self.save
   end
   
   def reject!
     self.status = "no_contact"
+    self.save
   end
 end

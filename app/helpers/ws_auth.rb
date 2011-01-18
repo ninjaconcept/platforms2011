@@ -1,6 +1,5 @@
 module WsAuth
   def ws_auth
-    
     username, password = decode_credentials(request)
     
     u = User.find_by_username(username)
@@ -10,7 +9,6 @@ module WsAuth
       head 401
       false
     end
-    
   end
   
   def decode_credentials(request)
