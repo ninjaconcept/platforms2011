@@ -21,7 +21,11 @@ class User < ActiveRecord::Base
   # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
 
 
-
+  has_many :conferences, :foreign_key=>:creator_user_id, :dependent=>:destroy
+  has_many :member_of_series, :dependent=>:destroy
+  has_many :rcd_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy
+  has_many :rcd_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy
+  has_many :attendies, :dependent=>:destroy
   
   GPS_REGEX=/(\d+(\.\d+)?) ?([NnSs]) ?,? ?(\d+(\.\d+)?) ?([EeWw])/
   validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
