@@ -58,7 +58,7 @@ class FactoryDefaults
       conf_hash.delete "enddate"
       categories_array=conf_hash.delete "categories"
       #conf_hash.delete "gps"
-      conf_hash["description"] = " " if conf_hash["description"].blank? #mandatory field, must not be empty
+      conf_hash["description"] = "_" if conf_hash["description"].blank? #mandatory field, must not be empty
       puts "creating conference #{conf_hash["name"]}"
       conf=Conference.create!(conf_hash)
       categories_array.map do |cat_hash|
