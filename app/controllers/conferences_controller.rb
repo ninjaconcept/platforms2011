@@ -4,7 +4,7 @@ class ConferencesController < InheritedResources::Base
 
   include WsAuth
   before_filter :ws_auth, :if => lambda { request.format == :json }
-  before_filter :authenticate_user, :if => lambda { request.format == :html }, :except => [:index]
+  before_filter :authenticate_user!, :if => lambda { request.format == :html }, :except => [:index]
   
   before_filter :ws_auth 
   
