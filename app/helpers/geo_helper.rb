@@ -27,10 +27,10 @@ module GeoHelper
         #format including N or S
         string.gsub("O","E") #change "O"st to "E"ast if applicable
         User::GPS_REGEX=~string
-        lat=$1.to_f
-        lat-lat if ["s","S"].include? $3
-        lng=$4.to_f
-        lng=-lng if ["w","W"].include? $6
+        self.lat=$1.to_f
+        self.lat=-self.lat if ["s","S"].include? $3
+        self.lng=$4.to_f
+        self.lng=-self.lng if ["w","W"].include? $6
       else
         #format is comething like "49 9" or "49,9" or "49.123,9.123"
         self.lat,self.lng=string.split(/ |,/)
