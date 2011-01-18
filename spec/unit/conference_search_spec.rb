@@ -31,7 +31,7 @@ describe ConferenceSearcher do
     end
   end
   it "searches region" do
-    search "reg:country", 4 #in test, Switzerland is the country where the search will happen
+    search "reg:country", 3 #in test, United States is the country where the search will happen
     search "reg:50", 4 #in test, Switzerland is the country where the search will happen
   end
 end

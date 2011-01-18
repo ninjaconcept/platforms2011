@@ -61,9 +61,12 @@ class FactoryDefaults
       conf_hash["description"] = "_" if conf_hash["description"].blank? #mandatory field, must not be empty
       puts "creating conference #{conf_hash["name"]}"
       conf=Conference.create!(conf_hash)
-      categories_array.map do |cat_hash|
+      new_confs=categories_array.map do |cat_hash|
         cat=Category.find_by_name(cat_hash["name"])
         CategoryConference.create!(:conference=>conf, :category=>cat)
+      end
+      if new_confs.empty?
+        CategoryConference.create!(:conference=>conf, :category=>Category.first) #customer said, we should take the first cat, when none is available (so we conform to M56)
       end
     end
   end
