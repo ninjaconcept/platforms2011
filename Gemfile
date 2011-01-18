@@ -18,9 +18,12 @@ gem 'git'
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
+#gem 'spatial_adapter'
+gem 'geokit-rails3'
 
+gem 'mysql'
 group :production, :migration do
-  gem 'mysql' # mysql2 does not work on alpha5
+#  gem 'mysql' # mysql2 does not work on alpha5
 end
 
 group :development do
@@ -30,7 +33,6 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
   
-  gem 'mysql2' # mysql2 does not work on alpha5
 end
 
 group :test, :cucumber, :development do  
@@ -38,6 +40,7 @@ group :test, :cucumber, :development do
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
+  gem 'shoulda'
   gem 'rspec-rails'
   gem 'spork'
   gem 'launchy'
@@ -45,3 +48,4 @@ group :test, :cucumber, :development do
   gem 'pickle'
   gem 'ZenTest'
 end
+
