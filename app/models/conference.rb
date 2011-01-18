@@ -6,6 +6,8 @@ class Conference < ActiveRecord::Base
     include GeoHelper
   end
   
+  has_friendly_id :name, :use_slug => true, :approximate_ascii => true
+  
   acts_as_mappable acts_as_mappable_hash
   validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
   

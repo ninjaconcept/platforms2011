@@ -42,7 +42,7 @@ Feature: Manage conferences
       | conference 1 | bcc Berliner Congress Center, Berlin, Germany |
       
   
-  Scenario: delete a conference for a cateroy
+  Scenario: delete a conference for a category
     Given a category exists with id: 9999, name: "category 1"
     And the following conferences exist
       | name   | id       |

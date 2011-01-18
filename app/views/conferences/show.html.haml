@@ -7,9 +7,10 @@
   
 = link_to 'Back to conferences list', collection_path
 
-%br
-%br
 
+%h2
+  Conference data
+  
 %p
   %strong
     Creator:
@@ -45,3 +46,25 @@
 %p
   %strong Howtofind:
   = @conference.howtofind
+
+
+%h2
+  Attendees
+
+
+- unless @conference.attendances.blank?
+  %ul
+    - @conference.attendances.each do |attendance|
+      %li
+        = attendance.user.username
+        = surround '(', ')' do
+          = attendance.user.email
+- else
+  %strong
+    Nobody attends this conference!
+    
+    
+    
+    
+    
+
