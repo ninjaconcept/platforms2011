@@ -13,7 +13,23 @@ class ConferenceSearcher
     if opts["cat"]
       #cat_ids=Category.find_all_by_name(opts["cat"])
       query=query.includes(:categories)
-      query=query.where("categories.name in (?)", opts["cat"])
+      #query=query.where("categories.name in (?)", opts["cat"])
+      cats=Category.find_all_by_name(opts["cat"].map{|cat_name|cat_name.gsub("_"," ")}) #this was defined with the customer: since "cat:Life Science" contains a space, the query syntax should be "cat:Life_Science"
+      cat_ids=[] #empty
+      if opts["opt"]=="withsub" #add sub cat ids
+        cats.each do |cat|
+          cat_ids+=cat.subtree_ids
+        end
+      end
+      cat_ids+=cats.map{|c|c.id}  #add the cat itself
+      query=query.where("categories.id in (?)", cat_ids) #and fire
+    end
+    if opts["reg"]=="country"
+      country=defined?(current_user) ? (current_user.country) : "Switzerland"
+      country="%#{country}%" #prepare for like syntax
+      query=query.where("location like ?",country ) #in test env it should always use Switzerland...
+    elsif opts["reg"]=~/\d+/
+      #query=query.where("county=?",defined?(current_user) ? (current_user.country) : "Switzerland" ) #in test env it should always use Switzerland...
     end
     puts query.to_sql
     query.paginate :page=>1
@@ -53,5 +69,7 @@ class ConferenceSearcher
 
 end
 
-ConferenceSearcher.do_find "cat:Technology"
+ConferenceSearcher.do_find "reg:country"
+
+
 #ConferenceSearcher.do_find ""

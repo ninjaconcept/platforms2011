@@ -23,14 +23,15 @@ class FactoryDefaults
     categories.each do |c_hash|
       parent_name=c_hash["parent"]["name"] if c_hash["parent"]
       if parent_name
-        parent_cat=Category.find_by_name(parent_name)
-        if parent_cat.nil?
-          parent_cat=Category.create!(:name=>parent_name) #if not found, create it
-        end
+        #parent_cat=Category.find_by_name(parent_name)
+        #if parent_cat.nil?
+        #  parent_cat=Category.create!(:name=>parent_name) #if not found, create it
+        #end
+        parent_cat=Category.find_or_create_by_name(parent_name)
         c_hash["parent"] = parent_cat
       end
       c_hash.delete "subcategories" #should be redundant to parent
-      c_hash.delete "parent" #
+      #c_hash.delete "parent" #
       puts "creating/updating category #{c_hash["name"]}"
       cat=Category.find_by_name(c_hash["name"])
       if cat
@@ -56,7 +57,8 @@ class FactoryDefaults
       conf_hash["end_date"]=Date.parse(conf_hash["enddate"]) #dito
       conf_hash.delete "enddate"
       categories_array=conf_hash.delete "categories"
-      conf_hash.delete "gps" # TODO
+      #conf_hash.delete "gps"
+      conf_hash["description"] = " " if conf_hash["description"].blank? #mandatory field, must not be empty
       puts "creating conference #{conf_hash["name"]}"
       conf=Conference.create!(conf_hash)
       categories_array.map do |cat_hash|

@@ -2,11 +2,11 @@
 
 require 'spec_helper'
 
-describe AttendeesController do
-  context "reading attendees" do
+describe AttendancesController do
+  context "reading attendances" do
     context "all users of a conference with users" do
       before do
-        get "/ws/conferences/1/attendees"
+        get "/ws/conferences/1/attendances"
       end
       
       it "should return 200" do
@@ -20,7 +20,7 @@ describe AttendeesController do
     
     context "all users of a conference without users" do
       before do
-        get "/ws/conferences/2/attendees"
+        get "/ws/conferences/2/attendances"
       end
       
       it "should return 204" do
@@ -30,7 +30,7 @@ describe AttendeesController do
     
     context "all users of a non existing conference" do
       before do
-        get "/ws/conferences/10000000/attendees"
+        get "/ws/conferences/10000000/attendances"
       end
       
       it "should return 404" do
@@ -43,7 +43,7 @@ describe AttendeesController do
     context "for an existing conference" do
       before do
         @user = User.first
-        post "/ws/conferences/2/attendees", @user.to_json, {"CONTENT_TYPE" => "application/json"}
+        post "/ws/conferences/2/attendances", @user.to_json, {"CONTENT_TYPE" => "application/json"}
       end
       
       it "should return 204" do
@@ -51,13 +51,13 @@ describe AttendeesController do
       end
       
       it "should create a conference attendance" do
-        Conference.find(2).attendees.should include(@user)
+        Conference.find(2).attendances.should include(@user)
       end
     end
     
     context "for a non existing conference" do
       before do
-        get "/ws/conferences/10000000/attendees"
+        get "/ws/conferences/10000000/attendances"
       end
       
       it "should return 404" do
@@ -72,8 +72,8 @@ describe AttendeesController do
       before do
         @user = User.first
         @conference = Conference.find(2)
-        @conference.attendees << @user
-        delete "/ws/conferences/#{@conference.id}/attendees/#{@user.username}"
+        @conference.attendances << @user
+        delete "/ws/conferences/#{@conference.id}/attendances/#{@user.username}"
       end
       
       it "should return 204" do
@@ -82,14 +82,14 @@ describe AttendeesController do
       
       it "should delete the user" do
         @conference.reload
-        @conference.attendees.should_not include(@user)
+        @conference.attendances.should_not include(@user)
       end
     end
     
     context "for a non existing conference" do
       before do
         @user = User.first
-        delete "/ws/conferences/10000000/attendees/#{@user.username}"
+        delete "/ws/conferences/10000000/attendances/#{@user.username}"
       end
       
       it "should return 404" do
