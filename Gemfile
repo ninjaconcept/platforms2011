@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
+gem 'mysql', '2.8.1'
 gem 'devise'
 
 gem 'haml'
@@ -15,13 +16,12 @@ gem 'pacecar'
 gem 'omniauth'
 gem 'jquery-rails'
 gem 'git'
+gem 'cancan'
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
 #gem 'spatial_adapter'
 gem 'geokit-rails3'
-
-gem 'mysql', '2.8.1'
 
 group :development do
   gem 'rails3-generators'

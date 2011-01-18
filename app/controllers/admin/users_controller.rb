@@ -1,3 +1,3 @@
 class Admin::UsersController < Admin::BaseController
-  # before_filter :is_admin?
+  before_filter :require_admin
 end

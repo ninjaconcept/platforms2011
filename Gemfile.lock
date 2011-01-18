@@ -38,6 +38,7 @@ GEM
       git (>= 1.2.5)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    cancan (1.5.0)
     capistrano (2.5.19)
       highline
       net-scp (>= 1.0.0)
@@ -261,6 +262,7 @@ DEPENDENCIES
   ZenTest
   ancestry
   basiszwo-reflection
+  cancan
   capistrano
   capistrano-ext
   capybara
