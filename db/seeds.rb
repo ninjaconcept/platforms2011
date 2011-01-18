@@ -23,3 +23,5 @@ drop table users;
 =end
 
 FactoryDefaults.import
+
+Conference.first.attendees = User.all(:limit => 5)
