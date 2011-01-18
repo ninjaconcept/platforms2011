@@ -1,0 +1,11 @@
+%h1 Editing member_of_series
+
+= simple_form_for(@member_of_series, :url => resource_path(@member_of_series)) do |f|
+  = # render 'layouts/error_messages'
+  
+  = render 'form', :f => f
+  
+  .actions
+    = f.submit 'Update'
+    or
+    = link_to 'back', collection_path
