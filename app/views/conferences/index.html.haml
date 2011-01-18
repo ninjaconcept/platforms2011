@@ -3,6 +3,8 @@
 .main-actions
   = link_to 'New Conference', new_resource_path
 
+
+
 %table
   %tr
     %th Version
@@ -13,8 +15,7 @@
     %th End date
     %th Description
     %th Location
-    %th Gps long
-    %th Gps lat
+    %th Gps
     %th Venue
     %th Accomodation
     %th Howtofind
@@ -23,7 +24,7 @@
 
   - @conferences.each do |conference|
     %tr
-      %td= conference.version
+      %td= conference.lock_version
       %td= conference.name
       %td= conference.creator_user_id
       %td= conference.series_id
@@ -31,8 +32,7 @@
       %td= conference.end_date
       %td= conference.description
       %td= conference.location
-      %td= conference.gps_long
-      %td= conference.gps_lat
+      %td= conference.gps
       %td= conference.venue
       %td= conference.accomodation
       %td= conference.howtofind

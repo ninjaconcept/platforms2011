@@ -6,7 +6,9 @@ PlatForms::Application.routes.draw do
 
   resources :categories
 
-  resources :conferences
+  resources :conferences do
+    match "/search" => "Conferences#search"
+  end
 
   resources :pages
   

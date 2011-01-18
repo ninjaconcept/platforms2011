@@ -21,7 +21,6 @@ gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branc
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
-#gem 'spatial_adapter'
 gem 'geokit-rails3'
 
 group :development do

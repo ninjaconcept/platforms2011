@@ -1,12 +1,15 @@
 # origin: M
 class User < ActiveRecord::Base
+  include GeoHelper
+  class << self
+    include GeoHelper
+  end
 
-  acts_as_mappable :default_units => :kilometers,
-    :default_formula => :flat,
-    :distance_field_name => :distance,
-    :lat_column_name => :lat,
-    :lng_column_name => :lng
-    #:auto_geocode=> { :field => :full_address, :error_message => 'Adresse konnte nicht in Koordinaten aufgelöst werden' }
+  acts_as_mappable acts_as_mappable_hash
+
+  validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
+  
+  #:auto_geocode=> { :field => :full_address, :error_message => 'Adresse konnte nicht in Koordinaten aufgelöst werden' }
   
   has_many :authentications
   
@@ -14,21 +17,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :lockable, :timeoutable, :recoverable,
     :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable
 
-  attr_accessor :gps
+  #attr_accessor :gps
   # composed_of :gps, :mapping => [%w(lat), %w(lng)]
-  validates_format_of :gps, :with => /\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/, :allow_blank => true
+  #validates_format_of :gps, :with => /\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/, :allow_blank => true
   
-  # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
-
-
   has_many :conferences, :foreign_key=>:creator_user_id, :dependent=>:destroy
   has_many :member_of_series, :dependent=>:destroy
   has_many :rcd_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy
   has_many :rcd_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy
   has_many :attendies, :dependent=>:destroy
   
-  GPS_REGEX=/(\d+(\.\d+)?) ?([NnSs]) ?,? ?(\d+(\.\d+)?) ?([EeWw])/
-  validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, 
