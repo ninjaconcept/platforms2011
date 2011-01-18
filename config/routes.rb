@@ -20,5 +20,20 @@ PlatForms::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
   root :to => "pages#index"
+  
+  scope "/ws", :contraints => { :format => 'json' } do
+    resources :conferences, :only => [:create, :show, :update] do
+      resources :attendees, :only => [:create, :list, :delete]
+    end
+    resources :members, :only => [:create, :show, :update] do
+      resources :contacts, :only => [:create, :list] 
+    end
+    resources :categories, :only => [:list, :create]
+    resources :series, :only => [:list, :create, :show]
+    match "/conferencesbycategory/:id" => "categories#by_id"
+    match "/search/:query" => "search#search"
+    match "/reset" => "DataController#reset"
+    match "/factorydefaults" => "DataController#factory_defaults"
+  end
 
 end
