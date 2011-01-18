@@ -30,15 +30,22 @@ class ConferenceSearcher
       query=query.where("location like ?",country ) 
     elsif opts["reg"]=~/\d+/
       raise "User #{user.username} has no GPS data given, fix this in the UI" if user.gps.blank?
-      query=query.within(opts["reg"].to_i, :origin=>user) #geokit ist so cool!
+      query=query.within(opts["reg"].to_i, :origin=>user) #geokit is so geil!
     end
-    puts query.to_sql
+    if opts["text"]
+      opts["text"].each do |text|
+        prepared="%#{text}%"
+        query=query.where("name LIKE ? OR description LIKE ?", prepared, prepared)
+      end
+    end
+    #puts query.to_sql
     query.paginate :page=>1
   end
 
   def self.parse string
     hash={}
     arr=string.split
+    hash["text"]=[]
     arr.each do |element|
       if element=~/\:/
         key,value=element.split(":")
@@ -49,7 +56,6 @@ class ConferenceSearcher
           hash[key]=value
         end
       else
-        hash["text"]||=[]
         hash["text"]<<element
       end
     end
@@ -62,6 +68,5 @@ class ConferenceSearcher
   end
 end
 
-ConferenceSearcher.do_find "reg:50", User.first
+#ConferenceSearcher.do_find "CCC from:20090101", User.first
 
-#ConferenceSearcher.do_find ""

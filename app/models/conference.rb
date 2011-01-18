@@ -11,14 +11,10 @@ class Conference < ActiveRecord::Base
   
   belongs_to :creator, :class_name=>"User"
 
-  has_and_belongs_to_many :attendances, :join_table => 'attendances',
-    :class_name => "User", :uniq => true
+  has_many :attendances, :dependent => :destroy
 
   has_many :category_conferences, :dependent => :destroy
   has_many :categories, :through=>:category_conferences
-  
-  has_many :attendees, :through=>:attendances
-
   
   
   validates_presence_of :name, :start_date, :end_date, :description, :location

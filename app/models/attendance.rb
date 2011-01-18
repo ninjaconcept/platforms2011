@@ -1,5 +1,5 @@
 # origin: M
-class Attendy < ActiveRecord::Base
+class Attendance < ActiveRecord::Base
   belongs_to :user
   belongs_to :conference
 end
