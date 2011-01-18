@@ -6,3 +6,4 @@ config/database.yml
 public/stylesheets/compiled*
 config/deploy/config.rb
 import/*
+nbproject
