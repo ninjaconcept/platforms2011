@@ -1,8 +1,8 @@
 #origin: GM
 
 class ConferencesController < InheritedResources::Base
-  include WsAuth
-  before_filter :ws_auth 
+  #include WsAuth
+  #before_filter :ws_auth
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
@@ -18,9 +18,21 @@ class ConferencesController < InheritedResources::Base
   end
 
   def search
-    opts={}
-    opts=params
-    @conferences=ConferenceSearcher.do_find opts
+    dummy_conf=Conference.new(params[:conference])
+    if params[:search_term]=~/\:/
+      opts=params[:search_term]
+    else
+      opts="" #build the search string
+      opts<<" from:#{dummy_conf.start_date.to_s} " if dummy_conf.start_date
+      opts<<" until:#{dummy_conf.end_date.to_s} " if dummy_conf.end_date
+      opts<<" reg:#{params[:region]} " unless params[:region].blank?
+      Category.find_all_by_id(params[:conference][:category_ids]).each do |cat|
+        opts<<" cat:#{cat.name.gsub(" ","_")} " #a bit fragvile, but it works...
+      end
+      opts<<" #{params[:search_term]} "      
+    end
+    #opts["from"]
+    @conferences=ConferenceSearcher.do_find opts, current_user
   end
 
   def create

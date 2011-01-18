@@ -21,7 +21,7 @@ describe ConferenceSearcher do
   it "searches cats" do
     search "cat:Technology", 6
     search "cat:Sciences ", 8
-    search "cat:Technology cat:Sciences", 14
+    search "cat:Technology    cat:Sciences", 14
     search "cat:Life_Science", 4
   end
   it "searches cats with subcats" do
