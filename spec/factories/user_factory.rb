@@ -26,7 +26,11 @@
 
 Factory.define :user do |f|
   f.sequence(:email) {|n| "user#{n}@plat-forms.org" }
-  f.password 'super-secret-password'
+  f.password 'super-secret'
   f.password_confirmation { |u| u.password }
   f.remember_me false
+  f.town "Munich"
+  f.country "Germany"
+  f.fullname "Stevie B"
+  f.username "stefan"
 end

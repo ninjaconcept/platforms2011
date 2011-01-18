@@ -38,10 +38,12 @@ group :test, :cucumber do
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
+  gem 'shoulda'
   gem 'rspec-rails'
   gem 'spork'
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'pickle'
   gem 'ZenTest'
+  
 end
