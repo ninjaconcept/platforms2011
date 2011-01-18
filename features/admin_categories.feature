@@ -7,7 +7,7 @@ Feature: Manage categories
   Background:
     Given a user exists with email: "stefan@lesscode.de", password: "lesscode", is_administrator: true
     And I am logged in with "stefan@lesscode.de/lesscode"
-    And no category exists
+    And no category records exist
   
   Scenario: No access for non admins
     Given I am logged out
