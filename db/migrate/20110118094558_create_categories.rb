@@ -3,11 +3,12 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.integer :lock_version, :default=>0 #active_record built_in
       t.string :name
-      t.integer :parent_id
+      t.string :ancestry
+      t.integer :ancestry_depth
 
       t.timestamps
     end
-    add_foreign_key :categories, :parent_id, :references => :categories
+    add_index :categories, :ancestry
   end
 
   def self.down

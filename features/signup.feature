@@ -15,8 +15,7 @@ Feature: Signup
     And I should see "Full name"
     And I should see "Town"
     And I should see "Country"
-    And I should see "GPS Latitude"
-    And I should see "GPS Longitude"
+    And I should see "GPS"
     And I should see "Sign up"
     And I should see "Sign in"
     And I should see "Forgot your password?"
@@ -33,8 +32,7 @@ Feature: Signup
       | Full name             | Stefan Botzenhart     |
       | Town                  | Karlsruhe             |
       | Country               | Germany               |
-      | GPS Latitude          |                       |
-      | GPS Longitude         |                       |
+      | GPS                   |                       |
     When I press "Sign up"
     Then I should see "You have signed up successfully. If enabled, a confirmation was sent to your e-mail."
     And I should be on "/"

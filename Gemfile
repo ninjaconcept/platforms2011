@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 
+gem 'mysql', '2.8.1'
 gem 'devise'
 
 gem 'haml'
@@ -15,12 +16,12 @@ gem 'pacecar'
 gem 'omniauth'
 gem 'jquery-rails'
 gem 'git'
+gem 'cancan'
+gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
 gem 'geokit-rails3'
-gem "will_paginate"
-gem 'mysql', '2.8.1'
 
 group :development do
   gem 'rails3-generators'

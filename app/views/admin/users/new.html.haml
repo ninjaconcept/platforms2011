@@ -1,0 +1,11 @@
+%h1 New user
+
+= simple_form_for(@user, :url => collection_path) do |f|
+  = render 'layouts/error_messages'
+  
+  = render 'form', :f => f
+  
+  .actions
+    = f.submit 'Create'
+    or
+    = link_to 'cancel', collection_path

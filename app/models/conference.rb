@@ -11,7 +11,12 @@ class Conference < ActiveRecord::Base
   
   belongs_to :creator, :class_name=>"User"
   has_and_belongs_to_many :attendees, :join_table => 'attendees', 
+<<<<<<< HEAD
     :class_name => "User", :uniq => true
   has_many :category_conferences
   has_many :categories, :through=>:category_conferences
+=======
+                          :class_name => "User", :uniq => true
+
+>>>>>>> 826a1bfc6705801eff4f5b44ad8db4965c39e197
 end

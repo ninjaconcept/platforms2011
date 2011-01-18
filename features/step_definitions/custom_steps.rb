@@ -5,6 +5,10 @@ Given /^I am logged in with "([^"]*)\/([^"]*)"$/ do |email, password|
   And %{I press "Sign in"}
 end
 
+Given /^I am logged out/ do
+  And %{I follow "Logout"}
+end
+
 Then /^I should see the following table at "([^"]*)":$/ do |selector, expected_table|
   expected_table.diff!(tableish("table#{selector} tr", 'th,td'))
 end
