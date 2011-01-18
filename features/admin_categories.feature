@@ -40,5 +40,6 @@ Feature: Manage categories
     And I should see the following table at "#categories":
       | Name       | Parent     |
       | category 1 |            |
-      | category 2 | category 1 |
+      | category 2 | category 1 |  
+  
   

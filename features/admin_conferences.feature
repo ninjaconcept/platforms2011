@@ -17,7 +17,7 @@ Feature: Manage conferences
     Then I should be on "/"
     And I should see "You are not allowed to access this page. Please contact your admin if necessary!"
     
-  @focus
+  
   Scenario: create a new conferences
     Given I am on "/admin/conferences"
     And I should see "Listing conferences"
@@ -40,3 +40,31 @@ Feature: Manage conferences
     And I should see the following table at "#conferences":
       | Name         |  Location |
       | conference 1 | bcc Berliner Congress Center, Berlin, Germany |
+      
+  
+  Scenario: delete a conference for a cateroy
+    Given a category exists with id: 9999, name: "category 1"
+    And the following conferences exist
+      | name   | id       |
+      | conf 1 | 9995     |
+      | conf 2 | 9996     |
+      | conf 3 | 9997     |
+      | conf 4 | 9998     |
+      | conf 5 | 9999     |
+    And the following category conferences exist
+      | conference_id | category_id |
+      | 9995          | 9999        |
+      | 9996          | 9999        |
+      | 9997          | 9999        |
+      | 9998          | 9999        |
+      | 9999          | 9999        |
+    And I am on "/admin/categories"
+    When I follow "Show conferences" within "#category_9999"
+    Then I should be on "/admin/categories/category-1/conferences"
+    And I should see "Listing conferences (5)"
+    When I follow "Destroy"
+    Then I should see "Conference was successfully destroyed."
+    And I should be on "/admin/categories/category-1/conferences"
+    And I should see "Listing conferences (4)"
+    
+  
