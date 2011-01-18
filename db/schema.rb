@@ -12,15 +12,15 @@
 
 ActiveRecord::Schema.define(:version => 20110118094731) do
 
-  create_table "attendies", :force => true do |t|
+  create_table "attendees", :id => false, :force => true do |t|
     t.integer  "conference_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "attendies", ["conference_id"], :name => "index_attendies_on_conference_id"
-  add_index "attendies", ["user_id"], :name => "index_attendies_on_user_id"
+  add_index "attendees", ["conference_id"], :name => "index_attendees_on_conference_id"
+  add_index "attendees", ["user_id"], :name => "index_attendees_on_user_id"
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -147,8 +147,8 @@ ActiveRecord::Schema.define(:version => 20110118094731) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
-  add_foreign_key "attendies", ["conference_id"], :name => "index_attendies_on_conference_id"
-  add_foreign_key "attendies", ["user_id"], :name => "index_attendies_on_user_id"
+  add_foreign_key "attendees", ["conference_id"], :name => "index_attendees_on_conference_id"
+  add_foreign_key "attendees", ["user_id"], :name => "index_attendees_on_user_id"
 
   add_foreign_key "categories", ["parent_id"], :references => "categories", :name => "index_categories_on_parent_id"
 

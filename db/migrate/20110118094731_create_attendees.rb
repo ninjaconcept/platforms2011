@@ -1,6 +1,6 @@
 class CreateAttendees < ActiveRecord::Migration
   def self.up
-    create_table :attendees do |t|
+    create_table :attendees, :id => false do |t|
       t.integer :conference_id
       t.integer :user_id
 
