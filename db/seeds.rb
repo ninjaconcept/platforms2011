@@ -25,4 +25,4 @@ drop table users;
 
 FactoryDefaults.import
 
-Conference.first.attendees = User.all(:limit => 5)
+Conference.first.attendances = User.all(:limit => 5)
