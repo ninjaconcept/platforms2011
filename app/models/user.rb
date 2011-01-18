@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :fullname, :town, :country, :gps_lat, :gps_long
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :fullname, :town, :country, :lat, :lng
   
   # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
   
