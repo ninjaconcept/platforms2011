@@ -93,6 +93,10 @@ GEM
       spruz (>= 0.1.0)
     friendly_id (3.2.0)
       babosa (~> 0.2.1)
+    geokit (1.5.0)
+    geokit-rails3 (0.1.2)
+      geokit (~> 1.5.0)
+      rails (~> 3.0.0)
     gherkin (2.3.3)
       json (~> 1.4.6)
     git (1.2.5)
@@ -267,6 +271,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   friendly_id
+  geokit-rails3
   git
   haml
   haml-rails

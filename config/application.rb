@@ -52,3 +52,7 @@ module PlatForms
     
   end
 end
+
+
+  require 'spatial_adapter/mysql'
+  

@@ -18,6 +18,8 @@ gem 'git'
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
+#gem 'spatial_adapter'
+gem 'geokit-rails3'
 
 group :production, :migration do
   gem 'mysql' # mysql2 does not work on alpha5
@@ -45,3 +47,4 @@ group :test, :cucumber, :development do
   gem 'pickle'
   gem 'ZenTest'
 end
+
