@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   validates_presence_of :fullname, :username, :town, :country
   validates_uniqueness_of :username, :email
   
-  
   # validates_format_of :gps_lat, :with => /\d+(\.\d+)?/, :allow_blank => true
   # validates_format_of :gps_long, :with => /\d+(\.\d+)?/, :allow_blank => true
 

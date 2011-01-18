@@ -5,6 +5,9 @@
 
   <p><%= f.label :email %><br />
   <%= f.text_field :email %></p>
+  
+  <p><%= f.label :username %><br />
+  <%= f.text_field :username %></p>
 
   <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
   <%= f.password_field :password %></p>
@@ -14,6 +17,21 @@
 
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
+  
+  <p><%= f.label :fullname, 'Full name' %><br />
+  <%= f.text_field :fullname %></p>
+  
+  <p><%= f.label :town %><br />
+  <%= f.text_field :town %></p>
+  
+  <p><%= f.label :country %><br />
+  <%= f.text_field :country %></p>
+  
+  <p><%= f.label :lat, 'GPS Latitude' %><br />
+  <%= f.text_field :lat %></p>
+  
+  <p><%= f.label :lng, 'GPS Longitude' %><br />
+  <%= f.text_field :lng %></p>
 
   <p><%= f.submit "Update" %></p>
 <% end %>
