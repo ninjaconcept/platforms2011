@@ -10,7 +10,7 @@ describe ConferencesController do
   context "creating a new conference" do
     context "with correct data" do
       before do
-        post "/ws/conferences", Factory.build(:new_conference).to_json, "CONTENT_TYPE" => "application/json"
+        post "/ws/conferences", Factory.build(:new_conference).to_json, "CONTENT_TYPE" => "application/json"  
       end
       
       it "should create the conference" do
@@ -25,17 +25,7 @@ describe ConferencesController do
     
     context "with invalid object" do
       before do
-        post "/ws/conferences", {"conference" => {"hoge" => "fuge"}}.to_json, "CONTENT_TYPE" => "application/json"
-      end
-        
-      it "should return 400" do
-        response.status.should == 400
-      end
-    end
-    
-    context "with broken data" do
-      before do
-        post "/ws/conferences", {"cnfrnce" => {"hoge" => "fuge"}}.to_json, "CONTENT_TYPE" => "application/json"
+        post "/ws/conferences", {"hoge" => "fuge"}.to_json, "CONTENT_TYPE" => "application/json"
       end
         
       it "should return 400" do
@@ -57,7 +47,7 @@ describe ConferencesController do
   context "reading conferences" do
     context "existing conferences" do
       before do
-        get "ws/conferences/#{@c.id}", "CONTENT_TYPE" => "application/json"
+        get "ws/conferences/#{@c.id}", {}, "CONTENT_TYPE" => "application/json"
       end
       
       it "should return 200" do
@@ -67,7 +57,7 @@ describe ConferencesController do
     
     context "non-existing conferences" do
       before do
-        get "ws/conferences/100000000", "CONTENT_TYPE" => "application/json"
+        get "ws/conferences/100000000", {}, "CONTENT_TYPE" => "application/json"
       end
       
       it "should return 404" do
@@ -98,7 +88,7 @@ describe ConferencesController do
       
       context "with in valid object" do
         before do
-          put "ws/conferences/#{@c.id}", {"conference" => {"hoge" => "fuge"}}.to_json, "CONTENT_TYPE" => "application/json"
+          put "ws/conferences/#{@c.id}", {"hoge" => "fuge"}.to_json, "CONTENT_TYPE" => "application/json"
         end
         
         it "should return 400" do

@@ -4,7 +4,6 @@ class ConferencesController < InheritedResources::Base
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
   verify :params => [:id], :only => [:show, :update]
-  verify :params => [:conference], :only => [:create, :update]
   
   def show    
     respond_to do |format|
@@ -14,7 +13,7 @@ class ConferencesController < InheritedResources::Base
   end
   
   def create
-    @conference = Conference.create(params[:conference])
+    @conference = Conference.create!(params[:conference] || request.POST)
         
     respond_to do |format|
       format.json { render :json => @conference }
@@ -23,7 +22,7 @@ class ConferencesController < InheritedResources::Base
   end
   
   def update
-    @conference.attributes = params[:conference]
+    @conference.attributes = (params[:conference] || request.POST)
     @conference.save!
     
     respond_to do |format|
