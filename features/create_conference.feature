@@ -13,7 +13,7 @@ Feature: Create conference
     Given I am logged out
     When I go to "/conferences/new"
     Then I should be on "/users/sign_in"
-    And I should see "You are not allowed to access this page. Please contact your admin if necessary!"
+    And I should see "You need to sign in or sign up before continuing."
   
   
   Scenario: create a new conferences      
