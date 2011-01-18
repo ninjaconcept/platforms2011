@@ -12,5 +12,9 @@ PlatForms::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
   root :to => "pages#index"
+  
+  scope "/ws" do
+    resources :photos, :only => [:create, :show, :update], :defaults => { :format => 'json' }
+  end
 
 end
