@@ -1,4 +1,4 @@
-#origin: M
+# #origin: M
 
 require 'spec_helper'
 
@@ -10,7 +10,6 @@ describe ConferencesController do
   context "searching conferences" do
     context "with correct data" do
       before do
-        #TODO
         post "/conferences/search?query=from:20091131 until:20110118"
       end
     end

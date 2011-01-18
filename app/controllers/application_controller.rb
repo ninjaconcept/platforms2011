@@ -60,4 +60,12 @@ class ApplicationController < ActionController::Base
         format.any  { head status } # only return the status code
       end
     end
+    
+    def empty_safe(obj)
+      if obj.empty?
+        head 204
+      else
+        yield
+      end
+    end
 end
