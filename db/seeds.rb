@@ -1,3 +1,4 @@
+#origin: M
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -36,6 +37,15 @@ users.each do |u_hash|
   u_hash["email"]=u_hash["email"].strip #error in json data
   u_hash.delete "gps" # TODO
   puts "creating user #{u_hash["username"]}"
+  gps=u_hash.delete "gps"
+  if gps
+    gps.gsub("O","E") #change "O"st to "E"ast if applicable
+    User::GPS_REGEX=~gps
+    u_hash["lat"]=$1
+    u_hash["lat"]=-u_hash["lng"] if $3=~/Ss/
+    u_hash["lng"]=$4
+    u_hash["lng"]=-u_hash["lat"] if $6=~/Ww/
+  end
   User.create!(u_hash) #this works, since username etc. is also attr_accessible...
 end
 

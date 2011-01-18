@@ -33,4 +33,6 @@ Factory.define :user do |f|
   f.country "Germany"
   f.fullname "Stevie B"
   f.username "stefan"
+  f.lat ''
+  f.lng ''
 end

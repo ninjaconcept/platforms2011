@@ -21,10 +21,7 @@ gem 'hoptoad_notifier'
 #gem 'spatial_adapter'
 gem 'geokit-rails3'
 
-gem 'mysql'
-group :production, :migration do
-#  gem 'mysql' # mysql2 does not work on alpha5
-end
+gem 'mysql', '2.8.1'
 
 group :development do
   gem 'rails3-generators'

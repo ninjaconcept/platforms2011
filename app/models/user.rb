@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     :distance_field_name => :distance,
     :lat_column_name => :lat,
     :lng_column_name => :lng
-
+    #:auto_geocode=> { :field => :full_address, :error_message => 'Adresse konnte nicht in Koordinaten aufgelöst werden' }
   
   has_many :authentications
   
@@ -14,17 +14,23 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :lockable, :timeoutable, :recoverable,
     :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable
 
+  attr_accessor :gps
+  # composed_of :gps, :mapping => [%w(lat), %w(lng)]
+  validates_format_of :gps, :with => /\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/, :allow_blank => true
+  
+  # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
+
+
+
+  
+  GPS_REGEX=/(\d+(\.\d+)?) ?([NnSs]) ?,? ?(\d+(\.\d+)?) ?([EeWw])/
+  validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :fullname, :town, :country, :lat, :lng
-
-  attr_accessor :gps
-  
-  # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
   
   validates_presence_of :fullname, :username, :town, :country
   validates_uniqueness_of :username, :email
-  validates_format_of :gps, :with => /\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/, :allow_blank => true
   
   # validates_format_of :gps_lat, :with => /\d+(\.\d+)?/, :allow_blank => true
   # validates_format_of :gps_long, :with => /\d+(\.\d+)?/, :allow_blank => true
