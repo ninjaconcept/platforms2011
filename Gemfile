@@ -33,7 +33,7 @@ group :development do
   gem 'mysql2' # mysql2 does not work on alpha5
 end
 
-group :test, :cucumber do  
+group :test, :cucumber, :development do  
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
