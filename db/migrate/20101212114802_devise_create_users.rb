@@ -19,8 +19,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :town
       t.string :country
       #t.string :gps
-      t.float :gps_long
-      t.float :gps_lat
+      t.decimal :lat, :precision => 15, :scale => 10
+      t.decimal :lng, :precision => 15, :scale => 10
       t.boolean :is_administrator
 
       t.timestamps

@@ -9,8 +9,12 @@ class CreateConferences < ActiveRecord::Migration
       t.date :end_date
       t.string :description
       t.string :location
-      t.float :gps_long
-      t.float :gps_lat
+
+      t.decimal :lat, :precision => 15, :scale => 10
+      t.decimal :lng, :precision => 15, :scale => 10
+
+      #t.float :gps_long
+      #t.float :gps_lat
       t.string :venue
       t.string :accomodation
       t.string :howtofind
