@@ -16,6 +16,12 @@ PlatForms::Application.routes.draw do
   namespace :admin do
     resources :users
     resources :authentications
+    
+    resources :conferences
+    resources :categories do
+      resources :conferences
+    end
+    
   end
   
   devise_for :users, :controllers => { :registrations => 'registrations' }

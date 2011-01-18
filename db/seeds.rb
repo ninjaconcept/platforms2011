@@ -56,7 +56,7 @@ categories.each do |c_hash|
     if parent_cat.nil?
       parent_cat=Category.create!(:name=>parent_name) #if not found, create it
     end
-    c_hash["parent_id"]=parent_cat.id
+    c_hash["parent"] = parent_cat
   end
   c_hash.delete "subcategories" #should be redundant to parent
   c_hash.delete "parent" #

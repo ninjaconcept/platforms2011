@@ -1,0 +1,21 @@
+%h1= "Listing categories (#{@categories.length})"
+
+.main-actions
+  = link_to 'New Category', new_resource_path
+
+%table#categories
+  %tr
+    %th Name
+    %th Parent
+    %th
+      Actions
+
+  - @categories.each do |category|
+    %tr
+      %td= category.name
+      %td= category.parent.name if category.parent
+      
+      %td
+        = link_to 'Edit', edit_resource_path(category)
+        \|
+        = link_to 'Destroy', resource_path(category), :confirm => 'Are you sure?', :method => :delete
