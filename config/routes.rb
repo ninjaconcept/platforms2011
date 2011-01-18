@@ -21,17 +21,17 @@ PlatForms::Application.routes.draw do
 
   root :to => "pages#index"
   
-  scope "/ws", :contraints => { :format => 'json' } do
+  scope "/ws", :contraints => { :format => :json }, :defaults => {:format => :json} do
     resources :conferences, :only => [:create, :show, :update] do
-      resources :attendees, :only => [:create, :list, :delete]
+      resources :attendees, :only => [:create, :index, :destroy]
     end
     resources :members, :only => [:create, :show, :update] do
-      resources :contacts, :only => [:create, :list] 
+      resources :contacts, :only => [:create, :index] 
     end
-    resources :categories, :only => [:list, :create]
-    resources :series, :only => [:list, :create, :show]
-    match "/conferencesbycategory/:id" => "categories#by_id"
-    match "/search/:query" => "search#search"
+    resources :categories, :only => [:index, :create]
+    resources :series, :only => [:indes, :create, :show]
+    match "/conferencesbycategory/:id" => "Categories#by_id"
+    match "/search/:query" => "Search#search"
     match "/reset" => "DataController#reset"
     match "/factorydefaults" => "DataController#factory_defaults"
   end
