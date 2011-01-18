@@ -1,0 +1,3 @@
+.inputs
+  = f.input :parent_id, :collection => Category.all.collect{ |c| [c.name, c.id] }
+  = f.input :name

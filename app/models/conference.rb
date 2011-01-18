@@ -1,4 +1,6 @@
 class Conference < ActiveRecord::Base
+  @@per_page = 10 #for will_paginate
+
   include GeoHelper
   class << self
     include GeoHelper
@@ -9,6 +11,7 @@ class Conference < ActiveRecord::Base
   
   belongs_to :creator, :class_name=>"User"
   has_and_belongs_to_many :attendees, :join_table => 'attendees', 
-                          :class_name => "User", :uniq => true
-
+    :class_name => "User", :uniq => true
+  has_many :category_conferences
+  has_many :categories, :through=>:category_conferences
 end

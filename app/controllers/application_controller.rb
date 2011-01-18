@@ -11,6 +11,42 @@ class ApplicationController < ActionController::Base
   rescue_from(ActiveRecord::RecordNotFound){ |e| error_response(404, e) }
   rescue_from(ActiveRecord::StaleObjectError){ |e| error_response(409, e) }
   
+  
+  #cancan  
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Access denied. #{exception}"
+    redirect_to root_url
+  end
+  
+  def current_ability
+     #puts "!!! set current_ability controller: #{self} , parent: #{self.send(:parent) if self.send(:parent?)}"
+     Ability.new(current_user, self) # instead of Ability.new(current_user)
+  end
+  
+  def is_admin?
+    current_user.is_admin? #rescue false
+  end
+  
+  protected
+
+    def require_admin
+      unless current_user && is_admin?
+        flash[:error] = "You are not allowed to access this page. Please contact your admin if necessary!"
+        redirect_to root_path
+        return false
+      end
+    end
+    
+    def permission_denied    
+      flash[:error] = "You are not allowed to access this page. Please contact your admin if necessary!"
+  
+      respond_to do |format|
+        format.html { redirect_to admin_root_path }
+        format.xml  { head :unauthorized }
+        format.js   { head :unauthorized }
+      end
+    end
+  
   private
 
     # Overwriting the sign_out redirect path method
