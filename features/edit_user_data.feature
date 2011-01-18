@@ -7,7 +7,7 @@ Feature: Current user data
     Given a user exists with username: "stefan", email: "stefan@plat-forms.org", password: "supersecret"
     And I am logged in with "stefan@plat-forms.org/supersecret"
 
-  @focus
+  
   Scenario: Edit data form
     When I follow "Edit registration"
     Then I should be on "/users/edit"
