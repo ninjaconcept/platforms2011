@@ -1,14 +1,12 @@
 class ContactsController < ApplicationController
-  include WsAuth
-  before_filter :ws_auth, :if => lambda { request.format == :json }
-  before_filter :authenticate_user!, :if => lambda { request.format == :html }, :except => [:index]
+  before_filter :authenticate_user!
   respond_to :json
   
   def index
     u = User.find_by_username(params[:username])
     @rcd_list = u.rcd_statuses
     
-    @rcd_list.reject! {|s| s.status != "in_contact"} unless u == @current_user
+    @rcd_list.reject! {|s| s.status != "in_contact"} unless u == current_user
     
     respond_to do |format|
       format.json { empty_safe(@rcd_list) { render :json => @rcd_list } }

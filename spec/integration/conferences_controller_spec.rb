@@ -28,7 +28,6 @@ describe ConferencesController do
         end
         
         it "should create the conference" do
-          puts response.inspect
           response.should be_success
         end
         
