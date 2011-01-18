@@ -34,7 +34,7 @@ module GeoHelper
       else
         #format is comething like "49 9" or "49,9" or "49.123,9.123"
         self.lat,self.lng=string.split(/ |,/)
-        self.lat=2
+        #self.lat=2
       end
     end
   end

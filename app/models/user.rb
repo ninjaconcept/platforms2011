@@ -25,12 +25,11 @@ class User < ActiveRecord::Base
   has_many :member_of_series, :dependent=>:destroy
   has_many :rcd_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy
   has_many :rcd_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy
-  # has_many :attendances, :dependent=>:destroy
-  
+  has_many :attendances, :dependent=>:destroy
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, 
-                  :fullname, :town, :country, :lat, :lng, :is_administrator
+                  :fullname, :town, :country, :lat, :lng, :is_administrator, :gps
   
   validates_presence_of :fullname, :username, :town, :country
   validates_uniqueness_of :username, :email
