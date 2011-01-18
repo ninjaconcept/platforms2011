@@ -37,15 +37,6 @@ users.each do |u_hash|
   u_hash["password_confirmation"]=u_hash["password"]
   u_hash["email"]=u_hash["email"].strip #error in json data
   puts "creating user #{u_hash["username"]}"
-  gps=u_hash.delete "gps"
-  if gps
-    gps.gsub("O","E") #change "O"st to "E"ast if applicable
-    User::GPS_REGEX=~gps
-    u_hash["lat"]=$1
-    u_hash["lat"]=-u_hash["lat"].to_f if ["s","S"].include? $3
-    u_hash["lng"]=$4
-    u_hash["lng"]=-u_hash["lng"].to_f if ["w","W"].include? $6
-  end
   User.create!(u_hash) #this works, since username etc. is also attr_accessible...
 end
 
