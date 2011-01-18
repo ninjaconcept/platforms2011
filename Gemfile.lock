@@ -279,7 +279,7 @@ DEPENDENCIES
   inherited_resources (= 1.1.2)
   jquery-rails
   launchy
-  mysql
+  mysql (= 2.8.1)
   omniauth
   pacecar
   passenger
