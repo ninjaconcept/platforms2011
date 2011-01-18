@@ -58,13 +58,13 @@ ActiveRecord::Schema.define(:version => 20110118094731) do
     t.integer  "series_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "description"
+    t.text     "description"
     t.string   "location"
     t.decimal  "lat",             :precision => 15, :scale => 10
     t.decimal  "lng",             :precision => 15, :scale => 10
     t.string   "venue"
     t.string   "accomodation"
-    t.string   "howtofind"
+    t.text     "howtofind"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
