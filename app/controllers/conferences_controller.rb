@@ -1,11 +1,12 @@
+#origin: GM
+
 class ConferencesController < InheritedResources::Base
   respond_to :html, :json
-  verify :params => [:conference], :only => [:create, :update]
+  before_filter :load_conference, :only => [:show, :update]
   verify :params => [:id], :only => [:show, :update]
+  verify :params => [:conference], :only => [:create, :update]
   
-  def show
-    @conference = Conference.find(params[:id])
-    
+  def show    
     respond_to do |format|
       format.json { render :json => @conference }
       format.html { render } #TODO => change
@@ -22,7 +23,16 @@ class ConferencesController < InheritedResources::Base
   end
   
   def update
+    @conference.attributes = params[:conference]
+    @conference.save!
+    
+    respond_to do |format|
+      format.json { render :json => @conference }
+      format.html { render } #TODO => change
+    end
+  end
+  
+  def load_conference
     @conference = Conference.find(params[:id])
-    @conference.update_attributes()
   end
 end
