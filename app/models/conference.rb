@@ -8,5 +8,6 @@ class Conference < ActiveRecord::Base
   validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
   
   belongs_to :creator, :class_name=>"User"
-  
+  has_and_belongs_to_many :attendees, :join_table => 'attendees', 
+                          :class_name => "User", :uniq => true
 end
