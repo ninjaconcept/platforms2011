@@ -6,12 +6,14 @@
 %table#conferences
   %tr
     %th Name
+    %th Location
     %th
       Actions
 
   - @conferences.each do |conference|
     %tr
       %td= conference.name
+      %td= conference.location
       
       %td
         = link_to 'Edit', edit_resource_path(conference)

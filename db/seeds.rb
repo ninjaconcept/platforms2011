@@ -25,4 +25,6 @@ drop table users;
 
 FactoryDefaults.import
 
-Conference.first.attendances = User.all(:limit => 5)
+User.all(:limit=>5).each do |u|
+  Conference.first.attendances.create!(:user=>u)
+end

@@ -13,8 +13,14 @@ Then /^I should see the following table at "([^"]*)":$/ do |selector, expected_t
   expected_table.diff!(tableish("table#{selector} tr", 'th,td'))
 end
 
+Given /^no category records exist$/ do
+  (0..Category.maximum(:ancestry_depth)).each do |depth|
+    Category.destroy_all(:ancestry_depth => depth)
+  end
+end
+
 Given /^no ([^"]*) exists$/ do |model|
-  model.classify.constantize.destroy_all
+  model.classify.constantize.all.each { |entry| entry.destroy }
 end
 
 Then /^I should get a download with the filename "([^\"]*)"$/ do |filename|

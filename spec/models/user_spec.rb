@@ -16,7 +16,7 @@ describe User do
   # it { should validate_format_of(:gps_long).with(/\d+(\.\d+)?/) }
   
   
-  context "with existin users" do
+  context "with existing users" do
     before do
       @user = Factory(:user)
     end
@@ -28,6 +28,14 @@ describe User do
     it "should respond to is_admin?" do
       @user.should respond_to('is_admin?')
     end
+
+    it "should gecode by an address" do
+      @user.town="Nuernberg"
+      @user.country="Deutschland"
+      @user.lat.to_s.should=="49.45052"
+      @user.lng.to_s.should=="11.08048"
+    end
   end
   
+
 end

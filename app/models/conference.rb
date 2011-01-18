@@ -9,19 +9,15 @@ class Conference < ActiveRecord::Base
   acts_as_mappable acts_as_mappable_hash
   validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
   
-  belongs_to :creator, :class_name=>"User"
+  belongs_to :creator, :class_name=>"User", :foreign_key => 'creator_user_id'
 
-  has_and_belongs_to_many :attendances, :join_table => 'attendances',
-    :class_name => "User", :uniq => true
+  has_many :attendances, :dependent => :destroy
 
   has_many :category_conferences, :dependent => :destroy
   has_many :categories, :through=>:category_conferences
   
-  has_many :attendees, :through=>:attendances
-
   
-  
-  validates_presence_of :name, :start_date, :end_date, :description, :location
+  validates_presence_of :name, :start_date, :end_date, :description, :location#, :categories
   # venue, accomodation
   
   # TODO: presence of categories

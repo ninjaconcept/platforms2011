@@ -11,11 +11,13 @@
       Actions
 
   - @categories.each do |category|
-    %tr
+    %tr[category]
       %td= category.name
       %td= category.parent.name if category.parent
       
       %td
+        = link_to 'Show conferences', admin_category_conferences_path(category)
+        \|
         = link_to 'Edit', edit_resource_path(category)
         \|
         = link_to 'Destroy', resource_path(category), :confirm => 'Are you sure?', :method => :delete

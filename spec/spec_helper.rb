@@ -14,6 +14,12 @@ def app
   Rails::Application
 end
 
+def authed_headers(headers)
+  username = "sjobs"
+  password = "kzr"
+  headers.merge("HTTP_AUTHORIZATION" => "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}")
+end
+
 RSpec.configure do |config|
   # == Mock Framework
   #

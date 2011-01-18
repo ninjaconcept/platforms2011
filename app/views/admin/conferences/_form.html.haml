@@ -1,8 +1,8 @@
 .inputs
   =# f.input :category_id, :collection => Category.all.collect{ |c| [c.name, c.id] }
   = f.input :name
-  = f.input :start_date
-  = f.input :end_date
+  = f.input :start_date, :include_blank => true
+  = f.input :end_date, :include_blank => true
   = f.input :location
   = f.input :lat, :label => 'Location latitude'
   = f.input :lng, :label => 'Location longitude'

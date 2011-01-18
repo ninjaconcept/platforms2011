@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20110118094731) do
 
-  create_table "attendances", :id => false, :force => true do |t|
+  create_table "attendances", :force => true do |t|
     t.integer  "conference_id"
     t.integer  "user_id"
     t.datetime "created_at"

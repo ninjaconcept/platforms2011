@@ -1,6 +1,8 @@
 #origin: GM
 
 class ConferencesController < InheritedResources::Base
+  before_filter :ws_auth 
+  
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
   verify :params => [:id], :only => [:show, :update]

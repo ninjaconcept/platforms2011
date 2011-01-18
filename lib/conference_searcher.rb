@@ -1,5 +1,6 @@
 class ConferenceSearcher
-  def self.search opts
+
+  def self.search opts, user=current_user
     query=Conference
     if opts["until"]
       query=query.where("end_date <= ?",Date.parse(opts["until"]))
@@ -25,51 +26,47 @@ class ConferenceSearcher
       query=query.where("categories.id in (?)", cat_ids) #and fire
     end
     if opts["reg"]=="country"
-      country=defined?(current_user) ? (current_user.country) : "Switzerland"
-      country="%#{country}%" #prepare for like syntax
-      query=query.where("location like ?",country ) #in test env it should always use Switzerland...
+      country="%#{user.country}%" #prepare for like syntax
+      query=query.where("location like ?",country ) 
     elsif opts["reg"]=~/\d+/
-      #query=query.where("county=?",defined?(current_user) ? (current_user.country) : "Switzerland" ) #in test env it should always use Switzerland...
+      raise "User #{user.username} has no GPS data given, fix this in the UI" if user.gps.blank?
+      query=query.within(opts["reg"].to_i, :origin=>user) #geokit is so geil!
     end
-    puts query.to_sql
+    if opts["text"]
+      opts["text"].each do |text|
+        prepared="%#{text}%"
+        query=query.where("name LIKE ? OR description LIKE ?", prepared, prepared)
+      end
+    end
+    #puts query.to_sql
     query.paginate :page=>1
   end
 
   def self.parse string
     hash={}
     arr=string.split
+    hash["text"]=[]
     arr.each do |element|
       if element=~/\:/
         key,value=element.split(":")
-        #        last_key=key
-        if key=="cat" #only those may be arrays
+        if key=="cat" #only "cat" may be arrays
           hash[key]||=[]
           hash[key]<<value
         else
           hash[key]=value
         end
       else
-        hash["text"]||=[]
         hash["text"]<<element
       end
     end
-    #hash["from"]=
     hash
   end
-  def self.do_find string
+
+  def self.do_find string, user
     hash=parse string
-    search hash
+    search hash, user
   end
-
-  def self.adjust_parsed_hash hash
-    #if hash["from"].nil? and hash["until"].nil?
-    #  #hash["from"]
-    #end
-  end
-
 end
 
-ConferenceSearcher.do_find "reg:country"
+#ConferenceSearcher.do_find "CCC from:20090101", User.first
 
-
-#ConferenceSearcher.do_find ""
