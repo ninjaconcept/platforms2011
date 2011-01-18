@@ -4,28 +4,32 @@ class AttendeesController < ApplicationController
   verify :params => [:conference_id]
   verify :params => [:id], :only => [:show]
   verify :params => [:user], :only => [:id]
-  
-  
+    
   def index
     @attendees = attendees
     
     respond_to do |format|
-      format.json { render :json => @attendees }
+      format.json do
+        empty_safe(@attendees) do
+          render :json => @attendees
+        end
+      end
       format.html { redirect_to "/" } #TODO => change
     end
   end
   
   def create
-    attendees << User.find(params[:user][:id])
-    attendees.save
+    username = params[:user][:username] if params[:user]
+    attendees << User.find_by_username(username || request.POST["username"])
     
     respond_to do |format|
       format.json { head 204 }
     end
   end
   
-  def delete
-    @attendee = attendees.find(params[:id])
+  def destroy
+    @attendee = attendees.find_by_username(params[:username])
+    attendees.delete(@attendee)
     
     respond_to do |format|
       format.json { head 204 }
