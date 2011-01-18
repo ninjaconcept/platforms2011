@@ -17,7 +17,8 @@ gem 'omniauth'
 gem 'jquery-rails'
 gem 'git'
 gem 'cancan'
-gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
+#gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
+gem "will_paginate", "~> 3.0.pre2"
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'

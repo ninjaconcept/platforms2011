@@ -7,7 +7,7 @@ class CreateConferences < ActiveRecord::Migration
       t.integer :series_id
       t.date :start_date
       t.date :end_date
-      t.string :description
+      t.text :description
       t.string :location
 
       t.decimal :lat, :precision => 15, :scale => 10
@@ -15,7 +15,7 @@ class CreateConferences < ActiveRecord::Migration
 
       t.string :venue
       t.string :accomodation
-      t.string :howtofind
+      t.text :howtofind
 
       t.timestamps
     end

@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   has_many :member_of_series, :dependent=>:destroy
   has_many :rcd_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy
   has_many :rcd_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy
-  has_many :attendies, :dependent=>:destroy
+  # has_many :attendances, :dependent=>:destroy
   
 
   # Setup accessible (or protected) attributes for your model

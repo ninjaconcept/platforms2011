@@ -1,5 +1,5 @@
 %ul.admin-menu.menu
-  - if request.fullpath =~ /^\/admin/
+  - if current_user.is_admin?
     
     %li
       = link_to "Manage users", admin_users_path

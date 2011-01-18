@@ -9,7 +9,9 @@ describe User do
   it { should validate_presence_of(:fullname) }
   it { should validate_presence_of(:town) }
   it { should validate_presence_of(:country) }
-  it { should validate_format_of(:gps).with(/\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/) }
+  
+  # it { should validate_format_of(:gps).with(GPS_REGEX) }
+  
   # it { should validate_format_of(:gps_lat).with(/\d+(\.\d+)?/) }
   # it { should validate_format_of(:gps_long).with(/\d+(\.\d+)?/) }
   

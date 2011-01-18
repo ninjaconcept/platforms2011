@@ -1,10 +1,11 @@
 require 'test_helper'
 
 class ConferenceTest < ActionDispatch::IntegrationTest
-  fixtures :all
+  
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :start_date }
+  it { should validate_presence_of :end_date }
+  it { should validate_presence_of :description }
+  it { should validate_presence_of :location }
 
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
 end
