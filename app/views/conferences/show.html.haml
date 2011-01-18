@@ -40,9 +40,11 @@
 %p
   %strong Venue:
   = @conference.venue
+
 %p
   %strong Accomodation:
   = @conference.accomodation
+
 %p
   %strong Howtofind:
   = @conference.howtofind
@@ -50,7 +52,6 @@
 
 %h2
   Attendees
-
 
 - unless @conference.attendances.blank?
   %ul
@@ -62,9 +63,3 @@
 - else
   %strong
     Nobody attends this conference!
-    
-    
-    
-    
-    
-

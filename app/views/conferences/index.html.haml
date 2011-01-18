@@ -26,12 +26,13 @@
     %br
     = submit_tag 'Search'
 
-.main-actions
-  = link_to 'New Conference', new_resource_path
+- if current_user
+  .main-actions
+    = link_to 'New Conference', new_resource_path
 
 - if @conferences.blank?
   %h3
-    No conferences found for your search query! Please refine!
+    No conferences found!
     
 - else
   %table

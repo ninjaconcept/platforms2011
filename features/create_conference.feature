@@ -21,9 +21,9 @@ Feature: Create conference
     And I should see "Listing conferences"
     And I follow "New Conference"
     When I fill in the following:
-      | Name | conference 1|
-      | Description | lorem ipsum |
-      | Location | bcc Berliner Congress Center, Berlin, Germany |
+      | Name        | conference 1                                  |
+      | Description | lorem ipsum                                   |
+      | Location    | bcc Berliner Congress Center, Berlin, Germany |
     And I check "Life Science"
     And I select "2010" from "conference_start_date_1i"
     And I select "February" from "conference_start_date_2i"
