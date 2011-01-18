@@ -34,7 +34,7 @@ Feature: Session
     And I press "Sign in"
     Then I should see "Signed in successfully."
     And I should be on "/"
-    And I should see "Welcome to Platforms 2011"
+    And I should see "Welcome to CaP"
     And I should see "Edit registration"
     And I should see "Logout"
     
@@ -45,6 +45,6 @@ Feature: Session
     When I follow "Logout"
     Then I should see "Signed out successfully."
     And I should be on "/"
-    And I should see "Welcome to Platforms 2011"
+    And I should see "Welcome to CaP"
     
     

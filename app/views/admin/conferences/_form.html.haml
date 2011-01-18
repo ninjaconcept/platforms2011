@@ -1,5 +1,4 @@
 .inputs
-  =# f.input :category_id, :collection => Category.all.collect{ |c| [c.name, c.id] }
   = f.input :name
   = f.input :start_date, :include_blank => true
   = f.input :end_date, :include_blank => true
@@ -8,6 +7,6 @@
   = f.input :lng, :label => 'Location longitude'
   = f.input :venue
   = f.input :accomodation
-  = f.association :categories,   :as => :check_boxes
+  = f.association :categories, :as => :check_boxes
   = f.input :description
   = f.input :howtofind, :label => 'How to find the conference'

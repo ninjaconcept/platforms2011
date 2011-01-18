@@ -1,41 +1,47 @@
+%h1
+  = "Conference '#{@conference.name}'"
+
+- if can? :edit, @conference
+  = link_to 'Edit this conference', edit_resource_path(@conference)
+  \|
+  
+= link_to 'Back to conferences list', collection_path
+
+%br
+%br
 
 %p
-  %b Name:
-  = @conference.name
+  %strong
+    Creator:
+  = @conference.creator.username
+  = surround '(', ')' do
+    = @conference.creator.email
+
 %p
-  %b Creator user:
-  = @conference.creator_user_id
-%p
-  %b Series:
-  = @conference.series_id
+  %strong Conference series:
+  =# @conference.series.name if @conference.series
+  
 %p
   %b Start date:
   = @conference.start_date
 %p
   %b End date:
   = @conference.end_date
+
 %p
-  %b Description:
+  %strong Description:
   = @conference.description
+
 %p
-  %b Location:
+  %strong Location:
   = @conference.location
+
 %p
-  %b Gps long:
-  = @conference.gps_long
-%p
-  %b Gps lat:
-  = @conference.gps_lat
-%p
-  %b Venue:
+  %strong Venue:
   = @conference.venue
 %p
-  %b Accomodation:
+  %strong Accomodation:
   = @conference.accomodation
 %p
-  %b Howtofind:
+  %strong Howtofind:
   = @conference.howtofind
-
-= link_to 'Edit', edit_conference_path(@conference)
-\|
-= link_to 'Back', conferences_path

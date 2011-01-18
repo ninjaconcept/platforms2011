@@ -18,9 +18,5 @@ class Conference < ActiveRecord::Base
   
   
   validates_presence_of :name, :start_date, :end_date, :description, :location#, :categories
-  # venue, accomodation
-  
-  # TODO: presence of categories
-  
   
 end
