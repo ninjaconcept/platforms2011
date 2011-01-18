@@ -22,9 +22,21 @@ Feature: Manage conferences
     Given I am on "/admin/conferences"
     And I should see "Listing conferences"
     And I follow "New Conference"
-    When I fill in "Name" with "conference 1"
+    When I fill in the following:
+      | Name | conference 1|
+      | Description | lorem ipsum |
+      | Location | bcc Berliner Congress Center, Berlin, Germany |
+    And I check "Life Science"
+    And I select "2010" from "conference_start_date_1i"
+    And I select "February" from "conference_start_date_2i"
+    And I select "10" from "conference_start_date_3i"
+    
+    And I select "2010" from "conference_end_date_1i"
+    And I select "February" from "conference_end_date_2i"
+    And I select "20" from "conference_end_date_3i"
+    
     And I press "Create"
     Then I should be on "/admin/conferences"
     And I should see the following table at "#conferences":
-      | Name         | 
-      | conference 1 | 
+      | Name         |  Location |
+      | conference 1 | bcc Berliner Congress Center, Berlin, Germany |
