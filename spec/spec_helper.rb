@@ -7,6 +7,13 @@ require 'rspec/rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+require 'capybara/rails' 
+require 'capybara/dsl' 
+
+def app
+  Rails::Application
+end
+
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -24,4 +31,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+  
+  config.include(Capybara, :type => :integration)
 end
