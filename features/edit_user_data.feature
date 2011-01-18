@@ -4,15 +4,19 @@ Feature: Current user data
   I want to interact with my user data
   
   Background:
-    Given a user exists with email: "oli@plat-forms.org", password: "supersecret"
-    And I am logged in with "oli@plat-forms.org/supersecret"
+    Given a user exists with email: "stefan@plat-forms.org", password: "supersecret"
+    And I am logged in with "stefan@plat-forms.org/supersecret"
 
   @focus
   Scenario: Edit data form
     When I follow "Edit registration"
     Then I should be on "/users/edit"
     And I should see "Edit User"
-    And the "Email" field should contain "oli@plat-forms.org"
+    And the "Email" field should contain "stefan@plat-forms.org"
+    And the "Username" field should contain "stefan"
+    And the "Full name" field should contain "Stevie B"
+    And the "Town" field should contain "Munich"
+    And the "Country" field should contain "Germany"
     And I should see "Password (leave blank if you don't want to change it)"
     And I should see "Password confirmation"
     And I should see "Current password (we need your current password to confirm your changes)"
