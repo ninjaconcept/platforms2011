@@ -3,7 +3,7 @@
 %h2
   Search:
 - @conference = Conference.new
-- simple_form_for @conference, :url => search_conferences_path do |f|
+- simple_form_for @conference, :url => search_conferences_path, :method=>:get do |f|
   %label
     = check_box_tag 'include_subcategories'
     include subcategories
