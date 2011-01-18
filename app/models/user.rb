@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :lockable, :timeoutable, :recoverable,
-    :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable
+    :rememberable, :trackable, :validatable, :confirmable
 
   #attr_accessor :gps
   # composed_of :gps, :mapping => [%w(lat), %w(lng)]
@@ -23,9 +23,14 @@ class User < ActiveRecord::Base
   
   has_many :conferences, :foreign_key=>:creator_user_id, :dependent=>:destroy
   has_many :member_of_series, :dependent=>:destroy
-  has_many :rcd_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy
-  has_many :rcd_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy
-  # has_many :attendances, :dependent=>:destroy
+  has_many :sent_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy
+  has_many :received_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy
+  
+  def rcd_statuses
+    sent_statuses + received_statuses
+  end
+  
+  # # has_many :attendances, :dependent=>:destroy
   
 
   # Setup accessible (or protected) attributes for your model
