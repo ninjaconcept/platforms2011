@@ -9,7 +9,8 @@ Feature: Manage conferences
     And I am logged in with "stefan@lesscode.de/lesscode"  
   
   Scenario: No access for non admins
-    Given a user exists with email: "heiko@lesscode.de", password: "lesscode", is_administrator: false
+    Given I am logged out
+    And a user exists with email: "heiko@lesscode.de", password: "lesscode", is_administrator: false
     And I am logged in with "heiko@lesscode.de/lesscode"
     When I go to "/admin/conferences"
     Then I should be on "/"
