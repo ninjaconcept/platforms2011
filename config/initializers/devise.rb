@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
@@ -72,7 +74,7 @@ Devise.setup do |config|
   config.password_length = 3..20
 
   # Regex to use to validate the email address
-  config.email_regexp = /^([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
+  config.email_regexp = /^([ÄÖÜäöü\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})$/i
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this

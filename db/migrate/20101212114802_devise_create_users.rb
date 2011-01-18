@@ -12,11 +12,13 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       t.token_authenticatable
 
+      #custom cols:
+      t.integer :lock_version, :default=>0 #active_record built_in
       t.string :username
       t.string :fullname
       t.string :town
       t.string :country
-      t.string :gps
+      #t.string :gps
       t.float :gps_long
       t.float :gps_lat
       t.boolean :is_administrator

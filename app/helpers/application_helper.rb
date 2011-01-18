@@ -56,5 +56,11 @@ module ApplicationHelper
   #   
   #   base + additional
   # end
+
+
+  #parses a string
+  def to_date string
+    
+  end
   
 end
