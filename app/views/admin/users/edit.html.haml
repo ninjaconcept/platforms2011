@@ -1,0 +1,11 @@
+%h1 Editing user
+
+= simple_form_for(@user, :url => resource_path(@user)) do |f|
+  = render 'layouts/error_messages'
+  
+  = render 'form', :f => f
+  
+  .actions
+    = f.submit 'Update'
+    or
+    = link_to 'back', collection_path

@@ -1,0 +1,24 @@
+%h1= "Listing users (#{@users.length})"
+
+.main-actions
+  =# link_to 'New user', new_resource_path
+
+%table
+  %tr
+    %th Username
+    %th Email
+    %th Full name
+    %th Admin?
+    %th
+      Actions
+
+  - @users.each do |user|
+    %tr
+      %td= user.username
+      %td= user.email
+      %td= user.fullname
+      %td= user.is_admin?
+      %td
+        = link_to 'Edit', edit_resource_path(user)
+        \|
+        = link_to 'Destroy', resource_path(user), :confirm => 'Are you sure?', :method => :delete

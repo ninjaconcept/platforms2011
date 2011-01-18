@@ -1,0 +1,11 @@
+
+- User.content_columns.each do |column|
+  - unless column.name =~ /password|remember|token/
+    %p
+      %b= "#{column.name.humanize}:"
+    
+      = @user.send column.name.to_sym
+
+= link_to 'Edit', edit_resource_path(@user)
+\|
+= link_to 'Back', collection_path

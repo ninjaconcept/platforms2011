@@ -14,6 +14,7 @@ PlatForms::Application.routes.draw do
   resources :authentications
  
   namespace :admin do
+    resources :users
     resources :authentications
   end
   
