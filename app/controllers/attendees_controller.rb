@@ -1,4 +1,4 @@
-class AttendeesController < ApplicationController
+class AttendancesController < ApplicationController
   respond_to :json
   
   verify :params => [:conference_id]
@@ -6,7 +6,7 @@ class AttendeesController < ApplicationController
   verify :params => [:user], :only => [:id]
     
   def index
-    @attendees = attendees
+    @attendances = attendances
     
     respond_to do |format|
       format.json do
@@ -20,24 +20,22 @@ class AttendeesController < ApplicationController
   
   def create
     username = params[:user][:username] if params[:user]
-    attendees << User.find_by_username(username || request.POST["username"])
-    
+    attendances << User.find_by_username(username || request.POST["username"])
     respond_to do |format|
       format.json { head 204 }
     end
   end
   
   def destroy
-    @attendee = attendees.find_by_username(params[:username])
-    attendees.delete(@attendee)
-    
+    @attendances = attendances.find_by_username(params[:username])
+    attendances.delete(@attendee)
     respond_to do |format|
       format.json { head 204 }
     end
   end
   
   private
-    def attendees
-      Conference.find(params[:conference_id]).attendees
-    end
+  def attendances
+    Conference.find(params[:conference_id]).attendances
+  end
 end

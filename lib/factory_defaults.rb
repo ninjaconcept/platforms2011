@@ -23,14 +23,15 @@ class FactoryDefaults
     categories.each do |c_hash|
       parent_name=c_hash["parent"]["name"] if c_hash["parent"]
       if parent_name
-        parent_cat=Category.find_by_name(parent_name)
-        if parent_cat.nil?
-          parent_cat=Category.create!(:name=>parent_name) #if not found, create it
-        end
+        #parent_cat=Category.find_by_name(parent_name)
+        #if parent_cat.nil?
+        #  parent_cat=Category.create!(:name=>parent_name) #if not found, create it
+        #end
+        parent_cat=Category.find_or_create_by_name(parent_name)
         c_hash["parent"] = parent_cat
       end
       c_hash.delete "subcategories" #should be redundant to parent
-      c_hash.delete "parent" #
+      #c_hash.delete "parent" #
       puts "creating/updating category #{c_hash["name"]}"
       cat=Category.find_by_name(c_hash["name"])
       if cat
