@@ -1,6 +1,7 @@
 #origin: GM
 
 class ConferencesController < InheritedResources::Base
+  include WsAuth
   before_filter :ws_auth 
   
   respond_to :html, :json
