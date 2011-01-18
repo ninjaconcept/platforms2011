@@ -17,7 +17,6 @@ class ConferencesController < InheritedResources::Base
     end
   end
 
-
   def search
     opts={}
     opts=params
