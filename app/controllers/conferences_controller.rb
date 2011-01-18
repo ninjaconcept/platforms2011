@@ -1,8 +1,11 @@
 #origin: GM
 
+# class ConferencesController < BaseController
 class ConferencesController < InheritedResources::Base
-  include WsAuth
-  before_filter :ws_auth 
+  # include WsAuth
+  # before_filter :ws_auth 
+  
+  # before_filter :authenticate_user!, :except => :index
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
@@ -28,12 +31,19 @@ class ConferencesController < InheritedResources::Base
     @conference = Conference.new(params[:conference] || request.POST)
     @conference.creator=current_user
     @conference.save!
-        
+      
     respond_to do |format|
       format.json { render :json => @conference }
-      format.html { redirect_to "/" } #TODO => change
+      # format.html { redirect_to "/" } #TODO => change
     end
   end
+  
+  # def create
+  #   @conference = Conference.new(params[:conference] || request.POST)
+  #   
+  #   create!
+  # end
+  
   
   def update
     @conference.attributes = (params[:conference] || request.POST)

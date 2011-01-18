@@ -1,21 +1,12 @@
--if resource.errors.any?
-  #error_explanation
-    %h2= "#{pluralize(resource.errors.count, "error")} prohibited this #{resource.class.name.downcase} from being saved:"
-    %ul
-      - resource.errors.full_messages.each do |msg|
-        %li= msg
-
 .inputs
-  = f.input :version
   = f.input :name
-  = f.input :creator_user_id
-  = f.input :series_id
+  =# f.input :series_id
   = f.input :start_date
   = f.input :end_date
   = f.input :description
   = f.input :location
-  = f.input :gps_long
-  = f.input :gps_lat
+  = f.input :gps, :label => 'GPS data'
   = f.input :venue
   = f.input :accomodation
   = f.input :howtofind
+  = f.association :categories, :as => :check_boxes
