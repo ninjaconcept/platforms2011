@@ -1,7 +1,7 @@
 class CreateConferences < ActiveRecord::Migration
   def self.up
     create_table :conferences do |t|
-      t.string :version
+      t.integer :lock_version, :default=>0 #active_record built_in
       t.string :name
       t.integer :creator_user_id
       t.integer :series_id
