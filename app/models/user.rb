@@ -1,15 +1,24 @@
 # origin: M
 class User < ActiveRecord::Base
+
+  acts_as_mappable :default_units => :kilometers,
+    :default_formula => :flat,
+    :distance_field_name => :distance,
+    :lat_column_name => :lat,
+    :lng_column_name => :lng
+
   
   has_many :authentications
   
   # Include default devise modules. Others available are:
   devise :database_authenticatable, :registerable, :lockable, :timeoutable, :recoverable,
-         :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable
+    :rememberable, :trackable, :validatable, :token_authenticatable, :confirmable
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :fullname, :town, :country, :gps_lat, :gps_long
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :fullname, :town, :country, :lat, :lng
+
+  attr_accessor :gps
   
   # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
   
