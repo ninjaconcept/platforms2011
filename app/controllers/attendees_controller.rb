@@ -4,7 +4,7 @@ class AttendeesController < ApplicationController
   end
   
   private
-    def attendees
-      Conference.
-    end
+  def attendees
+    #      Conference.
+  end
 end
