@@ -6,8 +6,8 @@ Feature: Manage conferences
   
   Background:
     Given a user exists with email: "stefan@lesscode.de", password: "lesscode", is_administrator: true
-    And I am logged in with "stefan@lesscode.de/lesscode"  
-  
+    And I am logged in with "stefan@lesscode.de/lesscode"
+    And no conference exists  
   
   Scenario: No access for non admins
     Given I am logged out
@@ -25,6 +25,6 @@ Feature: Manage conferences
     When I fill in "Name" with "conference 1"
     And I press "Create"
     Then I should be on "/admin/conferences"
-    And I should see the following table at "#categories":
+    And I should see the following table at "#conferences":
       | Name         | 
       | conference 1 | 
