@@ -22,8 +22,7 @@ PlatForms::Application.routes.draw do
     resources :conferences
     resources :categories do
       resources :conferences
-    end
-    
+    end  
   end
   
   devise_for :users, :controllers => { :registrations => 'registrations' }
@@ -35,9 +34,12 @@ PlatForms::Application.routes.draw do
       resources :attendees, :only => [:create, :index]
       match "attendees/:username" => "attendees#destroy", :via => :delete
     end
-    resources :members, :only => [:create, :show, :update] do
-      resources :contacts, :only => [:create, :index] 
-    end
+    
+    match "members" => "registration#create", :via => :post
+    match "members/:username" => "registration#show", :via => :get
+    match "members/:username/contacts" => "contacts#index", :via => :get
+    match "members/:username/contacts" => "contacts#add", :via => :post
+    
     resources :categories, :only => [:index, :create]
     resources :series, :only => [:indes, :create, :show]
     match "/conferencesbycategory/:id" => "Categories#by_id"
