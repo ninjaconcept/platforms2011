@@ -1,4 +1,4 @@
-class AttendeesController < ApplicationController
+class AttendancesController < ApplicationController
   respond_to :json
   
   verify :params => [:conference_id]
@@ -7,17 +7,17 @@ class AttendeesController < ApplicationController
   
   
   def index
-    @attendees = attendees
+    @attendances = attendances
     
     respond_to do |format|
-      format.json { render :json => @attendees }
+      format.json { render :json => @attendances }
       format.html { redirect_to "/" } #TODO => change
     end
   end
   
   def create
-    attendees << User.find(params[:user][:id])
-    attendees.save
+    attendances << User.find(params[:user][:id])
+    attendances.save
     
     respond_to do |format|
       format.json { head 204 }
@@ -25,7 +25,7 @@ class AttendeesController < ApplicationController
   end
   
   def delete
-    @attendee = attendees.find(params[:id])
+    @attendee = attendances.find(params[:id])
     
     respond_to do |format|
       format.json { head 204 }
@@ -33,7 +33,7 @@ class AttendeesController < ApplicationController
   end
   
   private
-    def attendees
-      Conference.find(params[:conference_id]).attendees
+    def attendances
+      Conference.find(params[:conference_id]).attendances
     end
 end

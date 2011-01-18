@@ -15,6 +15,12 @@ class ConferenceSearcher
       query=query.includes(:categories)
       query=query.where("categories.name in (?)", opts["cat"])
     end
+    if opts["opt"]=="withsub"
+      #TODO
+    end
+    if opts["reg"]=="country"
+      query=query.where("county=?",defined?(current_user) ? (current_user.country) : "Switzerland" ) #in test env it should always use Switzerland...
+    end
     puts query.to_sql
     query.paginate :page=>1
   end

@@ -10,14 +10,15 @@
 
 =begin
 drop the complete db manually:
-drop table attendies;
+drop table attendances;
 drop table authentications;
 drop table category_conferences;
 drop table categories;
 drop table conferences;
+drop table series;
+drop table member_of_series;
 drop table rcd_statuses;
 drop table schema_migrations;
-drop table series;
 drop table slugs;
 drop table users;
 =end
