@@ -6,6 +6,12 @@ describe ConferencesController do
   before do
     @c = Factory.create(:conference)
   end
+
+  context "searching conferences" do
+    context "with correct data" do
+      post "/conferences/search?query=from:20091131 until:20110118"
+    end
+  end
   
   context "creating a new conference" do
     context "with correct data" do

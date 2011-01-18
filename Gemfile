@@ -18,9 +18,8 @@ gem 'git'
 
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
-#gem 'spatial_adapter'
 gem 'geokit-rails3'
-
+gem "will_paginate"
 gem 'mysql', '2.8.1'
 
 group :development do

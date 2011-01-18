@@ -11,7 +11,14 @@ class ConferencesController < InheritedResources::Base
       format.html { render } #TODO => change
     end
   end
-  
+
+
+  def search
+    opts={}
+    opts=params
+    @conferences=ConferenceSearcher.search opts
+  end
+
   def create
     @conference = Conference.create!(params[:conference] || request.POST)
         
