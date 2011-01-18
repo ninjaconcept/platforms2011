@@ -34,7 +34,7 @@ PlatForms::Application.routes.draw do
   
   scope "/ws", :contraints => { :format => :json }, :defaults => {:format => :json} do
     resources :conferences, :only => [:create, :show, :update] do
-      resources :attendances, :only => [:create, :index, :destroy]
+      resources :attendances, :only => [:create, :index]
       match "attendances/:username" => "attendances#destroy", :via => :delete
     end
     

@@ -51,7 +51,8 @@ describe AttendancesController do
       end
       
       it "should create a conference attendance" do
-        Conference.find(2).attendances.should include(@user)
+        conf = Conference.find(2)
+        conf.attendances.find_by_user_id(@user).should_not be_nil
       end
     end
     
@@ -72,7 +73,8 @@ describe AttendancesController do
       before do
         @user = User.first
         @conference = Conference.find(2)
-        @conference.attendances << @user
+        @conference.attendances << Attendance.new(:user => @user)
+        @conference.save
         delete "/ws/conferences/#{@conference.id}/attendances/#{@user.username}"
       end
       
