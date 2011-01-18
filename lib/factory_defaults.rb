@@ -36,7 +36,7 @@ class FactoryDefaults
       if cat
         cat.update_attributes(c_hash)
       else
-        Category.new(c_hash)
+        Category.create(c_hash)
       end
     end
 
@@ -49,7 +49,6 @@ class FactoryDefaults
     conf_hash=conferences[13]
     conferences.each do |conf_hash|
       conf_hash["creator"]=User.find_by_username(conf_hash["creator"]["username"]) #creater attrbiute has another semantiv now: it's a Rails Model
-      #conf_hash.delete "creator"
       conf_hash["series"]=Series.find_by_name(conf_hash["series"]["name"]) if conf_hash["series"] and conf_hash["series"]["name"] #may be empty
       conf_hash.delete "series"
       conf_hash["start_date"]=Date.parse(conf_hash["startdate"]) #luckily Rails swallows this input format: 20091227
@@ -64,7 +63,6 @@ class FactoryDefaults
         cat=Category.find_by_name(cat_hash["name"])
         CategoryConference.create!(:conference=>conf, :category=>cat)
       end
-      #conf_hash.delete "categories"
     end
   end
 
