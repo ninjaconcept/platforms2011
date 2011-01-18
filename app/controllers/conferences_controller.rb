@@ -6,6 +6,8 @@ class ConferencesController < InheritedResources::Base
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
+  before_filter :authenticate_user!
+  
   verify :params => [:id], :only => [:show, :update]
   
   def show    
@@ -19,11 +21,13 @@ class ConferencesController < InheritedResources::Base
   def search
     opts={}
     opts=params
-    @conferences=ConferenceSearcher.search opts
+    @conferences=ConferenceSearcher.do_find opts
   end
 
   def create
-    @conference = Conference.create!(params[:conference] || request.POST)
+    @conference = Conference.new(params[:conference] || request.POST)
+    @conference.creator=current_user
+    @conference.save!
         
     respond_to do |format|
       format.json { render :json => @conference }

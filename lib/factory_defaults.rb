@@ -49,7 +49,7 @@ class FactoryDefaults
 
     conf_hash=conferences[13]
     conferences.each do |conf_hash|
-      conf_hash["creator"]=User.find_by_username(conf_hash["creator"]["username"]) #creater attrbiute has another semantiv now: it's a Rails Model
+      conf_hash["creator"]=User.find_by_username(conf_hash["creator"]["username"]) #creater attribute has another semantic now: it's a Rails Model
       conf_hash["series"]=Series.find_by_name(conf_hash["series"]["name"]) if conf_hash["series"] and conf_hash["series"]["name"] #may be empty
       conf_hash.delete "series"
       conf_hash["start_date"]=Date.parse(conf_hash["startdate"]) #luckily Rails swallows this input format: 20091227
@@ -60,7 +60,9 @@ class FactoryDefaults
       #conf_hash.delete "gps"
       conf_hash["description"] = "_" if conf_hash["description"].blank? #mandatory field, must not be empty
       puts "creating conference #{conf_hash["name"]}"
-      conf=Conference.create!(conf_hash)
+      conf=Conference.new(conf_hash)
+      conf.creator=conf_hash["creator"]  #not mass_assignable for security reasons...
+      conf.save!
       new_confs=categories_array.map do |cat_hash|
         cat=Category.find_by_name(cat_hash["name"])
         CategoryConference.create!(:conference=>conf, :category=>cat)
