@@ -2,7 +2,7 @@
 
 %h2
   Search:
-- @conference = Conference.new
+- @conference = Conference.new(:start_date=>Date.today)
 - simple_form_for @conference, :url => search_conferences_path, :html=>{:method=>:get} do |f|
   %label
     = check_box_tag 'include_subcategories'
