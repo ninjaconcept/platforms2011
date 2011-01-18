@@ -30,7 +30,7 @@ PlatForms::Application.routes.draw do
   
   devise_for :users, :controllers => { :registrations => 'registrations' }
 
-  root :to => "pages#index"
+  root :to => "categories#index"
   
   scope "/ws", :contraints => { :format => :json }, :defaults => {:format => :json} do
     resources :conferences, :only => [:create, :show, :update] do

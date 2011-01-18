@@ -1,24 +1,52 @@
-%h1= "Listing categories (#{@categories.length})"
+%h1
+  Welcome to CaP - Conferences and Participants
 
-.main-actions
-  = link_to 'New Category', new_resource_path
 
-%table
-  %tr
-    %th Version
-    %th Name
-    %th Parent
-    %th
-      Actions
+- if @current_category
+  %h1
+    Category
+    = @current_category.name
 
-  - @categories.each do |category|
-    %tr
-      %td= category.version
-      %td= category.name
-      %td= category.parent_id
-      %td
-        = link_to 'Show', resource_path(category)
-        \|
-        = link_to 'Edit', edit_resource_path(category)
-        \|
-        = link_to 'Destroy', resource_path(category), :confirm => 'Are you sure?', :method => :delete
+  %h5
+    Back to
+    - if @current_category.parent
+      = link_to @current_category.parent.name
+    - else
+      = link_to "Main page", "/"
+
+- if @categories.any?
+  .categories
+    %h2
+      Subcategories
+    %ul
+      - @categories.each do |category|
+        %li= link_to category.name, category
+
+.conferences
+  %h2
+    Conferences
+  %ul
+    - @conferences.each do |conf|
+      %li= link_to conf.name, conf
+
+.conferences.running
+  %h2
+    Running conferences
+  %ul
+    - @running_conferences.each do |conf|
+      %li= link_to conf.name, conf
+
+.conferences.upcoming
+  %h2
+    Conferences starting tomorrow
+  %ul
+    - @upcoming_conferences.each do |conf|
+      %li= link_to conf.name, conf
+
+.conferences.upcoming
+  %h2
+    Conferences starting next week
+  %ul
+    - @nextweek_conferences.each do |conf|
+      %li= link_to conf.name, conf
+

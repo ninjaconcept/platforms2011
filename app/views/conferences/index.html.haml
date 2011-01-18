@@ -1,52 +1,64 @@
 %h1= "Listing conferences (#{@conferences.length})"
 
-%h2
-  Search:
-- @conference = Conference.new(:start_date=>Date.today)
-- simple_form_for @conference, :url => search_conferences_path, :html=>{:method=>:get} do |f|
-  %label
-    = check_box_tag 'include_subcategories'
-    include subcategories
-  = f.association :categories, :as => :check_boxes
-  = f.input :start_date, :include_blank => true
-  = f.input :end_date, :include_blank => true
-  %label
-    Search conferences within/in
-    = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
-  %br
-  %label
-    Search term
-  = text_field_tag 'search_term'
-  %br
-  = submit_tag 'Search'
+- unless current_user
+  %h3
+    You need to log in to search within conferences!
+    
+- else
+  %h2
+    Search:
+  - @conference = Conference.new(:start_date=>Date.today)
+  - simple_form_for @conference, :url => search_conferences_path, :html=>{:method=>:get} do |f|
+    %label
+      = check_box_tag 'include_subcategories'
+      include subcategories
+    = f.association :categories, :as => :check_boxes
+    = f.input :start_date, :include_blank => true
+    = f.input :end_date, :include_blank => true
+  
+    %label
+      Search conferences within/in
+      = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
+    %br
+    %label
+      Search term
+    = text_field_tag 'search_term'
+    %br
+    = submit_tag 'Search'
 
-.main-actions
-  = link_to 'New Conference', new_resource_path
+- if current_user
+  .main-actions
+    = link_to 'New Conference', new_resource_path
 
-%table
-  %tr
-    %th Name
-    %th Start date
-    %th End date
-    %th Creator user
-    %th Location
-    %th
-      Actions
-
-  - @conferences.each do |conference|
+- if @conferences.blank?
+  %h3
+    No conferences found!
+    
+- else
+  %table
     %tr
-      %td= conference.name
-      %td= conference.start_date
-      %td= conference.end_date
-      %td= conference.creator.username
-      %td= conference.location
-      %td
-        = link_to 'Show', resource_path(conference) 
+      %th Name
+      %th Start date
+      %th End date
+      %th Creator user
+      %th Location
+      %th
+        Actions
+
+    - @conferences.each do |conference|
+      %tr
+        %td= conference.name
+        %td= conference.start_date
+        %td= conference.end_date
+        %td= conference.creator.username
+        %td= conference.location
+        %td
+          = link_to 'Show', resource_path(conference) 
         
-        - if can? :edit, conference
-          \|
-          = link_to 'Edit', edit_resource_path(conference)
+          - if can? :edit, conference
+            \|
+            = link_to 'Edit', edit_resource_path(conference)
         
-        - if can? :destroy, conference
-          \|
-          = link_to 'Destroy', resource_path(conference), :confirm => 'Are you sure?', :method => :delete
+          - if can? :destroy, conference
+            \|
+            = link_to 'Destroy', resource_path(conference), :confirm => 'Are you sure?', :method => :delete
