@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     :distance_field_name => :distance,
     :lat_column_name => :lat,
     :lng_column_name => :lng
-
+    #:auto_geocode=> { :field => :full_address, :error_message => 'Adresse konnte nicht in Koordinaten aufgelöst werden' }
   
   has_many :authentications
   
@@ -21,10 +21,14 @@ class User < ActiveRecord::Base
   attr_accessor :gps
   
   # composed_of :gps, :mapping => [%w(gps_lat), %w(gps_long)]
-  
+
+
+
   validates_presence_of :fullname, :username, :town, :country
   validates_uniqueness_of :username, :email
-  validates_format_of :gps, :with => /\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/, :allow_blank => true
+  
+  GPS_REGEX=/(\d+(\.\d+)?) ?([NnSs]) ?,? ?(\d+(\.\d+)?) ?([EeWw])/
+  validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
   
   # validates_format_of :gps_lat, :with => /\d+(\.\d+)?/, :allow_blank => true
   # validates_format_of :gps_long, :with => /\d+(\.\d+)?/, :allow_blank => true
