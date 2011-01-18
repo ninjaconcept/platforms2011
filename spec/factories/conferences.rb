@@ -1,7 +1,6 @@
 # Read about factories at http://github.com/thoughtbot/factory_girl
 
 Factory.define :conference do |f|
-  f.version "MyString"
   f.name "MyString"
   f.creator_user_id 1
   f.series_id 1
@@ -17,7 +16,6 @@ Factory.define :conference do |f|
 end
 
 Factory.define :new_conference, :class => Conference do |f|
-  f.version "MyString"
   f.name "FunConf"
   f.creator_user_id 1
   f.series_id 1
