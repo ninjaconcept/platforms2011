@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   acts_as_mappable acts_as_mappable_hash
 
+  validate :geocode_address
+
   validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
   
   #:auto_geocode=> { :field => :full_address, :error_message => 'Adresse konnte nicht in Koordinaten aufgelöst werden' }
@@ -29,7 +31,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :username, 
-                  :fullname, :town, :country, :lat, :lng, :is_administrator, :gps
+    :fullname, :town, :country, :lat, :lng, :is_administrator, :gps
   
   validates_presence_of :fullname, :username, :town, :country
   validates_uniqueness_of :username, :email
@@ -48,6 +50,24 @@ class User < ActiveRecord::Base
   
   def is_admin?
     is_administrator?
+  end
+
+  def full_address
+    "#{town}, #{country}" rescue  ''
+  end
+
+  private
+
+  def geocode_address
+    unless full_address.blank? || full_address == ', ' || !(lat.blank? && lng.blank?)
+      logger.debug "Full address: #{full_address}"
+      geo = Geokit::Geocoders::MultiGeocoder.geocode( full_address )
+      if geo.success
+        self.lat, self.lng = geo.lat, geo.lng
+      else
+        errors.add_to_base "Could not Geocode address"
+      end
+    end
   end
   
 end

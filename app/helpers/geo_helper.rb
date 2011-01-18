@@ -40,23 +40,4 @@ module GeoHelper
   end
 
 
-  #TODO: validate :geocode_address
-
-  def full_address
-    "#{town}, #{country}" rescue  ''
-  end
-
-  private
-
-  def geocode_address
-    unless full_address.blank? || full_address != ',' || !(lat.blank? && lng.blank?)
-      logger.debug "Full address: #{full_address}"
-      geo = Geokit::Geocoders::MultiGeocoder.geocode( full_address )
-      if geo.success
-        self.lat, self.lng = geo.lat, geo.lng
-      else
-        errors.add_to_base _("Could not Geocode address")
-      end
-    end
-  end
 end
