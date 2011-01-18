@@ -1,16 +1,12 @@
 #origin GM
-class InvalidJSON < Exception; end
-class MissingData < Exception; end
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
   rescue_from(ActiveRecord::UnknownAttributeError){ |e| error_response(400, e) }
-  rescue_from(InvalidJSON){ |e| error_response(400, e) }
-  rescue_from(MissingData){ |e| error_response(400, e) }
+  rescue_from(ActiveRecord::RecordInvalid){ |e| error_response(400, e) }
   rescue_from(ActiveRecord::RecordNotFound){ |e| error_response(404, e) }
   rescue_from(ActiveRecord::StaleObjectError){ |e| error_response(409, e) }
-  
   
   #cancan  
   rescue_from CanCan::AccessDenied do |exception|
