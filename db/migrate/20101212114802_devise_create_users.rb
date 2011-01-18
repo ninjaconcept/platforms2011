@@ -18,7 +18,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :fullname
       t.string :town
       t.string :country
-      #t.string :gps
       t.decimal :lat, :precision => 15, :scale => 10
       t.decimal :lng, :precision => 15, :scale => 10
       t.boolean :is_administrator

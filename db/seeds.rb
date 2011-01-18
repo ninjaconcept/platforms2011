@@ -34,6 +34,8 @@ users.each do |u_hash|
   #adjust hash, so we can use it directly
   u_hash["password_confirmation"]=u_hash["password"]
   u_hash["email"]=u_hash["email"].strip #error in json data
+  u_hash.delete "gps" # TODO
+  puts "creating user #{u_hash["username"]}"
   User.create!(u_hash) #this works, since username etc. is also attr_accessible...
 end
 
@@ -48,6 +50,7 @@ categories.each do |c_hash|
   end
   c_hash.delete "subcategories" #should be redundant to parent
   c_hash.delete "parent" #
+  puts "creating/updating category #{c_hash["name"]}"
   cat=Category.find_by_name(c_hash["name"])
   if cat
     cat.update_attributes(c_hash)
@@ -64,7 +67,6 @@ end
 
 conf_hash=conferences[13]
 conferences.each do |conf_hash|
-  puts "------------AAAAAAAAAAAAAAAAAAAAAAA-------------------"+conf_hash.inspect
   conf_hash["creator"]=User.find_by_username(conf_hash["creator"]["username"]) #creater attrbiute has another semantiv now: it's a Rails Model
   #conf_hash.delete "creator"
   conf_hash["series"]=Series.find_by_name(conf_hash["series"]["name"]) if conf_hash["series"] and conf_hash["series"]["name"] #may be empty
@@ -75,7 +77,7 @@ conferences.each do |conf_hash|
   conf_hash.delete "enddate"
   categories_array=conf_hash.delete "categories"
   conf_hash.delete "gps" # TODO
-  puts "---------------------- #{conf_hash}"
+  puts "creating conference #{conf_hash["name"]}"
   conf=Conference.create!(conf_hash)
   categories_array.map do |cat_hash|
     cat=Category.find_by_name(cat_hash["name"])
