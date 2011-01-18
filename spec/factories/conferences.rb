@@ -2,7 +2,7 @@
 
 Factory.define :conference do |f|
   f.name "MyString"
-  f.creator_user_id 1
+  f.creator { Factory(:user) }
   f.series_id 1
   f.start_date "2011-01-18"
   f.end_date "2011-01-18"
