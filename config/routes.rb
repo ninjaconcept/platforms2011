@@ -1,5 +1,13 @@
 PlatForms::Application.routes.draw do
   
+  resources :member_of_series
+
+  resources :series
+
+  resources :categories
+
+  resources :conferences
+
   resources :pages
   
   match '/auth/:provider/callback', :to => 'authentications#create'

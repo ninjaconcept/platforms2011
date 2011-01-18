@@ -1,0 +1,45 @@
+%p#notice= notice
+
+%p
+  %b Version:
+  = @conference.version
+%p
+  %b Name:
+  = @conference.name
+%p
+  %b Creator user:
+  = @conference.creator_user_id
+%p
+  %b Series:
+  = @conference.series_id
+%p
+  %b Start date:
+  = @conference.start_date
+%p
+  %b End date:
+  = @conference.end_date
+%p
+  %b Description:
+  = @conference.description
+%p
+  %b Location:
+  = @conference.location
+%p
+  %b Gps long:
+  = @conference.gps_long
+%p
+  %b Gps lat:
+  = @conference.gps_lat
+%p
+  %b Venue:
+  = @conference.venue
+%p
+  %b Accomodation:
+  = @conference.accomodation
+%p
+  %b Howtofind:
+  = @conference.howtofind
+
+= link_to 'Edit', edit_conference_path(@conference)
+\|
+= link_to 'Back', conferences_path
