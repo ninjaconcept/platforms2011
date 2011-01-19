@@ -62,11 +62,12 @@
   %ul
     - @conference.attendances.each do |attendance|
       %li
-        = attendance.user.fullname
-        \-
         = attendance.user.username
-        = surround '(', ')' do
-          = attendance.user.email
+        - if current_user.is_in_contact_with?(attendance.user) || @conference.creator == current_user
+          \-
+          = attendance.user.fullname
+          = surround '(', ')' do
+            = attendance.user.email
 - else
   %strong
     Nobody attends this conference!

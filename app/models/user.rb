@@ -57,11 +57,17 @@ class User < ActiveRecord::Base
   end
 
   def full_address
-    "#{town}, #{country}" rescue  ''
+    "#{town}, #{country}" rescue ''
   end
   
   def attends?(conference)
     attendances.find_by_conference_id(conference.id) rescue nil
+  end
+  
+  def is_in_contact_with?(user)
+    if rcd = RcdStatus.for_users(self, user)
+      rcd.status == 'in_contact'
+    end
   end
   
 
