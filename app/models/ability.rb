@@ -14,6 +14,7 @@ class Ability
     end
     
     #defaults
+    can :read, [Conference, User]
     
   end
   

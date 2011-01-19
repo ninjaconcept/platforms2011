@@ -1,5 +1,9 @@
-class MembersController < ApplicationController
-  respond_to :json
+class MembersController < BaseController
+  respond_to :json, :html
+  
+  def index
+    @members = User.all.paginate(:per_page => 15, :page => params[:page])
+  end
   
   def create
     p = params[:user] || request.POST
@@ -14,6 +18,10 @@ class MembersController < ApplicationController
   def show
     respond_to do |format|
       format.json { render :json => User.find_by_username(params[:username]) }
+      format.html {
+        @member = User.find(params[:id])
+      }
     end
   end
+  
 end

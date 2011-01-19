@@ -20,7 +20,8 @@ Given /^no category records exist$/ do
 end
 
 Given /^no ([^"]*) exists$/ do |model|
-  model.classify.constantize.all.each { |entry| entry.destroy }
+  model.classify.constantize.all.each { |entry| entry.destroy }  
+  model.classify.constantize.all.length.should == 0
 end
 
 Then /^I should get a download with the filename "([^\"]*)"$/ do |filename|

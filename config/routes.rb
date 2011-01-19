@@ -12,10 +12,10 @@ PlatForms::Application.routes.draw do
       end
   end
   
-  resources :users, :only => [:show, :index] do
+  resources :members, :only => [:show, :index] do
     collection do
-        get 'search'
-      end
+      get 'search'
+    end
   end
 
   resources :pages

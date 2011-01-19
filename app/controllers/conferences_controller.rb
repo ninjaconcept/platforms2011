@@ -1,7 +1,7 @@
 #origin: GM
 
 class ConferencesController < BaseController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index]
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
