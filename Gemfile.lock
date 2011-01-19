@@ -190,6 +190,8 @@ GEM
       rspec (>= 1.3)
       yard
     polyglot (0.3.1)
+    prawn-core (0.8.4)
+    prawn-layout (0.8.4)
     pyu-ruby-sasl (0.0.3.2)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -294,6 +296,8 @@ DEPENDENCIES
   pacecar
   passenger
   pickle
+  prawn-core
+  prawn-layout
   rails (= 3.0.3)
   rails3-generators
   rspec-rails

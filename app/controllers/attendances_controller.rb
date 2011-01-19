@@ -22,6 +22,11 @@ class AttendancesController < ApplicationController
   def create
     username = params[:user][:username] if params[:user]
     user = User.find_by_username(username || request.POST["username"])
+
+    conference
+
+    head 403 and return unless check_user(user)
+
     attendances << Attendance.new(:user => user)
     respond_to do |format|
       format.json do
@@ -38,6 +43,11 @@ class AttendancesController < ApplicationController
   
   def destroy
     uid = User.find_by_username(params[:username])
+
+    conference
+
+    head 403 and return unless check_user(uid)
+
     @attendance = attendances.find_by_user_id(uid)
     @attendance.delete
     

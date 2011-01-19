@@ -43,7 +43,8 @@ class FactoryDefaults
     member_of_series.each do |ms_hash|
       series=Series.create!(:name=>ms_hash["name"])
       username=ms_hash["contacts"][0]["username"] #simple enough here, because testdata always follows this scheme
-      MemberOfSeries.create!(:series_id=>series.id, :user_id=>User.find_by_username(username).id)
+      series.contacts<<User.find_by_username(username)
+      #MemberOfSeries.create!(:series_id=>series.id, :user_id=>User.find_by_username(username).id)
     end
 
     conf_hash=conferences[13]

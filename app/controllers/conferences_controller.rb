@@ -153,6 +153,17 @@ class ConferencesController < BaseController
     send_data doc.render, :type => "application/pdf"
   end
 
+  def feed
+    @conference=Conference.find(params[:id])
+    @attendees = @conference.attendees
+    puts @attendees.size
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false } #index.rss.builder
+    end
+  end
+
+
   private
 
   def load_conference
