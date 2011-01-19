@@ -28,11 +28,20 @@ class ContactsController < ApplicationController
         rcd.reject!
       end
     else
-      RcdStatus.send_rcd(@current_user, u)
+      rcd=RcdStatus.send_rcd(@current_user, u)
     end
     
     respond_to do |format|
-      format.json { head 204 }
+      format.json {
+        if request.xhr?
+          render :update do |page|
+            #page.hide "notification_#{n.id}" #TODO: jquery einbinden
+            page<<"$('#rcd_status_#{rcd.id}').hide()"
+          end
+        else
+          head 204 
+        end
+      }
     end
   end
 end

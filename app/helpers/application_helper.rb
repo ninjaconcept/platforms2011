@@ -65,11 +65,11 @@ module ApplicationHelper
 
 
   def render_user_link user
-    link_to user.fullname, user_path
+    link_to user.fullname, member_path(user)
   end
 
   def render_conference_link conference
-    link_to conference.name, conference
+    link_to "#{conference.start_date} - #{conference.name}", conference
   end
 
   def render_user_link_by_rcd_status rcd

@@ -29,6 +29,14 @@ User.all(:limit=>5).each do |u|
   Conference.first.attendances.create!(:user=>u)
 end
 
+[
+  %w{bgates sjobs},
+  %w{bgates sballmer},
+  %w{sballmer bgates}
+].each do |users|
+  RcdStatus.send_rcd(User.find_by_username(users[0]),User.find_by_username(users[1]))
+end
+
 # M143
 User.create!( 
       :username => 'admin', :password => 'admin', :email => 'admin@plat-forms.org', 
