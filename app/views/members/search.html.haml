@@ -1,9 +1,5 @@
 %h1= "Listing members (#{@members.length})"
 
-
-= render :partial => 'list'
-
-
 - unless current_user
   %h3
     You need to log in to search within members!
@@ -13,19 +9,26 @@
     Search:
   - @member = User.new(:start_date=>Date.today)
   - simple_form_for @member, :url => search_members_path, :html=>{:method=>:get} do |f|
+    %br
     %label
-      = check_box_tag 'include_subcategories'
-      include subcategories
+      = check_box_tag 'only_non_contacts_members'
+      only users who are not contacts of mine
+    %br
+    %label
+      = check_box_tag 'only_non_rcd_members'
+      only users who have not received an RCD from me
     =# f.association :categories, :as => :check_boxes
     =# f.input :start_date, :include_blank => true
     =# f.input :end_date, :include_blank => true
-  
+    %br
     %label
       Search members within/in
-      = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
+      = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.town, 'town'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
     %br
     %label
       Search term
     = text_field_tag 'search_term'
     %br
     = submit_tag 'Search'
+
+= render :partial => 'list'
