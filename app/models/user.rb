@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
   def version=(arg)
     self.lock_version = arg
   end
+
+  def contacts
+    RcdStatus.where("(inviter_user_id=? OR invitee_user_id=?)",id,id).where("status='in_contact'").map{|rcd|rcd.get_other(self)}
+  end
   
   def rcd_statuses
     sent_statuses + received_statuses

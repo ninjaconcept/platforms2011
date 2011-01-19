@@ -5,6 +5,7 @@ class CategoriesController < InheritedResources::Base
   respond_to :html, :json
   
   def index
+    
     respond_to do |format|
       format.json { c = Category.all; empty_safe(c) { render :json => c } }
       format.html { index_page }
@@ -45,7 +46,7 @@ class CategoriesController < InheritedResources::Base
   def index_page id=nil
     time_format="%Y-%m-%d"
     @current_category=Category.find(id) if id
-    @categories=@current_category ? @current_category.descendants : Category.all
+    @categories=@current_category ? @current_category.descendants : Category.roots
     if id
       cat_string=@categories.map{|cat|" cat:#{cat.name} " }.join " "
     end
