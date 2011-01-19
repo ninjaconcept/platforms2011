@@ -70,6 +70,12 @@ class User < ActiveRecord::Base
       rcd.status == 'in_contact'
     end
   end
+
+  def is_in_received_or_sent_status_with?(user)
+    if rcd = RcdStatus.for_users(self, user)
+      rcd.status == 'sent'
+    end
+  end
   
 
   private
