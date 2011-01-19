@@ -1,10 +1,14 @@
 #origin: GM
 
+#require 'icalendar'
+
 class ConferencesController < BaseController
+  include Icalendar
+  
   before_filter :authenticate_user!, :except => [:index]
   
   respond_to :html, :json
-  before_filter :load_conference, :only => [:show, :update]
+  before_filter :load_conference, :only => [:show, :update, :ical]
   
   verify :params => [:id], :only => [:show, :update]
   
@@ -72,11 +76,26 @@ class ConferencesController < BaseController
     end
   end
   
+  def ical
+    conference = Conference.find(params[:id])
+    cal = Calendar.new
+    cal.event do
+      dtstart     conference.start_date
+      dtend       conference.end_date
+      summary     conference.name
+      description conference.description
+      location    conference.location
+      organizer   conference.creator.fullname+" "+conference.creator.email
+      #klass       "PRIVATE"
+    end
+    cal.event.comments=[conference.venue, conference.howtofind]
+    render :text=>cal.to_ical
+  end
 
   private
 
-    def load_conference
-      @conference = Conference.find(params[:id])
-    end
+  def load_conference
+    @conference = Conference.find(params[:id])
+  end
     
 end

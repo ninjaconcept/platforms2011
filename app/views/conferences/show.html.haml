@@ -76,8 +76,16 @@
   %strong
     Nobody attends this conference!
 
+
+%h2
+  Export
+= link_to "Export as ical", conference_ical_path(:conference_id=>@conference.id)
+
+
 %h2
   Invite your contacts
+
+
 
 TODO: list all in_contact users 
 

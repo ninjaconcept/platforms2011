@@ -8,9 +8,10 @@ PlatForms::Application.routes.draw do
 
   resources :conferences do
     collection do
-        get 'search'
-      end
+      get 'search'
+    end
   end
+  get "conferences/:id/ical" => "conferences#ical", :as=>:conference_ical
   
   resources :members, :only => [:show, :index] do
     collection do
@@ -23,7 +24,7 @@ PlatForms::Application.routes.draw do
   resources :notifications
 
   match '/status/', :to => 'status#index'
-  
+
   match '/auth/:provider/callback', :to => 'authentications#create'
   resources :authentications
 
