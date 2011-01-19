@@ -1,4 +1,6 @@
- class AttendancesController < ApplicationController
+#origin GM
+
+class AttendancesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
   respond_to :json, :js
 

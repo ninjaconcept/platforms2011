@@ -1,3 +1,5 @@
+#origin GM
+
 class CategoriesController < InheritedResources::Base
   before_filter :authenticate_user!, :except => [:index, :show, :by_id]
   before_filter :require_admin, :except => [:index, :show, :by_id]

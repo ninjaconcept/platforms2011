@@ -1,3 +1,5 @@
+#origin GM
+
 class Admin::SeriesController < Admin::BaseController
   def update
     update! do |success, failure|

@@ -1,3 +1,5 @@
+#origin GM
+
 class RcdStatus < ActiveRecord::Base
   belongs_to :invitee_user, :class_name=>"User"
   belongs_to :inviter_user, :class_name=>"User"

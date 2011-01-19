@@ -1,3 +1,5 @@
+#origin GM
+
 class Ability
   include CanCan::Ability
   

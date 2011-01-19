@@ -1,3 +1,5 @@
+#origin GM
+
 class AuthenticationsController < InheritedResources::Base
   actions :index, :create, :destroy
   

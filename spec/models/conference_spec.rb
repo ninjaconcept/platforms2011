@@ -1,3 +1,5 @@
+#origin G
+
 require 'spec_helper'
 
 describe Conference do

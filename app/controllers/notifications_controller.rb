@@ -1,3 +1,5 @@
+#origin GM
+
 class NotificationsController < InheritedResources::Base
   
   def update

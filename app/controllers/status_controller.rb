@@ -1,3 +1,5 @@
+#origin GM
+
 class StatusController < ApplicationController
   def index
     
@@ -9,8 +11,6 @@ class StatusController < ApplicationController
     @received_rcds=all_rcds_as_invitee.where("status='sent'")
     @attending_conferences=Conference.where("attendances.user_id=?",current_user.id).includes(:attendances)
     @notifications=current_user.notifications.where("`read`=?",false)
-    
-    
     
   end
 end

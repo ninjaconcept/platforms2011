@@ -1,3 +1,5 @@
+#origin GM
+
 class Admin::BaseController < BaseController
   before_filter :authenticate_user!
   before_filter :require_admin

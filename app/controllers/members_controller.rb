@@ -1,3 +1,5 @@
+#origin GM
+
 class MembersController < BaseController
   respond_to :json, :html
   before_filter :authenticate_user!

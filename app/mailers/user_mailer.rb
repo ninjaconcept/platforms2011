@@ -1,3 +1,5 @@
+#origin GM
+
 class UserMailer < ActionMailer::Base
   default :from => "info@n.plat-forms.org"
 

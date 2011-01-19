@@ -1,3 +1,5 @@
+#origin GM
+
 class Category < ActiveRecord::Base
 
   has_ancestry :cache_depth => true, :orphan_strategy => :destroy

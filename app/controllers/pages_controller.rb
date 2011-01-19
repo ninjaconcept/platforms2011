@@ -1,3 +1,5 @@
+#origin GM
+
 class PagesController < ApplicationController
   def index
     

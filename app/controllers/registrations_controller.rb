@@ -1,3 +1,5 @@
+#origin GM
+
 class RegistrationsController < Devise::RegistrationsController
   
   def create
