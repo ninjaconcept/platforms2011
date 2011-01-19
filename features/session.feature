@@ -35,7 +35,7 @@ Feature: Session
     Then I should see "Signed in successfully."
     And I should be on "/"
     And I should see "Welcome to CaP"
-    And I should see "Edit registration"
+    And I should see "Edit my profile"
     And I should see "Logout"
     
     

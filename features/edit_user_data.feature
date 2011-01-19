@@ -9,7 +9,7 @@ Feature: Current user data
 
   
   Scenario: Edit data form
-    When I follow "Edit registration"
+    When I follow "Edit my profile"
     Then I should be on "/users/edit"
     And I should see "Edit User"
     And the "Email" field should contain "stefan@plat-forms.org"

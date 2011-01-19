@@ -39,6 +39,10 @@ body.bp .error {
 body {
   background: #efefef;
   
+	h1.nojs{
+		color: #ff0000;
+	}
+
   .admin-navigation {
     @include self-clearing;
     color: #333;
