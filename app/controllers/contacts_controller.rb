@@ -15,12 +15,16 @@ class ContactsController < ApplicationController
   
   def add
     u = User.find_by_username(params[:username])
-    status = u.received_statuses
-
-    if status && params[:positive]
-      status.accept!
-    elsif status && !params[:positive]
-      status.reject!
+    rcd = RcdStatus.for_users(u, current_user)
+    
+    if rcd
+      status = rcd.status_for_user(current_user)
+      
+      if status == "RCD_received" && params[:positive]
+        rcd.accept!
+      else status == "RCD_received" && params![:positive]
+        rcd.reject!
+      end
     else
       RcdStatus.send_rcd(@current_user, u)
     end

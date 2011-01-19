@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   rescue_from(ActiveRecord::UnknownAttributeError){ |e| error_response(400, e) }
   rescue_from(ActiveRecord::RecordInvalid){ |e| error_response(400, e) }
-  rescue_from(ActiveRecord::RecordNotFound){ |e| error_response(404, e) }
+  #rescue_from(ActiveRecord::RecordNotFound){ |e| error_response(404, e) }
   rescue_from(ActiveRecord::StaleObjectError){ |e| error_response(409, e) }
   
   #cancan  
