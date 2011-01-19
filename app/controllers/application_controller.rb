@@ -1,5 +1,7 @@
 #origin GM
 
+class UpdateFailed < Exception; end
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
@@ -7,6 +9,7 @@ class ApplicationController < ActionController::Base
   rescue_from(ActiveRecord::RecordInvalid){ |e| error_response(400, e) }
   rescue_from(ActiveRecord::RecordNotFound){ |e| error_response(404, e) }
   rescue_from(ActiveRecord::StaleObjectError){ |e| error_response(409, e) }
+  rescue_from(UpdateFailed){ |e| error_response(400, e) }
   
   #cancan  
   rescue_from CanCan::AccessDenied do |exception|
@@ -63,5 +66,15 @@ class ApplicationController < ActionController::Base
       else
         yield
       end
+    end
+    
+    def update_all_attributes(params, object)
+      params.each do |k,v|
+        object.update_attribute(k,v)
+      end
+      
+      object.save!
+    rescue NoMethodError => e
+      raise UpdateFailed
     end
 end

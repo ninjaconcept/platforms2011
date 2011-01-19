@@ -42,7 +42,9 @@ class ConferencesController < InheritedResources::Base
   end
   
   def update
-    @conference.attributes = (params[:conference] || request.POST)
+    p = (params[:conference] || request.POST)
+    
+    update_all_attributes(p, @conference)
     
     update!
   end

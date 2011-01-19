@@ -40,6 +40,7 @@ PlatForms::Application.routes.draw do
     
     match "/members" => "members#create", :via => :post
     match "/members/:username" => "members#show", :via => :get
+    match "/members/:username" => "members#update", :via => :put
     match "/members/:username/contacts" => "contacts#index", :via => :get
     match "/members/:username/contacts" => "contacts#add", :via => :post
     
