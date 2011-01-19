@@ -35,9 +35,3 @@ end
 ].each do |users|
   RcdStatus.send_rcd(User.find_by_username(users[0]),User.find_by_username(users[1]))
 end
-
-# M143
-User.create!( 
-      :username => 'admin', :password => 'admin', :email => 'admin@plat-forms.org', 
-      :town => 'Nuernberg', :country => 'Germany', :fullname => 'Admin', :is_administrator => true
-)
