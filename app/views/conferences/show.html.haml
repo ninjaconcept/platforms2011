@@ -85,6 +85,8 @@
 %h2
   Export
 = link_to "Export as ical", conference_ical_path(:conference_id=>@conference.id)
+%br
+= link_to "Get as RSS", conference_feed_path(:conference_id=>@conference.id)
 
 
 %h2
