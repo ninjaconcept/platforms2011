@@ -19,7 +19,7 @@
       Actions
 
   - @users.each do |user|
-    %tr[user]
+    %tr[user]{:class => cycle("even", "odd")}
       %td= user.username
       %td= user.email
       %td= user.fullname

@@ -6,7 +6,7 @@ class Conference < ActiveRecord::Base
     include GeoHelper
   end
   
-  attr_accessor :just_created
+  attr_accessor :just_created, :search_term
 
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true
   

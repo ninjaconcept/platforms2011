@@ -2,6 +2,15 @@
 
 .main-actions
   = link_to 'New Conference', new_resource_path
+  
+.search-form
+  - form_for :conference, :url => collection_path, :html => { :method => :get } do |f|
+    %label 
+      Search term: 
+      = f.text_field :search_term, :value => @search_term
+    = f.submit :search
+
+%hr
 
 %table#conferences
   %tr
@@ -11,7 +20,7 @@
       Actions
 
   - @conferences.each do |conference|
-    %tr
+    %tr{:class => cycle("even", "odd")}
       %td= conference.name
       %td= conference.location
       
