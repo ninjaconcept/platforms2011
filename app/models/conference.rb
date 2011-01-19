@@ -20,6 +20,6 @@ class Conference < ActiveRecord::Base
   has_many :categories, :through=>:category_conferences
   
   
-  validates_presence_of :name, :start_date, :end_date, :description, :location#, :categories
+  validates_presence_of :name, :start_date, :end_date, :description, :location, :categories
   
 end
