@@ -15,7 +15,7 @@
 %p
   %strong
     Full name
-  - if current_user.is_in_contact_with?(user)
+  - if current_user.is_in_contact_with?(@user)
     = @user.fullname
   - else
     hidden
@@ -23,11 +23,18 @@
 %p
   %strong
     Email
-  - if current_user.is_in_contact_with?(user)
+  - if current_user.is_in_contact_with?(@user)
     = @user.email 
   - else
     hidden
 
+%p
+  %strong Town
+  = @user.town
+
+%p
+  %strong Country
+  = @user.country
 
 %h2
   Contact status
