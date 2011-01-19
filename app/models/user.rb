@@ -84,7 +84,12 @@ class User < ActiveRecord::Base
       rcd.status == 'in_contact'
     end
   end
-  
+
+  def is_in_received_or_sent_status_with?(user)
+    if rcd = RcdStatus.for_users(self, user)
+      rcd.status == 'sent'
+    end
+  end
   
   def to_json(opts = {})
     full = opts.delete(:full)
@@ -104,16 +109,16 @@ class User < ActiveRecord::Base
 
   private
 
-    def geocode_address
-      unless full_address.blank? || full_address == ', ' || !(lat.blank? && lng.blank?)
-        logger.debug "Full address: #{full_address}"
-        geo = Geokit::Geocoders::MultiGeocoder.geocode( full_address )
-        if geo.success
-          self.lat, self.lng = geo.lat, geo.lng
-        else
-          #errors.add_to_base "Could not Geocode address"
-        end
+  def geocode_address
+    unless full_address.blank? || full_address == ', ' || !(lat.blank? && lng.blank?)
+      logger.debug "Full address: #{full_address}"
+      geo = Geokit::Geocoders::MultiGeocoder.geocode( full_address )
+      if geo.success
+        self.lat, self.lng = geo.lat, geo.lng
+      else
+        #errors.add_to_base "Could not Geocode address"
       end
     end
+  end
   
 end
