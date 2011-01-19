@@ -26,7 +26,6 @@ class AttendancesController < ApplicationController
     respond_to do |format|
       # format.json { head 204 }
       format.json do
-        logger.debug request.inspect
         if request.xhr?
           render :update do |page|
             page.reload

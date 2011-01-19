@@ -20,11 +20,19 @@ PlatForms::Application.routes.draw do
 
   resources :pages
 
+  resources :notifications
+
   match '/status/', :to => 'status#index'
   
   match '/auth/:provider/callback', :to => 'authentications#create'
   resources :authentications
- 
+
+  resources :contacts do
+    collection do
+      post "add" => "contacts#add", :as=> :add
+    end
+  end
+
   namespace :admin do
     resources :users
     resources :authentications

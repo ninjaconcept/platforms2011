@@ -1,0 +1,4 @@
+# origin: M
+class Notification < ActiveRecord::Base
+  belongs_to :user
+end

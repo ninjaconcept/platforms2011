@@ -27,6 +27,10 @@ class RcdStatus < ActiveRecord::Base
     self.create!(:inviter_user => from, :invitee_user => to)
   end
   
+  def get_other me
+    me.id==inviter_user_id ? invitee_user : inviter_user
+  end
+
   def accept!
     self.status = "in_contact"
     self.save

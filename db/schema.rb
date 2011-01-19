@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110118094731) do
+ActiveRecord::Schema.define(:version => 20110119094731) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "conference_id"
@@ -81,6 +81,16 @@ ActiveRecord::Schema.define(:version => 20110118094731) do
 
   add_index "member_of_series", ["series_id"], :name => "index_member_of_series_on_series_id"
   add_index "member_of_series", ["user_id"], :name => "index_member_of_series_on_user_id"
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "text"
+    t.boolean  "read",       :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   create_table "rcd_statuses", :force => true do |t|
     t.integer  "inviter_user_id"
@@ -159,6 +169,8 @@ ActiveRecord::Schema.define(:version => 20110118094731) do
 
   add_foreign_key "member_of_series", ["series_id"], :name => "index_member_of_series_on_series_id"
   add_foreign_key "member_of_series", ["user_id"], :name => "index_member_of_series_on_user_id"
+
+  add_foreign_key "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   add_foreign_key "rcd_statuses", ["invitee_user_id"], :references => "users", :name => "index_rcd_statuses_on_invitee_user_id"
   add_foreign_key "rcd_statuses", ["inviter_user_id"], :references => "users", :name => "index_rcd_statuses_on_inviter_user_id"

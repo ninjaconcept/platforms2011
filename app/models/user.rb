@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :sent_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :received_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :attendances, :dependent=>:destroy
+  has_many :notifications, :dependent=>:destroy
   
   def rcd_statuses
     sent_statuses + received_statuses
