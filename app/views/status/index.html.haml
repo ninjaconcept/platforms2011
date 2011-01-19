@@ -1,0 +1,60 @@
+%h1
+  Welcome
+  = current_user.fullname
+  , this is your Status page
+
+.maps.link
+  = link_to "Your location on Google Maps", "http://maps.google.com" #TODO
+
+
+.members.in_contact
+  Other users, you're in contact with:
+  %ul
+  - @users_in_contact.each do |u|
+    %li= render_user_link u
+
+.members.in_contact
+  Other users, you've requested an RCD for:
+  %ul
+  - @users_with_sent_rcds.each do |u|
+    %li= render_user_link u
+
+.members.in_contact
+  Other users, from you've received an RCD:
+  %ul
+  - @users_with_received_rcds.each do |u|
+    %li= render_user_link u
+
+.attendances
+  Your personal calendar: You've signed up for the following conferences:
+  %ul
+  - @attending_conferences.each do |c|
+    %li= render_conference_link c
+    
+
+.categories
+  %h2
+    Categories
+
+  M8 - List of categories
+
+.conferences
+  %h2
+    Conferences
+  M9 - List of conferences
+
+.conferences.running
+  %h2
+    Running conferences
+  S10 - List of currently running conferences
+
+.conferences.upcoming
+  %h2
+    Conferences starting tomorrow
+  m11 - List of upcoming conferences tomorrow
+
+.conferences.upcoming
+  %h2
+    Conferences starting next week
+  m11 - List of upcoming conferences next week
+
