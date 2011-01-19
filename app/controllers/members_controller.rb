@@ -6,6 +6,10 @@ class MembersController < BaseController
     @members = User.all.paginate(:per_page => 15, :page => params[:page])
   end
   
+  def search
+    @members = User.all.paginate(:per_page => 15, :page => params[:page])
+  end
+  
   def create
     p = params[:user] || request.POST
     p[:password_confirmation] = p[:password] 

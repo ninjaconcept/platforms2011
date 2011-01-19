@@ -1,75 +1,7 @@
 %h1= "Listing members (#{@members.length})"
 
-- unless current_user
-  %h3
-    You need to log in to search within members!
-    
-- else
-  %h2
-    Search:
-  - @member = User.new(:start_date=>Date.today)
-  - simple_form_for @member, :url => search_members_path, :html=>{:method=>:get} do |f|
-    %label
-      = check_box_tag 'include_subcategories'
-      include subcategories
-    =# f.association :categories, :as => :check_boxes
-    =# f.input :start_date, :include_blank => true
-    =# f.input :end_date, :include_blank => true
-  
-    %label
-      Search members within/in
-      = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
-    %br
-    %label
-      Search term
-    = text_field_tag 'search_term'
-    %br
-    = submit_tag 'Search'
+= link_to 'Search for members', search_members_path
+%br
+%br
 
-
-- if @members.blank?
-  %h3
-    No members found!
-    
-- else
-  = will_paginate @members
-  %br
-  
-  %table
-    %tr
-      %th Name
-      %th Email 
-      %th Full name
-      %th Contact status
-      %th Town
-      %th Country
-      %th &nbsp;
-
-    - @members.each do |member|
-      %tr
-        %td= member.username
-        %td
-          - if current_user.is_in_contact_with?(member)
-            = member.email 
-          - else
-            hidden
-            
-        %td
-          - if current_user.is_in_contact_with?(member)
-            = member.fullname
-          - else
-            hidden
-          
-        %td
-          - if current_user.is_in_contact_with?(member)
-            connected
-          - else
-            not connected
-        
-        %td= member.town
-        %td= member.country
-        
-        %td
-          = link_to 'Show', resource_path(member)
-
-  = will_paginate @members
+= render :partial => 'list'
