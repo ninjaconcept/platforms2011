@@ -1,14 +1,19 @@
 #origin: GM
 
+#require 'icalendar'
+
 class ConferencesController < BaseController
+  include Icalendar
+  
   before_filter :authenticate_user!, :except => [:index]
   
   respond_to :html, :json
-  before_filter :load_conference, :only => [:show, :update]
+  before_filter :load_conference, :only => [:show, :update, :ical]
   
   verify :params => [:id], :only => [:show, :update]
   
-  def show    
+  def show
+    @my_contacts=current_user.contacts
     respond_to do |format|
       format.json { render :json => @conference }
       format.html { render } #TODO => change
@@ -63,8 +68,17 @@ class ConferencesController < BaseController
         Category.find_or_create_by_name(c[:name])
       end
     end
-    update_all_attributes(p, @conference)
-    
+    if p["start_date(1i)"].blank? #call from WS
+      update_all_attributes(p, @conference)
+    else #call from WebUI
+      conf_clone=@conference.clone
+      @conference.update_attributes(p)
+    end
+    if conf_clone.start_date!=@conference.start_date or conf_clone.end_date!=@conference.end_date 
+      @conference.attendees.each do |user|
+        user.notifications.create!(:text=>"Attentiaion! Start or end date of #{@conference.name} was updated by the owner.")
+      end
+    end
     
     respond_to do |format|
       format.json { @conference.save!; render :json => @conference }
@@ -72,11 +86,29 @@ class ConferencesController < BaseController
     end
   end
   
+  def ical
+    conference = Conference.find(params[:id])
+    cal = Calendar.new
+    cal.event do
+      dtstart     conference.start_date
+      dtend       conference.end_date
+      summary     conference.name
+      description conference.description
+      location    conference.location
+      organizer   conference.creator.fullname+" "+conference.creator.email
+      #klass       "PRIVATE"
+    end
+    cal.event.comments=[conference.venue, conference.howtofind]
+    conference.attendees.each do |u|
+      cal.event.comments<<"#{u.username}, #{u.fullname}, #{u.email}"
+    end
+    send_data cal.to_ical, :type=>"text/calendar"
+  end
 
   private
 
-    def load_conference
-      @conference = Conference.find(params[:id])
-    end
+  def load_conference
+    @conference = Conference.find(params[:id])
+  end
     
 end

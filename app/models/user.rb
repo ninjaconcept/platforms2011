@@ -29,7 +29,12 @@ class User < ActiveRecord::Base
   has_many :received_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :attendances, :dependent=>:destroy
   has_many :notifications, :dependent=>:destroy
-  
+
+
+  def contacts
+    RcdStatus.where("(inviter_user_id=? OR invitee_user_id=?)",id,id).where("status='in_contact'").map{|rcd|rcd.get_other(self)}
+  end
+
   def rcd_statuses
     sent_statuses + received_statuses
   end

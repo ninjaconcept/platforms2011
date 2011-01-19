@@ -9,5 +9,14 @@ class NotificationsController < InheritedResources::Base
     end
   end
 
+  def create
+    other_user=User.find(params[:user_id])
+    conf=Conference.find(params[:conference_id])
+    other_user.notifications.create!(:text=>"Invitation from #{current_user.fullname}: Hey, do you like to come to #{conf.name}? It will be pretty cool there.")
+    render :update do |page|
+      page<<"$('#user_#{other_user.id}').replaceWith('Ok, the user #{other_user.fullname} got an invitation notification')"
+    end
+  end
+
   
 end

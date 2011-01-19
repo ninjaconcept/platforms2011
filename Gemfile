@@ -23,6 +23,7 @@ gem "will_paginate", "~> 3.0.pre2"
 gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
 gem 'geokit-rails3'
+gem 'icalendar'
 
 group :development do
   gem 'rails3-generators'
