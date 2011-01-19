@@ -22,26 +22,27 @@ class ContactsController < ApplicationController
     if rcd
       status = rcd.status_for_user(current_user)
       
-      if status == "RCD_received" && params[:positive]
+      if status == "RCD_received" && (params[:positive]=="true" || params[:positive]==true)
         rcd.accept!
-      else status == "RCD_received" && params![:positive]
+      elsif status == "RCD_received" && (params[:positive]=="false" || params[:positive]==false)
         rcd.reject!
+      else
+        raise UpdateFailed
       end
     else
       rcd=RcdStatus.send_rcd(@current_user, u)
     end
     
     respond_to do |format|
-      format.json {
+      format.json do
         if request.xhr?
           render :update do |page|
-            #page.hide "notification_#{n.id}" #TODO: jquery einbinden
-            page<<"$('#rcd_status_#{rcd.id}').hide()"
+            page.reload
           end
         else
-          head 204 
+          head 204
         end
-      }
+      end
     end
   end
 end
