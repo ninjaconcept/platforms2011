@@ -6,6 +6,14 @@
 
 %hr
 
+.member_stats
+There are
+= User.count
+members signed up and
+= Conference.count
+conferences available
+%hr
+
 - if @current_category
   %h4
     = "You are in category '#{@current_category.name}'"

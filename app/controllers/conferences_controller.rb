@@ -112,5 +112,6 @@ class ConferencesController < BaseController
   def load_conference
     @conference = Conference.find(params[:id])
   end
-    
+
+  
 end
