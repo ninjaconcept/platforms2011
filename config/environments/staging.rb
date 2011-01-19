@@ -39,9 +39,18 @@ PlatForms::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => "lc.plat-forms.org" }
   config.action_mailer.smtp_settings = {
-    :address => "smtp.plat-forms.org"
+    :address => "smtp.plat-forms.org",
+    :authentication => :plain
   }
-  
+  # config.action_mailer.smtp_settings = {
+  #   :address => "smtp.plat-forms.org"
+  #   :port => ,
+  #   :domain => "your domain name",
+  #   :authentication => :login,
+  #   :user_name => "account@mailserver.com",
+  #   :password => "account_password",
+  #   :tls => true
+  # }
   
   # Enable threaded mode
   # config.threadsafe!
