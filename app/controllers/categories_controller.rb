@@ -1,6 +1,6 @@
 class CategoriesController < InheritedResources::Base
-  before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :require_admin, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :by_id]
+  before_filter :require_admin, :except => [:index, :show, :by_id]
   
   respond_to :html, :json
   
@@ -28,6 +28,15 @@ class CategoriesController < InheritedResources::Base
     create! do |success, failure|
       success.json { response.status = 200; render :json => @category }
       failure.json { head 400 }
+    end
+  end
+  
+  def by_id
+    respond_to do |format|
+      format.json do
+        c = Category.find(params[:id]).conferences
+        empty_safe(c) {render :json => c }
+      end
     end
   end
 
