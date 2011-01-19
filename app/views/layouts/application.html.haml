@@ -19,6 +19,7 @@
     
       .admin-navigation
         = render 'devise/menu/menu'
+        = render 'layouts/menu'
         = render 'admin/layouts/menu' if user_signed_in?
 
         = link_to image_tag('logo.png', :alt => 'home'), root_path

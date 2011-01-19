@@ -46,11 +46,11 @@ Feature: Manage conferences
     Given a category exists with id: 9999, name: "category 1"
     And the following conferences exist
       | name   | id       |
-      | conf 1 | 9995     |
-      | conf 2 | 9996     |
-      | conf 3 | 9997     |
-      | conf 4 | 9998     |
-      | conf 5 | 9999     |
+      | super conf 1 | 9995     |
+      | super conf 2 | 9996     |
+      | super conf 3 | 9997     |
+      | super conf 4 | 9998     |
+      | super conf 5 | 9999     |
     And the following category conferences exist
       | conference_id | category_id |
       | 9995          | 9999        |
