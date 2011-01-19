@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119135151) do
+ActiveRecord::Schema.define(:version => 20110119154214) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "conference_id"
@@ -104,11 +104,11 @@ ActiveRecord::Schema.define(:version => 20110119135151) do
   add_index "rcd_statuses", ["inviter_user_id"], :name => "index_rcd_statuses_on_inviter_user_id"
 
   create_table "series", :force => true do |t|
-    t.integer  "version",     :default => 0
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "series_contacts", :id => false, :force => true do |t|
