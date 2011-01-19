@@ -5,17 +5,24 @@ Feature: Manage categories
   
   
   Background:
-    Given a user exists with email: "stefan@lesscode.de", password: "lesscode", is_administrator: true
-    And I am logged in with "stefan@lesscode.de/lesscode"
+    Given a user exists with username: "stefan", password: "lesscode", is_administrator: true
+    And I am logged in with "stefan/lesscode"
     And no category records exist
   
   Scenario: No access for non admins
     Given I am logged out
-    And a user exists with email: "heiko@lesscode.de", password: "lesscode", is_administrator: false
-    And I am logged in with "heiko@lesscode.de/lesscode"
+    And a user exists with username: "heiko", password: "lesscode", is_administrator: false
+    And I am logged in with "heiko/lesscode"
     When I go to "/admin/categories"
     Then I should be on "/"
     And I should see "You are not allowed to access this page. Please contact your admin if necessary!"
+    
+
+  Scenario: No access for guests
+    Given I am logged out
+    When I go to "/admin/categories"
+    Then I should be on "/users/sign_in"
+    And I should see "You need to sign in or sign up before continuing."
     
   
   Scenario: create a new category

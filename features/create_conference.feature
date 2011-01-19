@@ -5,8 +5,8 @@ Feature: Create conference
   
   
   Background:
-    Given a user exists with email: "stefan@lesscode.de", password: "lesscode", is_administrator: false
-    And I am logged in with "stefan@lesscode.de/lesscode"
+    Given a user exists with username: "stefan", password: "lesscode", is_administrator: false
+    And I am logged in with "stefan/lesscode"
 
 
   Scenario: only logged in users can create conferences
