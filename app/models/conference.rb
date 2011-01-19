@@ -1,5 +1,5 @@
 class Conference < ActiveRecord::Base
-  @@per_page = 10 #for will_paginate
+  @@per_page = 10 #for will_paginate  
 
   include GeoHelper
   class << self
@@ -21,8 +21,6 @@ class Conference < ActiveRecord::Base
   has_many :category_conferences, :dependent => :destroy
   has_many :categories, :through=>:category_conferences
   
-  
   validates_presence_of :name, :start_date, :end_date, :description, :location
-  validates_presence_of :categories, :unless => :just_created
-  
+  validates_presence_of :categories, :unless => :just_created  
 end

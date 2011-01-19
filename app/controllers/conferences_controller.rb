@@ -1,7 +1,7 @@
 #origin: GM
 
 class ConferencesController < BaseController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index]
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
@@ -38,18 +38,34 @@ class ConferencesController < BaseController
   end
   
   def create
-    @conference = Conference.new(params[:conference] || request.POST)
+    p = params[:conference] || request.POST
+    if p[:categories] 
+      p[:categories].map! do |c|
+        Category.find_or_create_by_name(c[:name])
+      end
+    end
+    @conference = Conference.new(p)
     @conference.creator = current_user
     
-    create!
+    create! do |success, failure|
+      success.json { response.status = 200; render :json => @conference}
+    end
   end
   
   def update
     p = (params[:conference] || request.POST)
-    
+    if p[:categories] 
+      p[:categories].map! do |c|
+        Category.find_or_create_by_name(c[:name])
+      end
+    end
     update_all_attributes(p, @conference)
     
-    update!
+    
+    respond_to do |format|
+      format.json { @conference.save!; render :json => @conference }
+      format.html { update! }
+    end
   end
   
 

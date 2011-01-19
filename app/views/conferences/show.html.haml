@@ -66,7 +66,7 @@
   %ul
     - @conference.attendances.each do |attendance|
       %li
-        = attendance.user.username
+        = link_to attendance.user.username, member_path(attendance.user)
         - if current_user.is_in_contact_with?(attendance.user) || @conference.creator == current_user
           \-
           = attendance.user.fullname

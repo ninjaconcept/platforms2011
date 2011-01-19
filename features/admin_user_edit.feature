@@ -22,7 +22,10 @@ Feature: Admin user edit
     And I am logged in with "stefan/lesscode"
     And a user exist with id: 1000, is_administrator: false
     When I go to "/admin/users"
-    And I follow "Edit" within "#user_1000"
+    And I should see "Listing users"
+    # And I should see "Edit"
+    # And I follow "Edit" within "#user_1000"
+    And I follow "Edit" 
     When I check "Is administrator"
     And I press "Update"
     Then I should see "User was successfully updated."

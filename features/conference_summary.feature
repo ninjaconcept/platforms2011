@@ -5,7 +5,9 @@ Feature: Conference summary
   
   
   Scenario: no conferences
-    Given no conference exists
+    Given no attendance exists
+    And no category_conference exists
+    And no conference exists
     And I am on "/"
     When I am on "/conferences"
     Then I should see "No conferences found!"

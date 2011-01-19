@@ -3,11 +3,10 @@ class CategoriesController < InheritedResources::Base
   
   def index
     respond_to do |format|
-      format.json { empty_safe { render :json => Categories.all }
+      format.json { empty_safe { render :json => Categories.all } }
       format.html { index_page }
     end
   end
-
 
   def show
     index_page params[:id]
