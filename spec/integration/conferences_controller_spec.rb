@@ -135,6 +135,32 @@ describe ConferencesController do
           response.status.should == 409
         end
       end
+      
+      context "search" do
+        context "with results" do
+          before do
+            get "/ws/search/cat:Technology", {}, @headers
+          end
+          
+          it "should return 200" do
+            response.status.should == 200
+          end
+          
+          it "should return 10 items" do
+            JSON.parse(response.body).size.should == 6
+          end
+        end
+        
+        context "without results" do
+          before do
+            get "/ws/search/cat:Arts", {}, @headers
+          end
+          
+          it "should return 204" do
+            response.status.should == 204
+          end
+        end
+      end
     end
   end
   

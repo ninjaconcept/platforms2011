@@ -35,6 +35,10 @@ class ConferencesController < BaseController
       @conferences = Conference.all.paginate
     end
     
+    respond_to do |format|
+      format.json { empty_safe(@conferences) { render :json => @conferences } }
+      format.html { render }
+    end
   end
   
   def create
