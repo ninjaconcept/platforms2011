@@ -47,10 +47,12 @@ class FactoryDefaults
       #MemberOfSeries.create!(:series_id=>series.id, :user_id=>User.find_by_username(username).id)
     end
 
-    conf_hash=conferences[13]
+    conf_hash=conferences[1]
     conferences.each do |conf_hash|
       conf_hash["creator"]=User.find_by_username(conf_hash["creator"]["username"]) #creater attribute has another semantic now: it's a Rails Model
-      conf_hash["series"]=Series.find_by_name(conf_hash["series"]["name"]) if conf_hash["series"] and conf_hash["series"]["name"] #may be empty
+      if (conf_hash["series"] and conf_hash["series"]["name"]) #may be empty
+        conf_hash["series_id"]=Series.find_by_name(conf_hash["series"]["name"]).id
+      end
       conf_hash.delete "series"
       conf_hash["start_date"]=Date.parse(conf_hash["startdate"]) #luckily Rails swallows this input format: 20091227
       conf_hash.delete "startdate"

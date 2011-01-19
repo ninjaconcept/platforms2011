@@ -42,7 +42,7 @@ class Conference < ActiveRecord::Base
     else
       super( 
         :only => [:version, :id, :name, :startdate, :enddate, :description, :location, :gps, :venue, :accomodation, :howtofind],
-        :include => {:creator => {:only => :username}, :categories => {:only => :name}}
+        :include => {:creator => {:only => :username}, :categories => {:only => :name}, :series => {:only => :name}}
       )
     end
   end

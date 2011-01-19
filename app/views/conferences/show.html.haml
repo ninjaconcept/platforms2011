@@ -85,13 +85,11 @@
 %h2
   Export
 = link_to "Export as ical", conference_ical_path(:conference_id=>@conference.id)
-<<<<<<< HEAD
+%br
 = link_to "Export as pdf", conference_pdf_path(:conference_id=>@conference.id)
-=======
 %br
 = link_to "Get as RSS", conference_feed_path(:conference_id=>@conference.id, :format=>:rss)
 
->>>>>>> eb9500f0714306613d189a7d678bba77fa2497e9
 
 %h2
   Invite your contacts
