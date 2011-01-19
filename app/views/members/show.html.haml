@@ -44,4 +44,4 @@
 - elsif current_user.is_in_received_or_sent_status_with?(@member)
   = "You are about to get in contact with #{@member.fullname}. Pease wait, until the user responds to your request."
 - else
-  = link_to "Request details for this contact", add_contacts_path(:username=>@member.username, :positive=>"true"), :remote=>true, :method=>:post
+  = link_to "Request details for this contact", add_contacts_path(:uname=>@member.username, :positive=>"true"), :remote=>true, :method=>:post

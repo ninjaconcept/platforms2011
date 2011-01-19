@@ -66,7 +66,6 @@
   = link_to "Sign up for this conference", conference_attendances_path(@conference, :user => { :username => current_user.username}), :method => :post, :remote => true, :confirm => "Do you really want to sign up for this conference?"
   %br
   %br
-
 - unless @conference.attendances.blank?
   %ul
     - @conference.attendances.each do |attendance|
