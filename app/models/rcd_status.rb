@@ -20,19 +20,20 @@ class RcdStatus < ActiveRecord::Base
   end
   
   def self.for_users(from, to)
-    self.find("(invitee_user_id = ? AND inviter_user_id = ?) OR (inviter_user_id = ? AND invitee_user_id = ?)", 
-              [from.id, to.id, from.id, to.id])
+    self.where("(invitee_user_id = ? AND inviter_user_id = ?) OR (inviter_user_id = ? AND invitee_user_id = ?)", from.id, to.id, from.id, to.id).first
   end
   
   def self.send_rcd(from, to)
-    self.create(:inviter_user => from, :invitee_user => to)
+    self.create!(:inviter_user => from, :invitee_user => to)
   end
   
   def accept!
     self.status = "in_contact"
+    self.save
   end
   
   def reject!
     self.status = "no_contact"
+    self.save
   end
 end
