@@ -44,7 +44,6 @@ describe ConferencesController do
         end
         
         it "should not create the conference" do
-          puts response.inspect
           response.status.should == 403
         end
 

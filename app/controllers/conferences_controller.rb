@@ -60,8 +60,6 @@ class ConferencesController < BaseController
       p[:series] = s = Series.find(p[:series]["id"])
    
       unless s.contacts.include? current_user
-        puts s.inspect
-        puts s.contacts
         
         head 403
         return
