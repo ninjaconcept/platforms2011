@@ -110,6 +110,17 @@ class ConferencesController < BaseController
     send_data cal.to_ical, :type=>"text/calendar"
   end
 
+  def feed
+    @conference=Conference.find(params[:id])
+    @attendees = @conference.attendees
+    puts @attendees.size
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false } #index.rss.builder
+    end
+  end
+
+
   private
 
   def load_conference
