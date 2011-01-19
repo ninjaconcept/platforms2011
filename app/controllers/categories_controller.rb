@@ -8,7 +8,6 @@ class CategoriesController < InheritedResources::Base
     end
   end
 
-
   def show
     index_page params[:id]
     render :template=>"categories/index"
