@@ -1,6 +1,7 @@
 .inputs
+  - if @conference.series && @conference.series.contacts.include?(current_user)
+    = f.association :series
   = f.input :name
-  =# f.input :series_id
   = f.input :start_date
   = f.input :end_date
   = f.input :description

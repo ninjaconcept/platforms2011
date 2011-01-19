@@ -1,19 +1,17 @@
 %h1= "Listing series (#{@series.length})"
 
-.main-actions
-  = link_to 'New Series', new_resource_path
-
-%table
+%table#series
   %tr
     %th Name
     %th
       Actions
 
   - @series.each do |series|
-    %tr
+    %tr[series]
       %td= series.name
+      
       %td
-        = link_to 'Show', resource_path(series)
+        = link_to 'Show conferences', series_conferences_path(series)
         \|
         = link_to 'Edit', edit_resource_path(series)
         \|

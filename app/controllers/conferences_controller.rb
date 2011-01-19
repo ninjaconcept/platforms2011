@@ -3,6 +3,9 @@
 #require 'icalendar'
 
 class ConferencesController < BaseController
+  belongs_to :category, :optional => true
+  belongs_to :series, :optional => true
+  
   include Icalendar
   
   before_filter :authenticate_user!, :except => [:index]

@@ -14,6 +14,7 @@ class Conference < ActiveRecord::Base
   validates_format_of :gps, :with => GPS_REGEX, :allow_blank => true
   
   belongs_to :creator, :class_name=>"User", :foreign_key => 'creator_user_id'
+  belongs_to :series
 
   has_many :attendances, :dependent => :destroy
   has_many :attendees, :through => :attendances, :source => :user

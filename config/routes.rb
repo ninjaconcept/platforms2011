@@ -1,8 +1,8 @@
 PlatForms::Application.routes.draw do
-  
-  resources :member_of_series
 
-  resources :series
+  resources :series, :except => :show do
+    resources :conferences
+  end
 
   resources :categories
 
@@ -39,7 +39,9 @@ PlatForms::Application.routes.draw do
     resources :users
     resources :authentications
     
-    resources :series, :except => :show
+    resources :series, :except => :show do
+      resources :conferences
+    end
     resources :conferences
     resources :categories do
       resources :conferences

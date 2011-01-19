@@ -9,9 +9,12 @@ class Ability
       can :manage, :all
     else
       can :manage, [Conference], :creator_user_id => user.id
-      can :manage, Series
+      can :manage, Series do |serie|
+        serie.contacts.include? user
+      end
       can :read, Conference
       can :read, User
+      can :read, Series
     end
     
     #defaults

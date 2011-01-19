@@ -14,6 +14,8 @@
       %td= series.name
       
       %td
+        = link_to 'Show conferences', admin_series_conferences_path(series)
+        \|
         = link_to 'Edit', edit_resource_path(series)
         \|
         = link_to 'Destroy', resource_path(series), :confirm => 'Are you sure?', :method => :delete
