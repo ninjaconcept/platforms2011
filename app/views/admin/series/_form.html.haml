@@ -1,0 +1,5 @@
+.inputs
+  = f.input :name
+  = f.input :description
+  = f.association :contacts, :collection => User.all.collect{ |u| [u.username, u.id] }, :input_html => { :class => 'multi-select' }
+  =# f.input :contact_ids, :collection => User.all.collect{ |u| [u.username, u.id] }, :multiple => true

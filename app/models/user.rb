@@ -28,13 +28,7 @@ class User < ActiveRecord::Base
   has_many :sent_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :received_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :attendances, :dependent=>:destroy
-  has_many :notifications, :dependent=>:destroy
-
-
-  def contacts
-    RcdStatus.where("(inviter_user_id=? OR invitee_user_id=?)",id,id).where("status='in_contact'").map{|rcd|rcd.get_other(self)}
-  end
-
+  
   def rcd_statuses
     sent_statuses + received_statuses
   end
@@ -75,12 +69,7 @@ class User < ActiveRecord::Base
       rcd.status == 'in_contact'
     end
   end
-
-  def is_in_received_or_sent_status_with?(user)
-    if rcd = RcdStatus.for_users(self, user)
-      rcd.status == 'sent'
-    end
-  end
+  
   
 
   private

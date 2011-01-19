@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     else
       can :manage, [Conference], :creator_user_id => user.id
+      can :manage, Series
       can :read, Conference
       can :read, User
     end

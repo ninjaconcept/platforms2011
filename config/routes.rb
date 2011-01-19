@@ -38,6 +38,7 @@ PlatForms::Application.routes.draw do
     resources :users
     resources :authentications
     
+    resources :series, :except => :show
     resources :conferences
     resources :categories do
       resources :conferences

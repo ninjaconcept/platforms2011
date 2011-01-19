@@ -119,8 +119,6 @@ body {
 			font-size: 14px;
 		}
 	}
-	
-	
 
   ul.menu {
     list-style: none;	
@@ -152,6 +150,18 @@ body {
       padding: 5px;
     }
     
+		.multi-select{
+			width: 465px;
+			height: 200px;
+		}
+
+		textarea{
+			width: 465px;
+			height: 200px;
+			font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
+			padding: 5px;
+		}
+		
     .input {
       margin-bottom: 15px;
       

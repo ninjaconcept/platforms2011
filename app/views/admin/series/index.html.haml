@@ -1,0 +1,19 @@
+%h1= "Listing series (#{@series.length})"
+
+.main-actions
+  = link_to 'New series', new_resource_path
+
+%table#series
+  %tr
+    %th Name
+    %th
+      Actions
+
+  - @series.each do |series|
+    %tr[series]
+      %td= series.name
+      
+      %td
+        = link_to 'Edit', edit_resource_path(series)
+        \|
+        = link_to 'Destroy', resource_path(series), :confirm => 'Are you sure?', :method => :delete
