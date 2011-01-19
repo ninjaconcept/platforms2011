@@ -21,12 +21,15 @@
       GPS:
       = current_user.gps
 
-.edit_reg
-  You can edit your profile status
-  = link_to('here', edit_user_registration_path)
 
-.maps.link
-  = link_to "Your location on Google Maps", "http://maps.google.com" #TODO
+.things-to-do
+  %h3 Possible next steps
+  
+  %ul
+    %li= link_to 'Create a new conference', new_conference_path
+    %li= link_to "View your location on Google Maps", "http://maps.google.com" #TODO
+    %li= link_to('Edit your profile', edit_user_registration_path)
+    %li= link_to "Search for other members", members_path
 
 .notificatons
   %h3 Your nofitications
@@ -44,7 +47,7 @@
     %li= render_user_link_by_rcd_status rcd
 
 .members.in_contact
-  %h3 Other users, you've requested an RCD for:
+  %h3 Other users, you've requested an RCD:
   %ul
   - @sent_rcds.each do |rcd|
     %li= render_user_link_by_rcd_status rcd
@@ -55,15 +58,30 @@
   - @received_rcds.each do |rcd|
     %li
       = render_user_link_by_rcd_status rcd
-      = link_to "accept", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>true), :remote=>true, :method=>:post
+      = link_to "accept", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>"true"), :remote=>true, :method=>:post
       \/
       = link_to "reject", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>"false"), :remote=>true, :method=>:post
       invitation
 
-.attendances
-  %h3 Personal Calendar
+  %h3 Calendars
+  %h5 Default-Personal
   You've signed up for the following conferences:
   %ul
-  - @attending_conferences.each do |c|
-    %li= render_conference_link c
+    - @attending_conferences.each do |c|
+      %li= render_conference_link c
     
+  %h5 Calendar of conferences in your town
+  %ul
+    - Conference.where("venue LIKE ?","%"+current_user.town+"%").each do |c|
+      %li= render_conference_link c
+
+- unless current_user.gps.blank?
+  - [50,500,2000,5000].each do |km|
+    %h5
+      Calendar of conferences within
+      = km
+      kilometers
+    %ul
+      - Conference.within(km, :origin=>current_user.gps).each do |c|
+        %li= render_conference_link c
+

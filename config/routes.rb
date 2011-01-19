@@ -44,6 +44,7 @@ PlatForms::Application.routes.draw do
   end
   
   devise_for :users, :controllers => { :registrations => 'registrations' }
+  match '/status' => 'status#index', :as => 'user_root'
 
   root :to => "categories#index"
   

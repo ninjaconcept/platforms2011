@@ -1,0 +1,46 @@
+- if @members.blank?
+  %h3
+    No members found!
+    
+- else
+  = will_paginate @members
+  %br
+  
+  %table
+    %tr
+      %th Name
+      %th Email 
+      %th Full name
+      %th Contact status
+      %th Town
+      %th Country
+      %th &nbsp;
+
+    - @members.each do |member|
+      %tr
+        %td= member.username
+        %td
+          - if current_user.is_in_contact_with?(member)
+            = member.email 
+          - else
+            hidden
+            
+        %td
+          - if current_user.is_in_contact_with?(member)
+            = member.fullname
+          - else
+            hidden
+          
+        %td
+          - if current_user.is_in_contact_with?(member)
+            connected
+          - else
+            not connected
+        
+        %td= member.town
+        %td= member.country
+        
+        %td
+          = link_to 'Show', resource_path(member)
+
+  = will_paginate @members

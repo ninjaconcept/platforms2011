@@ -33,8 +33,8 @@ Feature: Session
       | Password | supersecret | 
     And I press "Sign in"
     Then I should see "Signed in successfully."
-    And I should be on "/"
-    And I should see "Welcome to CaP"
+    And I should be on "/status"
+    And I should see "Welcome oliver"
     And I should see "Edit my profile"
     And I should see "Logout"
     

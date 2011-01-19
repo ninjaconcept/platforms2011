@@ -1,5 +1,8 @@
 - if user_signed_in?
   %li
+    = link_to('Status page', status_path)
+    
+  %li
     = link_to('Edit my profile', edit_user_registration_path)
 - else
   %li
