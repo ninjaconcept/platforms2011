@@ -28,6 +28,19 @@ class User < ActiveRecord::Base
   has_many :sent_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :received_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :attendances, :dependent=>:destroy
+  has_many :notifications, :dependent=>:destroy
+  
+  def version
+    lock_version
+  end
+  
+  def version=(arg)
+    self.lock_version = arg
+  end
+
+  def contacts
+    RcdStatus.where("(inviter_user_id=? OR invitee_user_id=?)",id,id).where("status='in_contact'").map{|rcd|rcd.get_other(self)}
+  end
   
   def rcd_statuses
     sent_statuses + received_statuses
@@ -70,6 +83,21 @@ class User < ActiveRecord::Base
     end
   end
   
+  
+  def to_json(opts = {})
+    full = opts.delete(:full)
+    
+    if full
+      super(
+        :only => [:id, :username, :password, :fullname, :email, :town, :country, :gps, :status],
+        :methods => [:version]
+      )
+    else
+      super(
+        :only => [:username]
+      )
+    end
+  end
   
 
   private

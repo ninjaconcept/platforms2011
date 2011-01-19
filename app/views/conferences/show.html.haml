@@ -57,7 +57,12 @@
 %h2
   Attendees
 
-- unless current_user.attends?(@conference)
+- if current_user.attends?(@conference)
+  - if current_user.id==@conference.creator.id
+    You're the creator of this conf, so you have to attend...
+  -else
+    = link_to "Nope, I don't want to attend this conference", conference_attendances_delete_path(@conference, current_user.username), :method => :delete, :remote => true, :confirm => "Do you really want to cancel your attendance to this conference?"
+- else
   = link_to "Sign up for this conference", conference_attendances_path(@conference, :user => { :username => current_user.username}), :method => :post, :remote => true, :confirm => "Do you really want to sign up for this conference?"
   %br
   %br

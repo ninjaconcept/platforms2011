@@ -43,7 +43,7 @@ describe AttendancesController do
   context "creating attendances" do
     context "for an existing conference" do
       before do
-        @user = User.first
+        @user = User.find_by_username("sjobs")
         post "/ws/conferences/2/attendances", @user.to_json, json_headers
       end
       
@@ -72,7 +72,7 @@ describe AttendancesController do
   context "deleting attendances" do
     context "for an existing conference" do
       before do
-        @user = User.first
+        @user = User.find_by_username("sjobs")
         @conference = Conference.find(2)
         @conference.attendances << Attendance.new(:user => @user)
         @conference.save
