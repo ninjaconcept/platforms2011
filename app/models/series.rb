@@ -9,4 +9,18 @@ class Series < ActiveRecord::Base
   # has_and_belongs_to_many :series_contacts, :dependent => :destroy
   # has_many :contacts, :through => :series_contacts, :source => :user
   
+  def version
+    #lock_version
+  end
+  
+  def version=(arg)
+    #self.lock_version = arg
+  end
+   
+  def to_json(opts = {})
+    super(
+      :only => [:version, :id, :name],
+      :include => {:contacts => {:only => :username}}
+    )
+  end
 end

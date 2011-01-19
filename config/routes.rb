@@ -68,7 +68,7 @@ PlatForms::Application.routes.draw do
     match "/members/:uname/contacts" => "contacts#add", :via => :post
     
     resources :categories, :only => [:index, :show, :create]
-    resources :series, :only => [:indes, :create, :show]
+    resources :series, :only => [:index, :create, :show]
     match "/conferencesbycategory/:id" => "Categories#by_id"
     match "/search/:search_term" => "conferences#search"
     match "/reset" => "DataController#reset"
