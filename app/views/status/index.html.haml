@@ -21,12 +21,15 @@
       GPS:
       = current_user.gps
 
-.edit_reg
-  You can edit your profile status
-  = link_to('here', edit_user_registration_path)
 
-.maps.link
-  = link_to "Your location on Google Maps", "http://maps.google.com" #TODO
+.things-to-do
+  %h3 Possible next steps
+  
+  %ul
+    %li= link_to 'Create a new conference', new_conference_path
+    %li= link_to "View your location on Google Maps", "http://maps.google.com" #TODO
+    %li= link_to('Edit your profile', edit_user_registration_path)
+    %li= link_to "Search for other members", members_path
 
 .notificatons
   %h3 Your nofitications
