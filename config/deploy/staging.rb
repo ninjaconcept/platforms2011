@@ -6,6 +6,7 @@ set :application,       "platforms"
 set :deploy_to,         "/home/pf/rails/#{application}"
 
 # this is for deploying on paltforms vm
+set :database_password,                 "yRyomEfoasdfasdzqAOMbe"
 set :deployment_database_password,      "oumberkyaoopjsdfas"
 
 #############################################################

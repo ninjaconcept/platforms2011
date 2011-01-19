@@ -34,6 +34,32 @@ describe CategoriesController do
     end
   end
   
+  context 'reading conferences by category' do
+    before do
+      @c = Category.find_by_name("Technology")
+      get "/ws/conferencesbycategory/#{@c.id}", {}, json_headers
+    end
+    
+    it "should return 200" do
+      response.status.should == 200
+    end
+    
+    it "should return the conferences" do
+      JSON.parse(response.body).size.should == @c.conferences.size
+    end
+  end
+  
+  context 'reading conferences by empty category' do
+    before do
+      @c = Category.find_by_name("Arts")
+      get "/ws/conferencesbycategory/#{@c.id}", {}, json_headers
+    end
+  
+    it "should return 204" do
+      response.status.should == 204
+    end
+  end
+  
   context "creating category" do
     context "as admin" do
       before do

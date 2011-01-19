@@ -1,4 +1,3 @@
-
 require 'json'
 
 class FactoryDefaults
@@ -74,4 +73,7 @@ class FactoryDefaults
     end
   end
 
+  def self.reset
+    `cd #{RAILS_ROOT}; RAILS_ENV=#{RAILS_ENV} rake db:drop db:create db:migrate`
+  end
 end

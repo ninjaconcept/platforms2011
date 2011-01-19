@@ -34,38 +34,39 @@
 .notificatons
   %h3 Your nofitications
   %ul
-  - @notifications.each do |n|
-    %li[n]
-      -# id=notification_12 class=notification
-      = n.text
-      = link_to "delete notification", notification_path(n, :read=>true), :remote=>true, :method=>:put
+    - @notifications.each do |n|
+      %li[n]
+        -# id=notification_12 class=notification
+        = n.text
+        = link_to "delete notification", notification_path(n, :read=>true), :remote=>true, :method=>:put
 
-.members.in_contact
+.members2.in_contact
   %h3 Other users, you're in contact with:
   %ul
-  - @rcds_in_contact.each do |rcd|
-    %li= render_user_link_by_rcd_status rcd
+    - @rcds_in_contact.each do |rcd|
+      %li= render_user_link_by_rcd_status rcd
 
-.members.in_contact
+.members2.in_contact
   %h3 Other users, you've requested an RCD:
   %ul
-  - @sent_rcds.each do |rcd|
-    %li= render_user_link_by_rcd_status rcd
+    - @sent_rcds.each do |rcd|
+      %li= render_user_link_by_rcd_status rcd
 
-.members.in_contact
+.members2.in_contact2
   %h3 Other users, from you've received an RCD:
   %ul
-  - @received_rcds.each do |rcd|
-    %li
-      = render_user_link_by_rcd_status rcd
-      = link_to "accept", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>"true"), :remote=>true, :method=>:post
-      \/
-      = link_to "reject", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>"false"), :remote=>true, :method=>:post
-      invitation
+    - @received_rcds.each do |rcd|
+      %li
+        = render_user_link_by_rcd_status rcd
+        = link_to "accept", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>"true"), :remote=>true, :method=>:post
+        \/
+        = link_to "reject", add_contacts_path(:username=>rcd.get_other(current_user).username, :positive=>"false"), :remote=>true, :method=>:post
+        invitation
 
+.calendars
   %h3 Calendars
-  %h5 Default-Personal
-  You've signed up for the following conferences:
+  %strong You've signed up for the following conferences:
+  %h5 Default-Personal Calendar
   %ul
     - @attending_conferences.each do |c|
       %li= render_conference_link c

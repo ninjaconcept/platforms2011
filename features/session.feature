@@ -4,7 +4,7 @@ Feature: Session
   I want to sign in
   
   Background:
-    Given a user exists with username: "oliver", email: "oli@plat-forms.org", password: "supersecret"
+    Given a user exists with username: "oliver", email: "oli@plat-forms.org", password: "supersecret", fullname: "Oliver"
   
   
   Scenario Outline: Login fails
@@ -29,12 +29,12 @@ Feature: Session
   Scenario: Login with valid data
     Given I am on "/users/sign_in"
     And I fill in the following:
-      | Username | oliver |
+      | Username | oliver | 
       | Password | supersecret | 
     And I press "Sign in"
     Then I should see "Signed in successfully."
     And I should be on "/status"
-    And I should see "Welcome oliver"
+    And I should see "Welcome Oliver"
     And I should see "Edit my profile"
     And I should see "Logout"
     
