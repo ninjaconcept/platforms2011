@@ -4,32 +4,32 @@ Feature: Session
   I want to sign in
   
   Background:
-    Given a user exists with email: "oli@plat-forms.org", password: "supersecret"
+    Given a user exists with username: "oliver", email: "oli@plat-forms.org", password: "supersecret"
   
   
   Scenario Outline: Login fails
     Given I am on "/users/sign_in"
     And I fill in the following:
-      | Email | <email> |
+      | Username | <username> |
       | Password | <password> | 
     And I press "Sign in"
-    Then I should see "Invalid email or password."
+    Then I should see "Invalid username or password."
     And I should be on "/users/sign_in"
   
     Examples:
-      | email           | password    |
-      |                 |             |
-      | oli             |             |
-      | oli@plat-forms.org |             |
-      | oli@plat-forms.org | bad pass    |
-      |                 | supersecret |
-      | oli             | supersecret |
+      | username | password    |
+      | oli      |             |
+      | oliver   |             |
+      |          |             |
+      | oliver   | bad pass    |
+      |          | supersecret |
+      | oli      | supersecret |
   
   
   Scenario: Login with valid data
     Given I am on "/users/sign_in"
     And I fill in the following:
-      | Email | oli@plat-forms.org |
+      | Username | oliver |
       | Password | supersecret | 
     And I press "Sign in"
     Then I should see "Signed in successfully."
@@ -40,7 +40,7 @@ Feature: Session
     
     
   Scenario: Logout
-    Given I am logged in with "oli@plat-forms.org/supersecret"
+    Given I am logged in with "oliver/supersecret"
     And I am on "/pages"
     When I follow "Logout"
     Then I should see "Signed out successfully."

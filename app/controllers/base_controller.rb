@@ -104,7 +104,7 @@ class BaseController < InheritedResources::Base
     
     def paginated_collection 
       
-        _per_page = per_page rescue 100
+        _per_page = per_page rescue 15
         _collection = collection_with_permission_to_read
       
         paginate_options ||= {}

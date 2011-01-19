@@ -31,6 +31,8 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
   
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
 
 group :test, :cucumber, :development do  

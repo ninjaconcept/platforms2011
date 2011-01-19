@@ -1,12 +1,11 @@
 #origin: GM
 
-# class ConferencesController < BaseController
-class ConferencesController < InheritedResources::Base
+class ConferencesController < BaseController
   before_filter :authenticate_user!
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
-
+  
   verify :params => [:id], :only => [:show, :update]
   
   def show    
@@ -17,21 +16,25 @@ class ConferencesController < InheritedResources::Base
   end
 
   def search
-    dummy_conf=Conference.new(params[:conference])
-    if params[:search_term]=~/\:/
-      opts=params[:search_term]
-    else
-      opts="" #build the search string
-      opts<<" from:#{dummy_conf.start_date.to_s} " if dummy_conf.start_date
-      opts<<" until:#{dummy_conf.end_date.to_s} " if dummy_conf.end_date
-      opts<<" reg:#{params[:region]} " if !params[:region].blank? and params[:region]!="none"
-      Category.find_all_by_id(params[:conference][:category_ids]).each do |cat|
-        opts<<" cat:#{cat.name.gsub(" ","_")} " #a bit fragvile, but it works...
+    if params[:search_term]
+      dummy_conf=Conference.new(params[:conference])
+      if params[:search_term]=~/\:/
+        opts=params[:search_term]
+      else
+        opts="" #build the search string
+        opts<<" from:#{dummy_conf.start_date.to_s} " if dummy_conf.start_date
+        opts<<" until:#{dummy_conf.end_date.to_s} " if dummy_conf.end_date
+        opts<<" reg:#{params[:region]} " if !params[:region].blank? and params[:region]!="none"
+        Category.find_all_by_id(params[:conference][:category_ids]).each do |cat|
+          opts<<" cat:#{cat.name.gsub(" ","_")} " #a bit fragvile, but it works...
+        end
+        opts<<" #{params[:search_term]} "      
       end
-      opts<<" #{params[:search_term]} "      
+      @conferences = ConferenceSearcher.do_find opts, current_user
+    else
+      @conferences = Conference.all.paginate
     end
-    @conferences=ConferenceSearcher.do_find opts, current_user
-    render :template=>"conferences/index"
+    
   end
   
   def create

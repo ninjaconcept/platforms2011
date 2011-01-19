@@ -57,21 +57,32 @@ class User < ActiveRecord::Base
   end
 
   def full_address
-    "#{town}, #{country}" rescue  ''
+    "#{town}, #{country}" rescue ''
   end
+  
+  def attends?(conference)
+    attendances.find_by_conference_id(conference.id) rescue nil
+  end
+  
+  def is_in_contact_with?(user)
+    if rcd = RcdStatus.for_users(self, user)
+      rcd.status == 'in_contact'
+    end
+  end
+  
 
   private
 
-  def geocode_address
-    unless full_address.blank? || full_address == ', ' || !(lat.blank? && lng.blank?)
-      logger.debug "Full address: #{full_address}"
-      geo = Geokit::Geocoders::MultiGeocoder.geocode( full_address )
-      if geo.success
-        self.lat, self.lng = geo.lat, geo.lng
-      else
-        errors.add_to_base "Could not Geocode address"
+    def geocode_address
+      unless full_address.blank? || full_address == ', ' || !(lat.blank? && lng.blank?)
+        logger.debug "Full address: #{full_address}"
+        geo = Geokit::Geocoders::MultiGeocoder.geocode( full_address )
+        if geo.success
+          self.lat, self.lng = geo.lat, geo.lng
+        else
+          errors.add_to_base "Could not Geocode address"
+        end
       end
     end
-  end
   
 end

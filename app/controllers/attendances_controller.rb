@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   before_filter :authenticate_user!
-  respond_to :json
+  respond_to :json, :js
   
   verify :params => [:conference_id]
   verify :params => [:id], :only => [:show]
@@ -24,7 +24,17 @@ class AttendancesController < ApplicationController
     user = User.find_by_username(username || request.POST["username"])
     attendances << Attendance.new(:user => user)
     respond_to do |format|
-      format.json { head 204 }
+      # format.json { head 204 }
+      format.json do
+        logger.debug request.inspect
+        if request.xhr?
+          render :update do |page|
+            page.reload
+          end
+        else
+          head 204 
+        end
+      end
     end
   end
   

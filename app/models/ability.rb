@@ -8,7 +8,9 @@ class Ability
     if user.is_admin?
       can :manage, :all
     else
-      can :manage, [Conference], :creator => user
+      can :manage, [Conference], :creator_user_id => user.id
+      can :read, Conference
+      can :read, User
     end
     
     #defaults

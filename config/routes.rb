@@ -10,10 +10,17 @@ PlatForms::Application.routes.draw do
     collection do
         get 'search'
       end
-    # match "/search" => "Conferences#search", :as => :search
+  end
+  
+  resources :users, :only => [:show, :index] do
+    collection do
+        get 'search'
+      end
   end
 
   resources :pages
+
+  match '/status/', :to => 'status#index'
   
   match '/auth/:provider/callback', :to => 'authentications#create'
   resources :authentications

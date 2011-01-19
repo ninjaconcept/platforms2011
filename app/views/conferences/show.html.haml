@@ -21,7 +21,11 @@
 %p
   %strong Conference series:
   =# @conference.series.name if @conference.series
-  
+
+%p
+  %strong Categories:
+  = @conference.categories.map(&:name).to_sentence
+
 %p
   %b Start date:
   = @conference.start_date
@@ -53,13 +57,27 @@
 %h2
   Attendees
 
+- unless current_user.attends?(@conference)
+  = link_to "Sign up for this conference", conference_attendances_path(@conference, :user => { :username => current_user.username}), :method => :post, :remote => true, :confirm => "Do you really want to sign up for this conference?"
+  %br
+  %br
+
 - unless @conference.attendances.blank?
   %ul
     - @conference.attendances.each do |attendance|
       %li
         = attendance.user.username
-        = surround '(', ')' do
-          = attendance.user.email
+        - if current_user.is_in_contact_with?(attendance.user) || @conference.creator == current_user
+          \-
+          = attendance.user.fullname
+          = surround '(', ')' do
+            = attendance.user.email
 - else
   %strong
     Nobody attends this conference!
+
+%h2
+  Invite your contacts
+
+TODO: list all in_contact users 
+

@@ -62,6 +62,7 @@ class FactoryDefaults
       puts "creating conference #{conf_hash["name"]}"
       conf=Conference.new(conf_hash)
       conf.creator=conf_hash["creator"]  #not mass_assignable for security reasons...
+      conf.just_created=true # set it, so it won't complain about missin categories (they will be added in some ms)
       conf.save!
       new_confs=categories_array.map do |cat_hash|
         cat=Category.find_by_name(cat_hash["name"])

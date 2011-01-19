@@ -3,9 +3,9 @@ Feature: Current user data
   As a signed in user
   I want to interact with my user data
   
-  Background:
+  Background:    
     Given a user exists with username: "stefan", email: "stefan@plat-forms.org", password: "supersecret"
-    And I am logged in with "stefan@plat-forms.org/supersecret"
+    And I am logged in with "stefan/supersecret"
 
   
   Scenario: Edit data form
@@ -62,8 +62,8 @@ Feature: Current user data
     Then I should see "Bye! Your account was successfully cancelled. We hope to see you again soon."
     And I should be on "/"
     When I am on "/users/sign_in"
-    And I fill in "Email" with "supersecret2"
+    And I fill in "Username" with "stefan"
     And I fill in "Password" with "supersecret"
     When I press "Sign in"
-    Then I should see "Invalid email or password."
+    Then I should see "Invalid username or password."
     
