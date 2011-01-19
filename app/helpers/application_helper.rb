@@ -69,7 +69,12 @@ module ApplicationHelper
   end
 
   def render_conference_link conference
-    link_to conference.name, conf
+    link_to conference.name, conference
+  end
+
+  def render_user_link_by_rcd_status rcd
+    other_user=rcd.inviter_user_id==current_user.id ? rcd.invitee_user : rcd.inviter_user #get the other user, not the current one
+    render_user_link other_user
   end
   
 end
