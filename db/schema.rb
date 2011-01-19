@@ -168,9 +168,6 @@ ActiveRecord::Schema.define(:version => 20110119094732) do
   add_foreign_key "conferences", ["creator_user_id"], :references => "users", :name => "index_conferences_on_creator_user_id"
   add_foreign_key "conferences", ["series_id"], :name => "index_conferences_on_series_id"
 
-  add_foreign_key "member_of_series", ["series_id"], :name => "index_member_of_series_on_series_id"
-  add_foreign_key "member_of_series", ["user_id"], :name => "index_member_of_series_on_user_id"
-
   add_foreign_key "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
   add_foreign_key "rcd_statuses", ["invitee_user_id"], :references => "users", :name => "index_rcd_statuses_on_invitee_user_id"

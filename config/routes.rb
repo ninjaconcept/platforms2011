@@ -1,6 +1,5 @@
 PlatForms::Application.routes.draw do
   
-  resources :member_of_series
 
   resources :series
 

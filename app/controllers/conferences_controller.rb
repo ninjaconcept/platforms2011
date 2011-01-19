@@ -110,6 +110,7 @@ class ConferencesController < BaseController
   def feed
     @conference=Conference.find(params[:id])
     @attendees = @conference.attendees
+    puts @attendees.size
     respond_to do |format|
       format.html
       format.rss { render :layout => false } #index.rss.builder

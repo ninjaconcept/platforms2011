@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   #validates_format_of :gps, :with => /\d+(\.\d+)? ?[NnSs] ?,? ?\d+(\.\d+)? ?[EeWw]/, :allow_blank => true
   
   has_many :conferences, :foreign_key=>:creator_user_id, :dependent=>:destroy
-  has_many :member_of_series, :dependent=>:destroy
   has_many :sent_statuses,  :foreign_key=>:inviter_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :received_statuses,  :foreign_key=>:invitee_user_id, :dependent=>:destroy, :class_name => "RcdStatus"
   has_many :attendances, :dependent=>:destroy
@@ -78,6 +77,7 @@ class User < ActiveRecord::Base
   end
   
   def is_in_contact_with?(user)
+    return true if user==self
     if rcd = RcdStatus.for_users(self, user)
       rcd.status == 'in_contact'
     end
