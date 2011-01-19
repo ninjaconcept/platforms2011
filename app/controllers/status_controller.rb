@@ -4,6 +4,6 @@ class StatusController < ApplicationController
     @users_in_contact=all_rcds.where("status='in_contact'")
     @users_with_sent_rcds=all_rcds.where("status='RCD_sent'")
     @users_with_received_rcds=all_rcds.where("status='RCD_received'")
-    @attending_conferences=Conference.where("attendances.user_id=?",current_user.id).join(:attendances)
+    @attending_conferences=Conference.where("attendances.user_id=?",current_user.id).includes(:attendances)
   end
 end

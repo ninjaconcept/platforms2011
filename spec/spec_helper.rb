@@ -18,6 +18,10 @@ def authed_headers(headers, username = "sjobs", password = "kzr")
   headers.merge("HTTP_AUTHORIZATION" => "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}")
 end
 
+def json_headers
+  @headers ||= authed_headers({"CONTENT_TYPE" => "application/json"})
+end
+
 RSpec.configure do |config|
   # == Mock Framework
   #

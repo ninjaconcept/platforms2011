@@ -3,10 +3,11 @@
 require 'spec_helper'
 
 describe AttendancesController do
+  
   context "reading attendances" do
     context "all users of a conference with users" do
       before do
-        get "/ws/conferences/1/attendances"
+        get "/ws/conferences/1/attendances", {}, json_headers
       end
       
       it "should return 200" do
@@ -20,7 +21,7 @@ describe AttendancesController do
     
     context "all users of a conference without users" do
       before do
-        get "/ws/conferences/2/attendances"
+        get "/ws/conferences/2/attendances", {}, json_headers
       end
       
       it "should return 204" do
@@ -30,7 +31,7 @@ describe AttendancesController do
     
     context "all users of a non existing conference" do
       before do
-        get "/ws/conferences/10000000/attendances"
+        get "/ws/conferences/10000000/attendances", {}, json_headers
       end
       
       it "should return 404" do
@@ -43,7 +44,7 @@ describe AttendancesController do
     context "for an existing conference" do
       before do
         @user = User.first
-        post "/ws/conferences/2/attendances", @user.to_json, {"CONTENT_TYPE" => "application/json"}
+        post "/ws/conferences/2/attendances", @user.to_json, json_headers
       end
       
       it "should return 204" do
@@ -58,7 +59,7 @@ describe AttendancesController do
     
     context "for a non existing conference" do
       before do
-        get "/ws/conferences/10000000/attendances"
+        get "/ws/conferences/10000000/attendances", {}, json_headers
       end
       
       it "should return 404" do
@@ -75,7 +76,7 @@ describe AttendancesController do
         @conference = Conference.find(2)
         @conference.attendances << Attendance.new(:user => @user)
         @conference.save
-        delete "/ws/conferences/#{@conference.id}/attendances/#{@user.username}"
+        delete "/ws/conferences/#{@conference.id}/attendances/#{@user.username}", {}, json_headers
       end
       
       it "should return 204" do
@@ -91,7 +92,7 @@ describe AttendancesController do
     context "for a non existing conference" do
       before do
         @user = User.first
-        delete "/ws/conferences/10000000/attendances/#{@user.username}"
+        delete "/ws/conferences/10000000/attendances/#{@user.username}", {}, json_headers
       end
       
       it "should return 404" do

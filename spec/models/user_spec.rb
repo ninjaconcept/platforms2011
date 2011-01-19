@@ -32,8 +32,8 @@ describe User do
     it "should gecode by an address" do
       @user.town="Nuernberg"
       @user.country="Deutschland"
-      @user.lat.to_s.should=="48.1391265"
-      @user.lng.to_s.should=="11.08048"
+      Float(@user.lat).should be_close(48.1391265, 0.5)
+      Float(@user.lng).should be_close(11.08048, 0.5)
     end
   end
   
