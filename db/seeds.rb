@@ -28,3 +28,9 @@ FactoryDefaults.import
 User.all(:limit=>5).each do |u|
   Conference.first.attendances.create!(:user=>u)
 end
+
+# M143
+User.create!( 
+      :username => 'admin', :password => 'admin', :email => 'admin@plat-forms.org', 
+      :town => 'Nuernberg', :country => 'Germany', :fullname => 'Admin', :is_administrator => true
+)
