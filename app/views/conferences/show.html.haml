@@ -21,7 +21,11 @@
 %p
   %strong Conference series:
   =# @conference.series.name if @conference.series
-  
+
+%p
+  %strong Categories:
+  = @conference.categories.map(&:name).to_sentence
+
 %p
   %b Start date:
   = @conference.start_date
