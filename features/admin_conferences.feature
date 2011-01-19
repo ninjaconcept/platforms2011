@@ -7,7 +7,7 @@ Feature: Manage conferences
   Background:
     Given a user exists with username: "stefan", password: "lesscode", is_administrator: true
     And I am logged in with "stefan/lesscode"
-    And no conference exists  
+    And no conference exists
   
   Scenario: No access for non admins
     Given I am logged out

@@ -72,16 +72,6 @@ ActiveRecord::Schema.define(:version => 20110119154214) do
   add_index "conferences", ["creator_user_id"], :name => "index_conferences_on_creator_user_id"
   add_index "conferences", ["series_id"], :name => "index_conferences_on_series_id"
 
-  create_table "member_of_series", :force => true do |t|
-    t.integer  "series_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "member_of_series", ["series_id"], :name => "index_member_of_series_on_series_id"
-  add_index "member_of_series", ["user_id"], :name => "index_member_of_series_on_user_id"
-
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
     t.text     "text"

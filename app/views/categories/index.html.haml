@@ -30,7 +30,7 @@ conferences available
   %h2
     = @current_category.nil? ? 'Categories' : 'Subcategories'
   %ul
-    - if @categories.blank?
+    - if @categories.blank? && @current_category
       %li= "No subcategories for '#{@current_category.name}'"
     -else 
       - @categories.each do |category|
