@@ -1,5 +1,5 @@
 class AttendancesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:index]
   respond_to :json, :js
   
   verify :params => [:conference_id]
@@ -22,6 +22,11 @@ class AttendancesController < ApplicationController
   def create
     username = params[:user][:username] if params[:user]
     user = User.find_by_username(username || request.POST["username"])
+    
+    conference
+    
+    head 403 and return unless check_user(user)
+    
     attendances << Attendance.new(:user => user)
     respond_to do |format|
       # format.json { head 204 }
@@ -39,6 +44,11 @@ class AttendancesController < ApplicationController
   
   def destroy
     uid = User.find_by_username(params[:username])
+    
+    conference
+    
+    head 403 and return unless check_user(uid)
+    
     @attendance = attendances.find_by_user_id(uid)
     @attendance.delete
     
@@ -48,7 +58,15 @@ class AttendancesController < ApplicationController
   end
   
   private
+    def conference
+      Conference.find(params[:conference_id])
+    end
+  
     def attendances
-      Conference.find(params[:conference_id]).attendances
+      conference.attendances
+    end
+    
+    def check_user(user)
+      user == current_user
     end
 end

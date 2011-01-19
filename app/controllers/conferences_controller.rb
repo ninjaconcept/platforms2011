@@ -43,11 +43,11 @@ class ConferencesController < BaseController
   
   def create
     p = params[:conference] || request.POST
-    if p[:categories] 
-      p[:categories].map! do |c|
-        Category.find_or_create_by_name(c[:name])
-      end
+    
+    Array(p[:categories]).map! do |c|
+      Category.find_or_create_by_name(c[:name])
     end
+    
     @conference = Conference.new(p)
     @conference.creator = current_user
     
@@ -58,13 +58,12 @@ class ConferencesController < BaseController
   
   def update
     p = (params[:conference] || request.POST)
-    if p[:categories] 
-      p[:categories].map! do |c|
-        Category.find_or_create_by_name(c[:name])
-      end
-    end
-    update_all_attributes(p, @conference)
     
+    Array(p[:categories]).map! do |c|
+      Category.find_or_create_by_name(c[:name])
+    end
+    
+    update_all_attributes(p, @conference)
     
     respond_to do |format|
       format.json { @conference.save!; render :json => @conference }

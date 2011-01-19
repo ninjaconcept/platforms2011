@@ -42,7 +42,14 @@ class MembersController < BaseController
   
   def show
     respond_to do |format|
-      format.json { render :json => User.find_by_username(params[:uname]) }
+      format.json do
+        u = User.find_by_username(params[:uname]) 
+        if (u == current_user) || u.is_in_contact_with?(current_user) 
+          render :text => u.to_json(:full => true)
+        else
+          render :json => u
+        end
+      end
       format.html {
         @member = User.find(params[:id])
       }
