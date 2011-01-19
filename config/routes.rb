@@ -14,6 +14,8 @@ PlatForms::Application.routes.draw do
   end
 
   resources :pages
+
+  match '/status/', :to => 'status#index'
   
   match '/auth/:provider/callback', :to => 'authentications#create'
   resources :authentications

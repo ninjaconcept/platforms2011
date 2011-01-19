@@ -62,5 +62,14 @@ module ApplicationHelper
   def to_date string
     
   end
+
+
+  def render_user_link user
+    link_to user.fullname, user_path
+  end
+
+  def render_conference_link conference
+    link_to conference.name, conf
+  end
   
 end

@@ -6,6 +6,8 @@ class Conference < ActiveRecord::Base
     include GeoHelper
   end
   
+  attr_accessor :just_created
+
   has_friendly_id :name, :use_slug => true, :approximate_ascii => true
   
   acts_as_mappable acts_as_mappable_hash
@@ -20,6 +22,7 @@ class Conference < ActiveRecord::Base
   has_many :categories, :through=>:category_conferences
   
   
-  validates_presence_of :name, :start_date, :end_date, :description, :location#, :categories
+  validates_presence_of :name, :start_date, :end_date, :description, :location
+  validates_presence_of :categories, :unless => :just_created
   
 end
