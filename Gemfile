@@ -24,6 +24,8 @@ gem 'basiszwo-reflection'
 gem 'hoptoad_notifier'
 gem 'geokit-rails3'
 gem 'icalendar'
+gem 'prawn-core', :require => "prawn/core"
+gem 'prawn-layout', :require => "prawn/layout"
 
 group :development do
   gem 'rails3-generators'

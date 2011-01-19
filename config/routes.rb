@@ -13,6 +13,7 @@ PlatForms::Application.routes.draw do
     match "attendances/:username" => "attendances#destroy", :via => :delete, :as=>:attendances_delete
   end
   get "conferences/:id/ical" => "conferences#ical", :as=>:conference_ical
+  get "conferences/:id/pdf" => "conferences#pdf", :as=>:conference_pdf
   
   resources :members, :only => [:show, :index] do
     collection do

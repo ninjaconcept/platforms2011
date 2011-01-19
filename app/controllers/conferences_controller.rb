@@ -102,9 +102,55 @@ class ConferencesController < BaseController
     end
     cal.event.comments=[conference.venue, conference.howtofind]
     conference.attendees.each do |u|
-      cal.event.comments<<"#{u.username}, #{u.fullname}, #{u.email}"
+      if current_user.is_in_contact_with?(u)
+        cal.event.comments<<"#{u.username}, #{u.fullname}, #{u.email}"
+      else
+        cal.event.comments<<"#{u.username}"
+      end
     end
     send_data cal.to_ical, :type=>"text/calendar"
+  end
+  
+  def pdf
+    conference = Conference.find(params[:id])
+    
+    doc = Prawn::Document.new
+    doc.font "#{Prawn::BASEDIR}/data/fonts/DejaVuSans.ttf"
+    doc.move_down 10
+    
+    doc.text "Konferenz-Info"
+    doc.table [["Start",  conference.start_date],
+               ["Ende", conference.end_date],
+               ["Zusammenfassung", conference.description],
+               ["Ort", conference.location],
+               ["Organisator", conference.creator.fullname+" "+conference.creator.email]],
+               :horizontal_padding => 10,
+               :vertical_padding   => 3,
+               :border_width       => 2,
+               :position           => :center,
+               :column_widths => { 0 => 150, 1 => 200 }
+               
+    doc.move_down 10
+    
+    doc.text "Anwesende"
+    
+    attendees = conference.attendees.map do |a|
+      if current_user.is_in_contact_with?(a)
+        [a.username, a.fullname, a.email]
+      else
+        [a.username, nil, nil] 
+      end
+    end
+    
+    doc.table attendees,
+              :horizontal_padding => 10,
+              :vertical_padding   => 3,
+              :border_width       => 2,
+              :position           => :center,
+              :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
+              :headers            => ["Username","Name","Email"]
+              
+    send_data doc.render, :type => "application/pdf"
   end
 
   private

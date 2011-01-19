@@ -85,7 +85,7 @@
 %h2
   Export
 = link_to "Export as ical", conference_ical_path(:conference_id=>@conference.id)
-
+= link_to "Export as pdf", conference_pdf_path(:conference_id=>@conference.id)
 
 %h2
   Invite your contacts
