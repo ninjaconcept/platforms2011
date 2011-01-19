@@ -103,4 +103,18 @@ describe CategoriesController do
       response.status.should == 400
     end
   end
+  
+  context "creating a subcategory" do
+    before do
+      post "/ws/categories", {:name => "test", :parent => {:name => "Arts"}}.to_json, admin_headers
+    end
+    
+    it "should return 200" do
+      response.status.should == 200
+    end
+    
+    it "should be a child category" do
+      Category.find_by_name("Arts").children.size == 1
+    end
+  end
 end
