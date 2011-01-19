@@ -12,7 +12,9 @@
       
       %td
         = link_to 'Show conferences', series_conferences_path(series)
-        \|
-        = link_to 'Edit', edit_resource_path(series)
-        \|
-        = link_to 'Destroy', resource_path(series), :confirm => 'Are you sure?', :method => :delete
+        - if can? :edit, series
+          \|
+          = link_to 'Edit', edit_resource_path(series)
+        - if can? :destroy, series
+          \|
+          = link_to 'Destroy', resource_path(series), :confirm => 'Are you sure?', :method => :delete
