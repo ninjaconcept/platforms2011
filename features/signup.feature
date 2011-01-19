@@ -35,8 +35,8 @@ Feature: Signup
       | GPS                   |                       |
     When I press "Sign up"
     Then I should see "You have signed up successfully. If enabled, a confirmation was sent to your e-mail."
-    And I should be on "/"
-    And I should see "Welcome to CaP"
+    And I should be on "/status"
+    And I should see "Welcome Stefan"
     And 1 email should be delivered to stefan@plat-forms.org
     # And "stefan@plat-forms.org" should have subject: Confirmation instructions
     When I click the first link in email
