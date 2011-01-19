@@ -16,7 +16,7 @@ class Conference < ActiveRecord::Base
   belongs_to :creator, :class_name=>"User", :foreign_key => 'creator_user_id'
 
   has_many :attendances, :dependent => :destroy
-  has_many :attendees, :through=>:attendances
+  has_many :attendees, :through => :attendances, :source => :user
   
   has_many :category_conferences, :dependent => :destroy
   has_many :categories, :through=>:category_conferences

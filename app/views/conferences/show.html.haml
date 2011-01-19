@@ -84,8 +84,9 @@
 
 %h2
   Invite your contacts
-
-
-
-TODO: list all in_contact users 
+%ul
+- @my_contacts.each do |user|
+  %li[user]
+    = user.fullname
+    = link_to "invite", notifications_path(:conference_id=>@conference.id, :user_id=>user.id), :method=>:post, :remote=>true
 

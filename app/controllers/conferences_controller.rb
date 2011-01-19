@@ -12,7 +12,8 @@ class ConferencesController < BaseController
   
   verify :params => [:id], :only => [:show, :update]
   
-  def show    
+  def show
+    @my_contacts=current_user.contacts
     respond_to do |format|
       format.json { render :json => @conference }
       format.html { render } #TODO => change
@@ -67,8 +68,17 @@ class ConferencesController < BaseController
         Category.find_or_create_by_name(c[:name])
       end
     end
-    update_all_attributes(p, @conference)
-    
+    if p["start_date(1i)"].blank? #call from WS
+      update_all_attributes(p, @conference)
+    else #call from WebUI
+      conf_clone=@conference.clone
+      @conference.update_attributes(p)
+    end
+    if conf_clone.start_date!=@conference.start_date or conf_clone.end_date!=@conference.end_date 
+      @conference.attendees.each do |user|
+        user.notifications.create!(:text=>"Attentiaion! Start or end date of #{@conference.name} was updated by the owner.")
+      end
+    end
     
     respond_to do |format|
       format.json { @conference.save!; render :json => @conference }
@@ -89,7 +99,10 @@ class ConferencesController < BaseController
       #klass       "PRIVATE"
     end
     cal.event.comments=[conference.venue, conference.howtofind]
-    render :text=>cal.to_ical
+    conference.attendees.each do |u|
+      cal.event.comments<<"#{u.username}, #{u.fullname}, #{u.email}"
+    end
+    send_data cal.to_ical, :type=>"text/calendar"
   end
 
   private
