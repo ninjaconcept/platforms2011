@@ -1,5 +1,6 @@
 class Conference < ActiveRecord::Base
   @@per_page = 10 #for will_paginate  
+
   include GeoHelper
   class << self
     include GeoHelper

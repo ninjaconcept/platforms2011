@@ -1,0 +1,46 @@
+%h1
+  = "User '#{@member.username}'"
+  
+= link_to 'Back to users list', collection_path
+
+
+%h2
+  User data
+  
+%p
+  %strong
+    Username
+  = @member.username
+
+%p
+  %strong
+    Full name
+  - if current_user.is_in_contact_with?(@member)
+    = @member.fullname
+  - else
+    hidden
+  
+%p
+  %strong
+    Email
+  - if current_user.is_in_contact_with?(@member)
+    = @member.email 
+  - else
+    hidden
+
+%p
+  %strong Town
+  = @member.town
+
+%p
+  %strong Country
+  = @member.country
+
+%h2
+  Contact status
+
+- if current_user.is_in_contact_with?(@member)
+  = "You are in contact with #{@member.username}"
+
+- else
+  TODO: add link to request contact

@@ -1,14 +1,14 @@
-%h1= "Listing users (#{@users.length})"
+%h1= "Listing members (#{@members.length})"
 
 - unless current_user
   %h3
-    You need to log in to search within users!
+    You need to log in to search within members!
     
 - else
   %h2
     Search:
-  - @user = User.new(:start_date=>Date.today)
-  - simple_form_for @user, :url => search_users_path, :html=>{:method=>:get} do |f|
+  - @member = User.new(:start_date=>Date.today)
+  - simple_form_for @member, :url => search_members_path, :html=>{:method=>:get} do |f|
     %label
       = check_box_tag 'include_subcategories'
       include subcategories
@@ -17,7 +17,7 @@
     =# f.input :end_date, :include_blank => true
   
     %label
-      Search users within/in
+      Search members within/in
       = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
     %br
     %label
@@ -27,12 +27,12 @@
     = submit_tag 'Search'
 
 
-- if @users.blank?
+- if @members.blank?
   %h3
-    No users found!
+    No members found!
     
 - else
-  = will_paginate @users
+  = will_paginate @members
   %br
   
   %table
@@ -45,31 +45,31 @@
       %th Country
       %th &nbsp;
 
-    - @users.each do |user|
+    - @members.each do |member|
       %tr
-        %td= user.username
+        %td= member.username
         %td
-          - if current_user.is_in_contact_with?(user)
-            = user.email 
+          - if current_user.is_in_contact_with?(member)
+            = member.email 
           - else
             hidden
             
         %td
-          - if current_user.is_in_contact_with?(user)
-            = user.fullname
+          - if current_user.is_in_contact_with?(member)
+            = member.fullname
           - else
             hidden
           
         %td
-          - if current_user.is_in_contact_with?(user)
+          - if current_user.is_in_contact_with?(member)
             connected
           - else
             not connected
         
-        %td= user.town
-        %td= user.country
+        %td= member.town
+        %td= member.country
         
         %td
-          = link_to 'Show', resource_path(user)
+          = link_to 'Show', resource_path(member)
 
-  = will_paginate @users
+  = will_paginate @members
