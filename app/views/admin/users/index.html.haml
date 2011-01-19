@@ -1,7 +1,13 @@
 %h1= "Listing users (#{@users.length})"
+  
+.search-form
+  - form_for :user, :url => collection_path, :html => { :method => :get } do |f|
+    %label 
+      Search term: 
+      = f.text_field :search_term, :value => @search_term
+    = f.submit :search
 
-.main-actions
-  =# link_to 'New user', new_resource_path
+%hr
 
 %table
   %tr
