@@ -29,7 +29,7 @@
   = link_to "Your location on Google Maps", "http://maps.google.com" #TODO
 
 .notificatons
-  Your nofitications
+  %h3 Your nofitications
   %ul
   - @notifications.each do |n|
     %li[n]
@@ -38,29 +38,28 @@
       = link_to "delete notification", notification_path(n, :read=>true), :remote=>true, :method=>:put
 
 .members.in_contact
-  Other users, you're in contact with:
+  %h3 Other users, you're in contact with:
   %ul
   - @users_in_contact.each do |u|
     %li= render_user_link u
 
 .members.in_contact
-  Other users, you've requested an RCD for:
+  %h3 Other users, you've requested an RCD for:
   %ul
   - @sent_rcds.each do |rcd|
     %li= render_user_link_by_rcd_status rcd
 
 .members.in_contact
-  Other users, from you've received an RCD:
+  %h3 Other users, from you've received an RCD:
   %ul
   - @received_rcds.each do |rcd|
     %li
       = render_user_link_by_rcd_status rcd
-      =#     link_to "accept invitation", :controller=>:contacts, :action=>:add, :username=>u.username
+      = link_to "accept invitation", :controller=>:contacts, :action=>:add, :username=>rcd.get_other(current_user).username
 
 
 .attendances
-  %h3
-    Personal Calendar
+  %h3 Personal Calendar
   You've signed up for the following conferences:
   %ul
   - @attending_conferences.each do |c|
