@@ -34,14 +34,13 @@ class ContactsController < ApplicationController
     end
     
     respond_to do |format|
-      format.json do
-        if request.xhr?
-          render :update do |page|
-            page.reload
-          end
-        else
-          head 204
+      format.js do
+        render :update do |page|
+          page.reload
         end
+      end
+      format.json do
+        head 204
       end
     end
   end
