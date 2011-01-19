@@ -42,15 +42,6 @@ PlatForms::Application.configure do
     :address => "smtp.plat-forms.org",
     :authentication => :plain
   }
-  # config.action_mailer.smtp_settings = {
-  #   :address => "smtp.plat-forms.org"
-  #   :port => ,
-  #   :domain => "your domain name",
-  #   :authentication => :login,
-  #   :user_name => "account@mailserver.com",
-  #   :password => "account_password",
-  #   :tls => true
-  # }
   
   # Enable threaded mode
   # config.threadsafe!

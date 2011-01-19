@@ -27,7 +27,7 @@
   
   %ul
     %li= link_to 'Create a new conference', new_conference_path
-    %li= link_to "View your location on Google Maps", "http://maps.google.com" #TODO
+    %li= link_to "View your location on Google Maps", "http://maps.google.com?z=9&ll=#{@current_user.lat},#{@current_user.lat}" if @current_user.lat && @current_user.lng
     %li= link_to('Edit your profile', edit_user_registration_path)
     %li= link_to "Search for other members", members_path
 
