@@ -7,10 +7,16 @@ class MembersController < BaseController
   end
   
   def search
+    @select_options=[['worldwide', 'none'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']]
+    @select_options<<[current_user.town, 'town'] if current_user.town
+    @select_options<<[current_user.country, 'country'] if current_user.country
     @members = User
-    if params[:search_term]
+    unless params[:search_term].blank?
       term="%#{params[:search_term]}%"
-      @members=@members.where("username like ? OR fullname like ? OR town like ? OR country like ?", term, term,term,term)
+      #some crazy sql for M102:
+      @members=@members.where("username like ? OR (fullname like ? AND (((received_statuses_users.inviter_user_id=?) OR (rcd_statuses.invitee_user_id=?)) AND ((received_statuses_users.status='in_contact') OR (rcd_statuses.status='in_contact')) ))", term, term, current_user.id, current_user.id)
+      @members=@members.includes(:sent_statuses)
+      @members=@members.includes(:received_statuses)
     end
     if params[:only_non_contacts_members]
       #TODO (m90) @members=@members.where("rcd_status").includes(:rcd_statuses)

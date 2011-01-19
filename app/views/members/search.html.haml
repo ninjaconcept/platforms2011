@@ -20,10 +20,11 @@
     =# f.association :categories, :as => :check_boxes
     =# f.input :start_date, :include_blank => true
     =# f.input :end_date, :include_blank => true
-    %br
-    %label
-      Search members within/in
-      = select_tag 'region', options_for_select([['worldwide', 'none'], [current_user.town, 'town'], [current_user.country, 'country'], ['50km', '50'], ['500km', '500'], ['2000km', '2000'], ['5000km', '5000']])
+    - unless current_user.gps.blank?
+      %br
+      %label
+        Search members within/in
+        = select_tag 'region', options_for_select(@select_options)
     %br
     %label
       Search term
