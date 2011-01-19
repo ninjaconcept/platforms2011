@@ -29,7 +29,7 @@ PlatForms::Application.routes.draw do
 
   resources :contacts do
     collection do
-      post "add" => "contacts#add"
+      post "add" => "contacts#add", :as=> :add
     end
   end
 
