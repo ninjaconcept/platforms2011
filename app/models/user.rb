@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
         if geo.success
           self.lat, self.lng = geo.lat, geo.lng
         else
-          errors.add_to_base "Could not Geocode address"
+          #errors.add_to_base "Could not Geocode address"
         end
       end
     end

@@ -143,15 +143,15 @@ class ConferencesController < BaseController
     
     doc.text "Konferenz-Info"
     doc.table [["Start",  conference.start_date],
-               ["Ende", conference.end_date],
-               ["Zusammenfassung", conference.description],
-               ["Ort", conference.location],
-               ["Organisator", conference.creator.fullname+" "+conference.creator.email]],
-               :horizontal_padding => 10,
-               :vertical_padding   => 3,
-               :border_width       => 2,
-               :position           => :center,
-               :column_widths => { 0 => 150, 1 => 200 }
+      ["Ende", conference.end_date],
+      ["Zusammenfassung", conference.description],
+      ["Ort", conference.location],
+      ["Organisator", conference.creator.fullname+" "+conference.creator.email]],
+      :horizontal_padding => 10,
+      :vertical_padding   => 3,
+      :border_width       => 2,
+      :position           => :center,
+      :column_widths => { 0 => 150, 1 => 200 }
                
     doc.move_down 10
     
@@ -166,12 +166,12 @@ class ConferencesController < BaseController
     end
     
     doc.table attendees,
-              :horizontal_padding => 10,
-              :vertical_padding   => 3,
-              :border_width       => 2,
-              :position           => :center,
-              :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
-              :headers            => ["Username","Name","Email"]
+      :horizontal_padding => 10,
+      :vertical_padding   => 3,
+      :border_width       => 2,
+      :position           => :center,
+      :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
+      :headers            => ["Username","Name","Email"]
               
     send_data doc.render, :type => "application/pdf"
   end
@@ -187,11 +187,28 @@ class ConferencesController < BaseController
   end
 
 
+  def invite_via_email
+    @conference=Conference.find(params[:id])
+    count=0
+    params[:contacts].split(/\n/).each do |line|
+      line=line.strip
+      unless line.blank? and line=~/@/
+        password=rand(100000000000000).to_s
+        if u=User.create!(:email=>line, :fullname=>"_",  :username=>"invited_by_email_#{rand(100000000000)}", :town=>"_", :country=>"_", :password_confirmation=>password, :password=>password)
+          @conference.attendees<<u
+          UserMailer.invite(@conference,line.strip, current_user).deliver
+          count+=1
+        end
+      end
+    end
+    flash[:notice]="#{count} Emails have been sent."
+    redirect_to conference_path(@conference)
+  end
+
   private
 
   def load_conference
     @conference = Conference.find(params[:id])
   end
-
   
 end

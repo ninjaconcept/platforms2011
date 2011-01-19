@@ -99,3 +99,10 @@
     = user.fullname
     = link_to "invite", notifications_path(:conference_id=>@conference.id, :user_id=>user.id), :method=>:post, :remote=>true
 
+%h2
+  Invite others
+%strong
+  You can invite other (also unregistered) users. Use a new line for each email
+  - form_tag conferences_invite_via_email_path(@conference) do
+    = text_area_tag "contacts","", :size=>"100x3"
+    = submit_tag "Absenden"
