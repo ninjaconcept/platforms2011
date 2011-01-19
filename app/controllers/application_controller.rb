@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   rescue_from(ActiveRecord::UnknownAttributeError){ |e| error_response(400, e) }
   rescue_from(ActiveRecord::RecordInvalid){ |e| error_response(400, e) }
   rescue_from(ActiveRecord::RecordNotFound){ |e| error_response(404, e) }
-  rescue_from(ActiveRecord::StaleObjectError){ |e| error_response(409, e) }
+  rescue_from(ActiveRecord::StaleObjectError){ |e| error_response(409, e) } 
   rescue_from(UpdateFailed){ |e| error_response(400, e) }
   
   #cancan  
@@ -31,7 +31,10 @@ class ApplicationController < ActionController::Base
     def require_admin
       unless current_user && is_admin?
         flash[:error] = "You are not allowed to access this page. Please contact your admin if necessary!"
-        redirect_to root_path
+        respond_to do |format|
+          format.json { head 403 }
+          format.html { redirect_to root_path }
+        end
         return false
       end
     end

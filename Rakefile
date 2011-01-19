@@ -13,3 +13,5 @@ namespace :db do
     end
   end
 end
+
+task :default => [:spec, :cucumber]

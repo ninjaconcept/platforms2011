@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
   respond_to :json
   
   def index
-    u = User.find_by_username(params[:username])
+    u = User.find_by_username(params[:uname])
     @rcd_list = u.rcd_statuses
     
     @rcd_list.reject! {|s| s.status != "in_contact"} unless u == current_user
@@ -16,12 +16,12 @@ class ContactsController < ApplicationController
   def add
     raise UpdateFailed if params[:positive].nil?
     
-    u = User.find_by_username(params[:username])
+    u = User.find_by_username(params[:uname])
     rcd = RcdStatus.for_users(u, current_user)
     
     if rcd
       status = rcd.status_for_user(current_user)
-      
+
       if status == "RCD_received" && (params[:positive]=="true" || params[:positive]==true)
         rcd.accept!
       elsif status == "RCD_received" && (params[:positive]=="false" || params[:positive]==false)
@@ -30,7 +30,7 @@ class ContactsController < ApplicationController
         raise UpdateFailed
       end
     else
-      rcd=RcdStatus.send_rcd(@current_user, u)
+      rcd = RcdStatus.send_rcd(current_user, u)
     end
     
     respond_to do |format|
