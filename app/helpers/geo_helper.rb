@@ -1,5 +1,7 @@
 #origin GM
 
+#helper functions for geocoding
+
 module GeoHelper
 
   #works for user and conference the same way

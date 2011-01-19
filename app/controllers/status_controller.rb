@@ -1,5 +1,7 @@
 #origin GM
 
+#This allows users to view RCDstatuses current user only
+
 class StatusController < ApplicationController
   def index
     

@@ -1,5 +1,8 @@
 #origin GM
 
+#This is used by the auth layer to allow users to register
+#User interactions only
+
 class RegistrationsController < Devise::RegistrationsController
   
   def create

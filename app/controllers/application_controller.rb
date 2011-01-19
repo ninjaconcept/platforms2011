@@ -1,5 +1,9 @@
 #origin GM
 
+# This class is the base class for all HTTP interface controller classes
+# It rescues all exceptions and provides common functionality like filter
+# implementations.
+
 class UpdateFailed < Exception; end
 
 class ApplicationController < ActionController::Base

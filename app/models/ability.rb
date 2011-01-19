@@ -1,5 +1,7 @@
 #origin GM
 
+# manages whether a user is allowed to invoke certain actions
+
 class Ability
   include CanCan::Ability
   

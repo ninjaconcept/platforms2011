@@ -1,5 +1,7 @@
 #origin GM
 
+#This class manages Series, both for users as well as the webservice
+
 class SeriesController < InheritedResources::Base
   before_filter :authenticate_user!, :except => [:index, :show]
   before_filter :require_admin, :except => [:index, :show]

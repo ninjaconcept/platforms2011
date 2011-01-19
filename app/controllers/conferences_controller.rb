@@ -1,6 +1,6 @@
 #origin: GM
 
-#require 'icalendar'
+#This class manages conferences, both for users as well as the webservice
 
 class ConferencesController < BaseController
   belongs_to :category, :optional => true

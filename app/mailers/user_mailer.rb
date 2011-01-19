@@ -1,5 +1,7 @@
 #origin GM
 
+# class to handle mail notifications
+
 class UserMailer < ActionMailer::Base
   default :from => "info@n.plat-forms.org"
 

@@ -1,5 +1,7 @@
 #origin GM
 
+# helper functions for the user navigation
+
 module NavigationHelper
   
   def render_navigation

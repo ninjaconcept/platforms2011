@@ -1,5 +1,8 @@
 #origin GM
 
+#Global helper functions
+
+
 module ApplicationHelper
   
   def flash_messages

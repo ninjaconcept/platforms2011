@@ -1,5 +1,7 @@
 #origin GM
 
+#This class manages logins, both for users as well as the webservice
+
 class AuthenticationsController < InheritedResources::Base
   actions :index, :create, :destroy
   

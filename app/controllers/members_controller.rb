@@ -1,5 +1,7 @@
 #origin GM
 
+#This class manages User accounts, both for users as well as the webservice
+
 class MembersController < BaseController
   respond_to :json, :html
   before_filter :authenticate_user!

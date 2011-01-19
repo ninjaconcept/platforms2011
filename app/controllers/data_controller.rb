@@ -1,5 +1,7 @@
 #origin GM
 
+#This class allows resetting of the application
+
 class DataController < ApplicationController
   before_filter :authenticate_user!
   before_filter :require_admin

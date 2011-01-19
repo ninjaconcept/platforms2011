@@ -1,5 +1,7 @@
 #origin GM
 
+# This class acts as a base class for all controllers in the Admin namespace
+
 class Admin::BaseController < BaseController
   before_filter :authenticate_user!
   before_filter :require_admin

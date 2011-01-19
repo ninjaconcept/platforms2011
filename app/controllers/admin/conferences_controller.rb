@@ -1,5 +1,8 @@
 #origin GM
 
+# This class provides the interface for admins to create categories
+
+
 class Admin::ConferencesController < Admin::BaseController
   belongs_to :category, :optional => true
   belongs_to :series, :optional => true

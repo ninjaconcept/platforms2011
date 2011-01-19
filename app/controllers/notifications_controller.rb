@@ -1,5 +1,7 @@
 #origin GM
 
+#This class manages Notifications, both for users as well as the webservice
+
 class NotificationsController < InheritedResources::Base
   
   def update

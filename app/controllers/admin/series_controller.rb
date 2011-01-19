@@ -1,5 +1,7 @@
 #origin GM
 
+# This class provides the interface for admins to create series
+
 class Admin::SeriesController < Admin::BaseController
   def update
     update! do |success, failure|

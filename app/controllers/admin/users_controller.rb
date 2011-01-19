@@ -1,5 +1,7 @@
 #origin GM
 
+# This class provides the interface for admins to manage users
+
 class Admin::UsersController < Admin::BaseController
   
   def index

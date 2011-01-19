@@ -1,5 +1,7 @@
 #origin GM
 
+#This class manages Contacts (RCD), both for users as well as the webservice
+
 class ContactsController < ApplicationController
   before_filter :authenticate_user!
   respond_to :json

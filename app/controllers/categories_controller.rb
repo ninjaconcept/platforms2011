@@ -1,5 +1,7 @@
 #origin GM
 
+# This class manages Categories, both for users as well as the webservice
+
 class CategoriesController < InheritedResources::Base
   before_filter :authenticate_user!, :except => [:index, :show, :by_id]
   before_filter :require_admin, :except => [:index, :show, :by_id]

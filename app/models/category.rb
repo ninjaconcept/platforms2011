@@ -1,5 +1,7 @@
 #origin GM
 
+# model describing categories according to spec
+
 class Category < ActiveRecord::Base
 
   has_ancestry :cache_depth => true, :orphan_strategy => :destroy

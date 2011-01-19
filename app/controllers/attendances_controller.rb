@@ -1,5 +1,7 @@
 #origin GM
 
+#This class manages Attendances, both for users as well as the webservice
+
 class AttendancesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
   respond_to :json, :js

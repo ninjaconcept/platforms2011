@@ -1,5 +1,7 @@
 #origin GM
 
+# model describing conferences and their behaviour, als well as serialization
+
 class Conference < ActiveRecord::Base
   @@per_page = 10 #for will_paginate  
 
