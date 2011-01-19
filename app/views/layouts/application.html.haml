@@ -9,6 +9,11 @@
     
   %body.bp
     .body-inner
+      
+      %noscript
+        %h1.nojs 
+          This portal is almost running without javascript, but to ensure it's fully working please activate javascript!
+    
       .flash_messages
         = flash_messages
     
@@ -16,7 +21,7 @@
         = render 'devise/menu/menu'
         = render 'admin/layouts/menu' if user_signed_in?
 
-        = link_to "plat_forms 2011 - home", root_path
+        = link_to image_tag('logo.png', :alt => 'home'), root_path
       
     
       = yield

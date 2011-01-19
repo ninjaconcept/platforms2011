@@ -15,7 +15,6 @@ class Ability
     
     #defaults
     can :read, [Conference, User]
-    
   end
   
   def parent
