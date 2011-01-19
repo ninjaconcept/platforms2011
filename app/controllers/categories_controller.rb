@@ -24,7 +24,13 @@ class CategoriesController < InheritedResources::Base
   
   def create
     p = params[:conference] || request.POST
+    parent = p.delete(:parent)
+
     @category = Category.new(p)
+    
+    if parent
+      @category.parent = Category.find_by_name(parent[:name])
+    end
     
     create! do |success, failure|
       success.json { response.status = 200; render :json => @category }

@@ -41,7 +41,7 @@ class Category < ActiveRecord::Base
       #argh, what a hack
       h = JSON.parse(j)
       h[:parent] = h.delete(:parent_name)
-      JSON.dump(h)
+      JSON.dump(h) 
     end
   end
 end
