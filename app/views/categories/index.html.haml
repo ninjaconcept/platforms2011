@@ -1,6 +1,8 @@
 %h1
   Welcome to CaP - Conferences and Participants
 
+%p
+  this is the application of team LessCode by Heiko Seebach, Florian Gilcher and Stefan Botzenhart
 
 - if @current_category
   %h1
@@ -17,7 +19,7 @@
 - if @categories.any?
   .categories
     %h2
-      Subcategories
+      Categories
     %ul
       - @categories.each do |category|
         %li= link_to category.name, category
@@ -32,21 +34,34 @@
 .conferences.running
   %h2
     Running conferences
-  %ul
-    - @running_conferences.each do |conf|
-      %li= link_to conf.name, conf
+  - if @running_conferences.blank?
+    %p
+      %strong No running conferences
+  -else
+    %ul
+      - @running_conferences.each do |conf|
+        %li= link_to conf.name, conf
 
 .conferences.upcoming
   %h2
     Conferences starting tomorrow
-  %ul
-    - @upcoming_conferences.each do |conf|
-      %li= link_to conf.name, conf
+  - if @upcoming_conferences.blank?
+    %p
+      %strong No conferences starting tomorrow
+  -else
+    %ul
+      - @upcoming_conferences.each do |conf|
+        %li= link_to conf.name, conf
 
 .conferences.upcoming
   %h2
     Conferences starting next week
-  %ul
-    - @nextweek_conferences.each do |conf|
-      %li= link_to conf.name, conf
+  
+  - if @nextweek_conferences.blank?
+    %p
+      %strong No upcoming conferences next week
+  -else
+    %ul
+      - @nextweek_conferences.each do |conf|
+        %li= link_to conf.name, conf
 
