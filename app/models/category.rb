@@ -6,6 +6,7 @@ class Category < ActiveRecord::Base
   has_many :category_conferences, :dependent => :destroy
   has_many :conferences, :through => :category_conferences
   
+  validates_uniqueness_of :name
   validates_presence_of :name
   
   include Pacecar
