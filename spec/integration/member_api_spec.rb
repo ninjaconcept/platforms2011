@@ -89,7 +89,7 @@ describe MembersController do
         u1.email = "sjobs.hacked.himself@example.com"
         u1.save
         
-        put "ws/members/sjobs", u2.to_json, json_headers
+        put "ws/members/sjobs", u2.to_json(:full => true), json_headers
       end
       
       it "should return 409" do

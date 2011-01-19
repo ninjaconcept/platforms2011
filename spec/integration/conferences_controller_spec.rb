@@ -84,10 +84,9 @@ describe ConferencesController do
       context "existing conferences" do
         context "with valid data" do
           before do
-            @c2 = @c.clone
-            @c2.name = "changed"
+            @c.name = "changed"
             
-            put "ws/conferences/#{@c.id}", @c2.to_json, @headers
+            put "ws/conferences/#{@c.id}", @c.to_json(:include => :categories), @headers
           end
           
           it "should return 200" do
@@ -96,7 +95,7 @@ describe ConferencesController do
           
           it "should have changed the object" do
             @c.reload
-            @c.name.should == @c2.name
+            @c.name.should == "changed"
           end
         end
         
@@ -128,7 +127,7 @@ describe ConferencesController do
           @c.save
           @c2.name = "change2"
           
-          put "ws/conferences/#{@c.id}", @c2.to_json, @headers
+          put "ws/conferences/#{@c.id}", @c2.to_json(:include => :categories), @headers
         end
         
         it "should return 409" do

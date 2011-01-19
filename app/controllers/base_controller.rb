@@ -7,7 +7,7 @@ class BaseController < InheritedResources::Base
   
   
   actions :index, :show, :new, :edit, :create, :update, :destroy
-  respond_to :html, :js, :xml, :json
+  respond_to :html, :js, :json # :xml
 
  
   def show!
