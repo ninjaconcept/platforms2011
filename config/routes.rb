@@ -15,6 +15,7 @@ PlatForms::Application.routes.draw do
   get "conferences/:id/ical" => "conferences#ical", :as=>:conference_ical
   get "conferences/:id/pdf" => "conferences#pdf", :as=>:conference_pdf
   get "conferences/:id/feed" => "conferences#feed", :as=>:conference_feed
+  post "conferences/:id/invite_via_email" => "conferences#invite_via_email", :as=>:conferences_invite_via_email
   
   resources :members, :only => [:show, :index] do
     collection do
