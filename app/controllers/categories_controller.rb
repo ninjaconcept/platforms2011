@@ -1,16 +1,34 @@
 class CategoriesController < InheritedResources::Base
+  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :require_admin, :except => [:index, :show]
+  
   respond_to :html, :json
   
   def index
     respond_to do |format|
-      format.json { empty_safe { render :json => Categories.all } }
+      format.json { c = Category.all; empty_safe(c) { render :json => c } }
       format.html { index_page }
     end
   end
 
   def show
-    index_page params[:id]
-    render :template=>"categories/index"
+    respond_to do |format|
+      format.json { c = Category.find(params[:id]); render :json => c }
+      format.html do
+        index_page params[:id]
+        render :template=>"categories/index"
+      end
+    end
+  end
+  
+  def create
+    p = params[:conference] || request.POST
+    @category = Category.new(p)
+    
+    create! do |success, failure|
+      success.json { response.status = 200; render :json => @category }
+      failure.json { head 400 }
+    end
   end
 
   private

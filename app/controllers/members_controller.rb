@@ -42,7 +42,7 @@ class MembersController < BaseController
   
   def show
     respond_to do |format|
-      format.json { render :json => User.find_by_username(params[:username]) }
+      format.json { render :json => User.find_by_username(params[:uname]) }
       format.html {
         @member = User.find(params[:id])
       }
@@ -51,7 +51,7 @@ class MembersController < BaseController
   
   def update
     p = params[:user] || request.POST
-    u = User.find_by_username!(params[:username])
+    u = User.find_by_username!(params[:uname])
     
     if u == current_user
       

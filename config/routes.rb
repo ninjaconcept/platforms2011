@@ -55,12 +55,12 @@ PlatForms::Application.routes.draw do
     end
     
     match "/members" => "members#create", :via => :post
-    match "/members/:username" => "members#show", :via => :get
-    match "/members/:username" => "members#update", :via => :put
-    match "/members/:username/contacts" => "contacts#index", :via => :get
-    match "/members/:username/contacts" => "contacts#add", :via => :post
+    match "/members/:uname" => "members#show", :via => :get
+    match "/members/:uname" => "members#update", :via => :put
+    match "/members/:uname/contacts" => "contacts#index", :via => :get
+    match "/members/:uname/contacts" => "contacts#add", :via => :post
     
-    resources :categories, :only => [:index, :create]
+    resources :categories, :only => [:index, :show, :create]
     resources :series, :only => [:indes, :create, :show]
     match "/conferencesbycategory/:id" => "Categories#by_id"
     match "/search/:query" => "Search#search"

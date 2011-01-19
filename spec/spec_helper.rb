@@ -22,6 +22,10 @@ def json_headers
   @headers ||= authed_headers({"CONTENT_TYPE" => "application/json"})
 end
 
+def admin_headers
+  @headers ||= authed_headers({"CONTENT_TYPE" => "application/json"}, "admin", "admin")
+end
+
 RSpec.configure do |config|
   # == Mock Framework
   #
