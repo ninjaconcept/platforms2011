@@ -25,4 +25,5 @@ Factory.define :new_conference, :class => Conference do |f|
   f.venue "MyString"
   f.accomodation "MyString"
   f.howtofind "MyString"
+  f.categories { [Factory(:category)] }
 end

@@ -24,11 +24,11 @@ describe ConferencesController do
     
       context "with correct data" do
         before do
-          post "/ws/conferences", Factory.build(:new_conference).to_json, @headers
+          post "/ws/conferences", Factory.build(:new_conference).to_json(:include => :categories), @headers
         end
         
         it "should create the conference" do
-          response.should be_success
+          response.status.should == 200
         end
         
         it "should have created an instance" do
