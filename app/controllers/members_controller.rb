@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+  before_filter :authenticate_user!
   respond_to :json
   
   def create
@@ -14,6 +15,24 @@ class MembersController < ApplicationController
   def show
     respond_to do |format|
       format.json { render :json => User.find_by_username(params[:username]) }
+    end
+  end
+  
+  def update
+    p = params[:user] || request.POST
+    u = User.find_by_username!(params[:username])
+    
+    if u == current_user
+      
+      update_all_attributes(p, u)
+      
+      respond_to do |format|
+        format.json { render :json => u }
+      end
+    else
+      respond_to do |format|
+        format.json { head 403 }
+      end
     end
   end
 end

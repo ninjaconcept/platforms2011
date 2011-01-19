@@ -17,6 +17,8 @@ class ContactsController < ApplicationController
     u = User.find_by_username(params[:username])
     rcd = RcdStatus.for_users(u, current_user)
     
+    raise UpdateFailed if params[:positive].nil?
+    
     if rcd
       status = rcd.status_for_user(current_user)
       
