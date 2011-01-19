@@ -21,7 +21,34 @@ describe ConferencesController do
     end
     
     context "creating a new conference" do
-    
+      context "with a series" do
+        before do
+          f = Factory.build(:new_conference)
+          f.series = Series.find_by_name("Chaos Communication Congress")
+          reset!
+          post "/ws/conferences", f.to_json(:include => [:series, :categories] ), authed_headers({"CONTENT_TYPE" => "application/json"}, "kzuse", "kzr")
+        end
+        
+        it "should create the conference" do          
+          response.status.should == 200
+        end
+      end
+      
+      context "with a series that does not belong to me" do
+        before do
+          f = Factory.build(:new_conference)
+          f.series = Series.find_by_name("ICSE")
+          reset!
+          
+          post "/ws/conferences", f.to_json(:include => :series), authed_headers({"CONTENT_TYPE" => "application/json"}, "kzuse", "kzr")
+        end
+        
+        it "should not create the conference" do
+          response.status.should == 403
+        end
+
+      end
+      
       context "with correct data" do
         before do
           post "/ws/conferences", Factory.build(:new_conference).to_json(:include => :categories), @headers

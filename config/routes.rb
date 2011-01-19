@@ -72,8 +72,8 @@ PlatForms::Application.routes.draw do
     resources :series, :only => [:index, :create, :show]
     match "/conferencesbycategory/:id" => "Categories#by_id"
     match "/search/:search_term" => "conferences#search"
-    match "/reset" => "DataController#reset"
-    match "/factorydefaults" => "DataController#factory_defaults"
+    match "/reset" => "data#reset"
+    match "/factorydefaults" => "data#factory_defaults"
   end
 
 end

@@ -56,6 +56,16 @@ class ConferencesController < BaseController
       Category.find_or_create_by_name(c[:name])
     end
     
+    if p[:series]
+      p[:series] = s = Series.find(p[:series]["id"])
+   
+      unless s.contacts.include? current_user
+        
+        head 403
+        return
+      end
+    end
+    
     @conference = Conference.new(p)
     @conference.creator = current_user
     
@@ -69,6 +79,14 @@ class ConferencesController < BaseController
     
     Array(p[:categories]).map! do |c|
       Category.find_or_create_by_name(c[:name])
+    end
+    
+    if p[:series]
+      p[:series] = s = Series.find(p[:series][:id])
+      unless s.contacts.include? current_user
+        head 403
+        return
+      end
     end
     
     conf_clone=@conference.clone
@@ -145,13 +163,15 @@ class ConferencesController < BaseController
       end
     end
     
-    doc.table attendees,
-      :horizontal_padding => 10,
-      :vertical_padding   => 3,
-      :border_width       => 2,
-      :position           => :center,
-      :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
-      :headers            => ["Username","Name","Email"]
+    unless attendees.empty?
+      doc.table attendees,
+        :horizontal_padding => 10,
+        :vertical_padding   => 3,
+        :border_width       => 2,
+        :position           => :center,
+        :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
+        :headers            => ["Username","Name","Email"]
+    end
               
     send_data doc.render, :type => "application/pdf"
   end

@@ -74,9 +74,19 @@ class FactoryDefaults
         CategoryConference.create!(:conference=>conf, :category=>Category.first) #customer said, we should take the first cat, when none is available (so we conform to M56)
       end
     end
+    
+    self.create_admin
   end
 
   def self.reset
     `cd #{RAILS_ROOT}; RAILS_ENV=#{RAILS_ENV} rake db:drop db:create db:migrate`
+  end
+  
+  def self.create_admin
+    # M143
+    User.create!( 
+          :username => 'admin', :password => 'admin', :email => 'admin@plat-forms.org', 
+          :town => 'Nuernberg', :country => 'Germany', :fullname => 'Admin', :is_administrator => true
+    )
   end
 end
