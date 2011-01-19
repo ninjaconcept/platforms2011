@@ -11,7 +11,7 @@
       Actions
 
   - @categories.each do |category|
-    %tr[category]
+    %tr[category]{ :class => cycle("even", "odd") }
       %td= category.name
       %td= category.parent.name if category.parent
       

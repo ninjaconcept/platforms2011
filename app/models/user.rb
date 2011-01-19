@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   class << self
     include GeoHelper
   end
-
+  
+  attr_accessor :search_term  
+  
   acts_as_mappable acts_as_mappable_hash
 
   validate :geocode_address

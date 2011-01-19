@@ -17,7 +17,7 @@
       %th &nbsp;
 
     - @members.each do |member|
-      %tr
+      %tr{ :class => cycle("even", "odd") }
         %td= member.username
         %td
           - if current_user.is_in_contact_with?(member)

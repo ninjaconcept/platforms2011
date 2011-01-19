@@ -10,7 +10,7 @@
       Actions
 
   - @series.each do |series|
-    %tr[series]
+    %tr[series]{:class => cycle("even", "odd")}
       %td= series.name
       
       %td

@@ -29,12 +29,31 @@
 
 body.bp{
 	
+	table{
+		th {
+			background: $light_grey;
+		}
+		
+		tr.odd {
+			td{
+				background: $lighter_grey;
+			}
+		}
+		
+		tr.even {
+			td{
+				background: none;
+			}
+		}
+		
+	}
+	
 	a, a:visited {
 		color: #746d6d;
 	}
 	
 	a:hover {
-		color: #d20000;
+		color: $signal_color;
 	}
 	
 	.error {
@@ -173,7 +192,11 @@ body {
     }
     
   }
-
+	
+	.search-form{
+		margin-bottom: 10px;
+	}
+	
 	.categories{
 		width: 400px;
 		float: left;
@@ -181,6 +204,15 @@ body {
 	
 	.conferences{
 		margin-left: 410px;
+	}
+
+	.main-actions {
+		margin-bottom: 20px;
+		@include self-clearing;
+		
+		a, a:visited {
+			@include action-button;
+		}
 	}
 
 }

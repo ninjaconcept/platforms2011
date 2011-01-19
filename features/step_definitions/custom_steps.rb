@@ -19,6 +19,21 @@ Given /^no category records exist$/ do
   end
 end
 
+Given /^no conference records exist$/ do
+  Series.all.each do |series|
+    series.contacts.destroy_all
+  end
+  
+  Series.destroy_all
+  Conference.destroy_all
+  
+  # Conference.all.each do |conf|
+  #   conf.series.contacts.destroy_all if conf.series
+  #   conf.series.destroy
+  #   conf.destroy
+  # end
+end
+
 Given /^no ([^"]*) exists$/ do |model|
   model.classify.constantize.all.each { |entry| entry.destroy }  
   model.classify.constantize.all.length.should == 0
