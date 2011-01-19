@@ -1,6 +1,6 @@
 # origin: M
 
-#This class manages Notification, both for users as well as the webservice
+#This class tracks notifications
 
 class Notification < ActiveRecord::Base
   belongs_to :user

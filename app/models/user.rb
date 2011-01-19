@@ -1,4 +1,7 @@
 # origin: M
+
+# This class describes all users within the system
+
 class User < ActiveRecord::Base
   include GeoHelper
   class << self

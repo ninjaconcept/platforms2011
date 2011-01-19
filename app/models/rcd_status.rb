@@ -1,5 +1,8 @@
 #origin GM
 
+#This implements RCDStatus information as well as their state changes
+
+
 class RcdStatus < ActiveRecord::Base
   belongs_to :invitee_user, :class_name=>"User"
   belongs_to :inviter_user, :class_name=>"User"

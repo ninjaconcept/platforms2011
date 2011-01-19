@@ -1,5 +1,7 @@
 #origin GM
 
+# This class abstracts series from the database
+
 class Series < ActiveRecord::Base
   
   validates_uniqueness_of :name

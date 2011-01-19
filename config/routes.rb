@@ -1,3 +1,7 @@
+#origin: GM
+
+#This maps URLs to actions
+
 PlatForms::Application.routes.draw do
 
   resources :series, :except => :show do
