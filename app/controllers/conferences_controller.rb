@@ -6,7 +6,7 @@ class ConferencesController < InheritedResources::Base
   
   respond_to :html, :json
   before_filter :load_conference, :only => [:show, :update]
-
+  
   verify :params => [:id], :only => [:show, :update]
   
   def show    

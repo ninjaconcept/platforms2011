@@ -53,13 +53,26 @@
 %h2
   Attendees
 
+- unless current_user.attends?(@conference)
+  = link_to "Sign up for this conference", conference_attendances_path(@conference, :user => { :username => current_user.username}), :method => :post, :remote => true, :confirm => "Do you really want to sign up for this conference?"
+  %br
+  %br
+
 - unless @conference.attendances.blank?
   %ul
     - @conference.attendances.each do |attendance|
       %li
+        = attendance.user.fullname
+        \-
         = attendance.user.username
         = surround '(', ')' do
           = attendance.user.email
 - else
   %strong
     Nobody attends this conference!
+
+%h2
+  Invite your contacts
+
+TODO: list all in_contact users 
+

@@ -11,6 +11,7 @@ class Ability
       can :manage, [Conference], :creator => user
     end
     
+    # can :manage, Conference
     #defaults
     
   end
