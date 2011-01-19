@@ -21,7 +21,7 @@ class CategoriesController < InheritedResources::Base
     end
     @conferences=Conference.all.paginate :per_page=>10
     @running_conferences=ConferenceSearcher.do_find "#{cat_string} from:#{Date.today} until:#{Date.today} ", current_user
-    @upcoming_conferences=ConferenceSearcher.do_find "#{cat_string} from:#{1.day.from_now.strftime("%Y-%m-%d")} ", current_user
-    @nextweek_conferences=ConferenceSearcher.do_find "#{cat_string} from:#{1.week.from_now.monday.strftime("%Y-%m-%d")} until:#{1.week.from_now.end_of_week.strftime("%Y-%m-%d")}", current_user
+    @upcoming_conferences=ConferenceSearcher.do_find "#{cat_string}", current_user, Conference.where("start_date=?",1.day.from_now.strftime("%Y-%m-%d")) #alle Kategorien suchen plus die, die morgen starten
+    @nextweek_conferences=ConferenceSearcher.do_find "#{cat_string}", current_user, Conference.where("start_date BETWEEN ? AND ?",1.week.from_now.monday.strftime("%Y-%m-%d"), 1.week.from_now.end_of_week.strftime("%Y-%m-%d")) #alle Kategorien suchen plus die, die morgen starten
   end
 end

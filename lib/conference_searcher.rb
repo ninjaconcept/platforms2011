@@ -1,7 +1,7 @@
 class ConferenceSearcher
 
-  def self.search opts, user=current_user
-    query=Conference
+  def self.search opts, user=current_user, initial_arel_query=nil
+    query=initial_arel_query||Conference
     if opts["until"]
       query=query.where("end_date <= ?",Date.parse(opts["until"]))
     end
@@ -35,7 +35,7 @@ class ConferenceSearcher
     if opts["text"]
       opts["text"].each do |text|
         prepared="%#{text}%"
-        query=query.where("name LIKE ? OR description LIKE ?", prepared, prepared)
+        query=query.where("conferences.name LIKE ? OR conferences.description LIKE ?", prepared, prepared)
       end
     end
     #puts query.to_sql
@@ -62,9 +62,9 @@ class ConferenceSearcher
     hash
   end
 
-  def self.do_find string, user
+  def self.do_find string, user, initial_arel_query=nil
     hash=parse string
-    search hash, user
+    search hash, user, initial_arel_query
   end
 end
 
