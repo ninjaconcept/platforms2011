@@ -10,4 +10,12 @@ class Admin::SeriesController < Admin::BaseController
       }
     end
   end
+  
+  def create
+    create! do |success, failure|
+      success.html { 
+        redirect_to admin_series_index_path 
+      }
+    end
+  end
 end
