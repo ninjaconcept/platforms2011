@@ -163,13 +163,15 @@ class ConferencesController < BaseController
       end
     end
     
-    doc.table attendees,
-      :horizontal_padding => 10,
-      :vertical_padding   => 3,
-      :border_width       => 2,
-      :position           => :center,
-      :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
-      :headers            => ["Username","Name","Email"]
+    unless attendees.empty?
+      doc.table attendees,
+        :horizontal_padding => 10,
+        :vertical_padding   => 3,
+        :border_width       => 2,
+        :position           => :center,
+        :column_widths => { 0 => 100, 1 => 200, 2 => 200 },
+        :headers            => ["Username","Name","Email"]
+    end
               
     send_data doc.render, :type => "application/pdf"
   end
