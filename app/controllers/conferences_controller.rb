@@ -56,6 +56,18 @@ class ConferencesController < BaseController
       Category.find_or_create_by_name(c[:name])
     end
     
+    if p[:series]
+      p[:series] = s = Series.find(p[:series]["id"])
+   
+      unless s.contacts.include? current_user
+        puts s.inspect
+        puts s.contacts
+        
+        head 403
+        return
+      end
+    end
+    
     @conference = Conference.new(p)
     @conference.creator = current_user
     
@@ -69,6 +81,14 @@ class ConferencesController < BaseController
     
     Array(p[:categories]).map! do |c|
       Category.find_or_create_by_name(c[:name])
+    end
+    
+    if p[:series]
+      p[:series] = s = Series.find(p[:series][:id])
+      unless s.contacts.include? current_user
+        head 403
+        return
+      end
     end
     
     conf_clone=@conference.clone
