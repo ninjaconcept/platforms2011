@@ -24,7 +24,6 @@ class AttendancesController < ApplicationController
     user = User.find_by_username(username || request.POST["username"])
     attendances << Attendance.new(:user => user)
     respond_to do |format|
-      # format.json { head 204 }
       format.json do
         if request.xhr?
           render :update do |page|
@@ -43,12 +42,25 @@ class AttendancesController < ApplicationController
     @attendance.delete
     
     respond_to do |format|
-      format.json { head 204 }
+      format.json do
+        if request.xhr?
+          render :update do |page|
+            page.reload
+          end
+        else
+          head 204
+        end
+      end
+      format.js do
+        render :update do |page|
+          page.reload
+        end
+      end
     end
   end
   
   private
-    def attendances
-      Conference.find(params[:conference_id]).attendances
-    end
+  def attendances
+    Conference.find(params[:conference_id]).attendances
+  end
 end
