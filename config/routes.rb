@@ -51,7 +51,7 @@ PlatForms::Application.routes.draw do
     match "/members/:username/contacts" => "contacts#index", :via => :get
     match "/members/:username/contacts" => "contacts#add", :via => :post
     
-    resources :categories, :only => [:index, :create]
+    resources :categories, :only => [:index, :show, :create]
     resources :series, :only => [:indes, :create, :show]
     match "/conferencesbycategory/:id" => "Categories#by_id"
     match "/search/:query" => "Search#search"
